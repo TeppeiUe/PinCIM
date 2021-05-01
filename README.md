@@ -25,8 +25,9 @@ DMM Webcampで学んだ技術で、実際に他人を支援するツールを作
 **【画面設計】**
 - pending...
 
-## チャレンジ要素一覧
-[チャレンジ要素一覧](https://docs.google.com/spreadsheets/d/1A3z6Wkq6ry9K3m2mlBMgdLitNztRJ3YCQJdI46ocBzQ/edit?usp=sharing) (google スプレッドシート)
+## 機能一覧
+- [機能一覧](https://docs.google.com/spreadsheets/d/1A6S3yAGR7iKuectLNO92N2Kpv95bOUcJ2s8PFfZfkvQ/edit?usp=sharing)(google スプレッドシート)
+- [チャレンジ要素一覧](https://docs.google.com/spreadsheets/d/1A3z6Wkq6ry9K3m2mlBMgdLitNztRJ3YCQJdI46ocBzQ/edit?usp=sharing) (google スプレッドシート)
 
 ## 開発環境
 - OS：Linux(CentOS)

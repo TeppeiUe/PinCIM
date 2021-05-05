@@ -15,9 +15,13 @@ class BelongsController < ApplicationController
   end
 
   def edit
+    @belong = Belong.find(params[:id])
   end
 
   def update
+    @belong = Belong.find(params[:id])
+    @belong.update(params_belong)
+    redirect_to belong_path(@belong.id)
   end
 
   def search

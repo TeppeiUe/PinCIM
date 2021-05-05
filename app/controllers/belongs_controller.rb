@@ -11,6 +11,7 @@ class BelongsController < ApplicationController
   end
 
   def show
+    @belong = Belong.find(params[:id])
   end
 
   def edit

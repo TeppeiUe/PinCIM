@@ -16,9 +16,14 @@ class SalesEndsController < ApplicationController
   end
 
   def edit
+    @sales_end = SalesEnd.find(params[:id])
+    @belongs = Belong.all
   end
 
   def update
+    @sales_end = SalesEnd.find(params[:id])
+    @sales_end.update(params_sales_end)
+    redirect_to sales_end_path(@sales_end.id)
   end
 
   def search

@@ -5,9 +5,6 @@ class SalesEndsController < ApplicationController
     @belongs = Belong.all
   end
 
-  def new
-  end
-
   def create
     @sales_end = SalesEnd.new(params_sales_end)
     @sales_end.save

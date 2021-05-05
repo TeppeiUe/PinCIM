@@ -1,0 +1,15 @@
+.container
+	h2 営業担当者詳細
+	.row
+		.col-md-8
+			p.h5 氏名
+			p = @sales_end.name
+			p.h5 所属
+			p = link_to @sales_end.belong.name, belong_path(@sales_end.belong_id)
+			p.h5 役職
+			p = @sales_end.post
+			p.h5 電話番号
+			p = @sales_end.telephone_number
+			p.h5 備考
+			p = @sales_end.note
+			= link_to "編集", edit_sales_end_path(@sales_end.id), class: "btn btn-primary"

@@ -1,7 +1,9 @@
 class BelongsController < ApplicationController
+  before_action :set_belong_new, only: [:index, :search]
+  before_action :set_belongs, only: [:index, :create]
+  before_action :set_belong, only: [:show, :edit, :update]
+
   def index
-    @belongs = Belong.all
-    @belong = Belong.new
   end
 
   def create
@@ -9,21 +11,17 @@ class BelongsController < ApplicationController
     if @belong.save
       redirect_to belongs_path
     else
-      @belongs = Belong.all
       render "index"
     end
   end
 
   def show
-    @belong = Belong.find(params[:id])
   end
 
   def edit
-    @belong = Belong.find(params[:id])
   end
 
   def update
-    @belong = Belong.find(params[:id])
     if @belong.update(params_belong)
       redirect_to belong_path(@belong.id)
     else
@@ -37,6 +35,18 @@ class BelongsController < ApplicationController
   end
 
   private
+
+  def set_belong_new
+    @belong = Belong.new
+  end
+
+  def set_belongs
+    @belongs = Belong.all
+  end
+
+  def set_belong
+    @belong = Belong.find(params[:id])
+  end
 
   def params_belong
     params.require(:belong).permit(:name, :address)

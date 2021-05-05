@@ -2,13 +2,4 @@
 	h2 所属編集
 	.row
 		.col-md-4
-			= render "shared/error", obj: @belong
-			= form_with model: @belong, local: true do |f|
-			  .form-group
-			    = f.label :name
-			    = f.text_field :name, class: "form-control name"
-			  .form-group
-			    = f.label :address
-			    = f.text_field :address, class: "form-control address"
-			  .form-group
-			    = f.submit "変更保存", class: "btn btn-primary"
+			= render "belongs/form", belong: @belong, btn_name: "変更保存"

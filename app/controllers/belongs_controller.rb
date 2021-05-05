@@ -25,6 +25,8 @@ class BelongsController < ApplicationController
   end
 
   def search
+    @belongs = Belong.search_name(params[:value])
+    render "index"
   end
 
   private

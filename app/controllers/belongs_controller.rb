@@ -6,8 +6,12 @@ class BelongsController < ApplicationController
 
   def create
     @belong = Belong.new(params_belong)
-    @belong.save
-    redirect_to belongs_path
+    if @belong.save
+      redirect_to belongs_path
+    else
+      @belongs = Belong.all
+      render "index"
+    end
   end
 
   def show
@@ -20,8 +24,11 @@ class BelongsController < ApplicationController
 
   def update
     @belong = Belong.find(params[:id])
-    @belong.update(params_belong)
-    redirect_to belong_path(@belong.id)
+    if @belong.update(params_belong)
+      redirect_to belong_path(@belong.id)
+    else
+      render "edit"
+    end
   end
 
   def search

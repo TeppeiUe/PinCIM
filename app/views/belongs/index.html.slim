@@ -17,6 +17,7 @@
 			        td = link_to belong.name, belong_path(belong.id)
 			        td = belong.address
 		.col-md-4
+			= render "shared/error", obj: @belong
 			= form_with model: @belong, local: true do |f|
 			  .form-group
 			    = f.label :name

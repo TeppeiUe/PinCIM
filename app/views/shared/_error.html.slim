@@ -1,0 +1,6 @@
+- if obj.errors.any?
+  .error_explanation
+    p.h5 内容を確認して下さい
+    ul
+      - obj.errors.full_messages.each do |message|
+        li = message

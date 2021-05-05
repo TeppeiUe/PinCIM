@@ -1,8 +1,10 @@
 class SalesEndsController < ApplicationController
+  before_action :set_sales_end_new, only: [:index, :search]
+  before_action :set_sales_ends, only: [:index, :create]
+  before_action :set_sales_end, only: [:show, :edit, :update]
+  before_action :set_belongs, only: [:index, :create, :edit, :update, :search]
+
   def index
-    @sales_ends = SalesEnd.all
-    @sales_end = SalesEnd.new
-    @belongs = Belong.all
   end
 
   def create
@@ -10,27 +12,20 @@ class SalesEndsController < ApplicationController
     if @sales_end.save
       redirect_to sales_end_path(@sales_end.id)
     else
-      @sales_ends = SalesEnd.all
-      @belongs = Belong.all
       render "index"
     end
   end
 
   def show
-    @sales_end = SalesEnd.find(params[:id])
   end
 
   def edit
-    @sales_end = SalesEnd.find(params[:id])
-    @belongs = Belong.all
   end
 
   def update
-    @sales_end = SalesEnd.find(params[:id])
     if @sales_end.update(params_sales_end)
       redirect_to sales_end_path(@sales_end.id)
     else
-      @belongs = Belong.all
       render "edit"
     end
   end
@@ -39,11 +34,26 @@ class SalesEndsController < ApplicationController
     how = params[:how]
     value = params[:value]
     @sales_ends = SalesEnd.search_sales_end(how, value)
-    @belongs = Belong.all
     render "index"
   end
 
   private
+
+  def set_sales_end_new
+    @sales_end = SalesEnd.new
+  end
+
+  def set_sales_ends
+    @sales_ends = SalesEnd.all
+  end
+
+  def set_sales_end
+    @sales_end = SalesEnd.find(params[:id])
+  end
+
+  def set_belongs
+    @belongs = Belong.all
+  end
 
   def params_sales_end
     params.require(:sales_end).permit(

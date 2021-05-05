@@ -1,0 +1,9 @@
+.container
+	h2 所属詳細
+	.row
+		.col-md-8
+			p.h5 所属名
+			p = @belong.name
+			p.h5 住所
+			p = @belong.address
+			= link_to "編集", edit_belong_path(@belong.id), class: "btn btn-primary"

@@ -12,6 +12,7 @@ class SalesEndsController < ApplicationController
   end
 
   def show
+    @sales_end = SalesEnd.find(params[:id])
   end
 
   def edit

@@ -1,2 +1,37 @@
-h1 SalesEnds#index
-p Find me in app/views/sales_ends/index.html.slim
+.container
+	h2 営業担当者
+	.row
+		.col-md-8
+			table.table
+			  thead
+			    tr
+			      th 氏名
+			      th 所属
+			      th 役職
+			      th 電話番号
+			  tbody
+			    - @sales_ends.each do |sales_end|
+			      tr
+			        td = link_to sales_end.name, sales_end_path(sales_end.id)
+			        td = link_to sales_end.belong.name, belong_path(sales_end.belong_id)
+			        td = sales_end.post
+			        td = sales_end.telephone_number
+		.col-md-4
+			= form_with model: @sales_end, local: true do |f|
+			  .form-group
+			    = f.label :name
+			    = f.text_field :name, class: "form-control name"
+			  .form-group
+			    = f.label :belong_id
+			    = f.collection_select :belong_id, @belongs, :id, :name, {prompt: "選択して下さい"}, class: "form-control belong_id"
+			  .form-group
+			  	= f.label :post
+			  	= f.text_field :post, class: "form-control post"
+			  .form-group
+			  	= f.label :telephone_number
+			  	= f.text_field :telephone_number, class: "form-control telephone_number"
+			  .form-group
+			  	= f.label :note
+			  	= f.text_area :note, class: "form-control note"
+			  .form-group
+			    = f.submit "新規登録", class: "btn btn-primary"

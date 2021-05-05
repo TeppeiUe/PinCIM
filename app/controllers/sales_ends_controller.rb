@@ -27,6 +27,11 @@ class SalesEndsController < ApplicationController
   end
 
   def search
+    how = params[:how]
+    value = params[:value]
+    @sales_ends = SalesEnd.search_sales_end(how, value)
+    @belongs = Belong.all
+    render "index"
   end
 
   private

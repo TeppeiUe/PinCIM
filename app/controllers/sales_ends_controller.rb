@@ -7,8 +7,13 @@ class SalesEndsController < ApplicationController
 
   def create
     @sales_end = SalesEnd.new(params_sales_end)
-    @sales_end.save
-    redirect_to sales_ends_path
+    if @sales_end.save
+      redirect_to sales_end_path(@sales_end.id)
+    else
+      @sales_ends = SalesEnd.all
+      @belongs = Belong.all
+      render "index"
+    end
   end
 
   def show
@@ -22,8 +27,12 @@ class SalesEndsController < ApplicationController
 
   def update
     @sales_end = SalesEnd.find(params[:id])
-    @sales_end.update(params_sales_end)
-    redirect_to sales_end_path(@sales_end.id)
+    if @sales_end.update(params_sales_end)
+      redirect_to sales_end_path(@sales_end.id)
+    else
+      @belongs = Belong.all
+      render "edit"
+    end
   end
 
   def search

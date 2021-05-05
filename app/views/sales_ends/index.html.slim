@@ -22,6 +22,7 @@
 			        td = sales_end.post
 			        td = sales_end.telephone_number
 		.col-md-4
+			= render "shared/error", obj: @sales_end
 			= form_with model: @sales_end, local: true do |f|
 			  .form-group
 			    = f.label :name

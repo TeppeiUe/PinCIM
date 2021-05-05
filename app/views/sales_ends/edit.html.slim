@@ -2,6 +2,7 @@
 	h2 営業担当者編集
 	.row
 		.col-md-4
+			= render "shared/error", obj: @sales_end
 			= form_with model: @sales_end, local: true do |f|
 			  .form-group
 			    = f.label :name

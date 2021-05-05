@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_055212) do
+ActiveRecord::Schema.define(version: 2021_05_05_142537) do
 
   create_table "belongs", force: :cascade do |t|
     t.string "name", null: false
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2021_05_05_055212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_belongs_on_name"
+  end
+
+  create_table "sales_ends", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "belong_id"
+    t.string "post"
+    t.string "telephone_number"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_sales_ends_on_name"
   end
 
 end

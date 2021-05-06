@@ -1,7 +1,9 @@
 class KeyPeopleController < ApplicationController
+  before_action :set_key_person_new, only: [:index, :search]
+  before_action :set_key_person, only: [:show, :edit, :update]
+
   def index
     @key_people = KeyPerson.all
-    @key_person = KeyPerson.new
   end
 
   def create
@@ -15,15 +17,12 @@ class KeyPeopleController < ApplicationController
   end
 
   def show
-    @key_person = KeyPerson.find(params[:id])
   end
 
   def edit
-    @key_person = KeyPerson.find(params[:id])
   end
 
   def update
-    @key_person = KeyPerson.find(params[:id])
     if @key_person.update(params_key_person)
       redirect_to key_person_path(@key_person.id)
     else
@@ -37,6 +36,14 @@ class KeyPeopleController < ApplicationController
   end
 
   private
+
+  def set_key_person_new
+    @key_person = KeyPerson.new
+  end
+
+  def set_key_person
+    @key_person = KeyPerson.find(params[:id])
+  end
 
   def params_key_person
     params.require(:key_person).permit(:name, :career, :note)

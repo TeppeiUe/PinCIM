@@ -15,9 +15,13 @@ class KeyPeopleController < ApplicationController
   end
 
   def edit
+    @key_person = KeyPerson.find(params[:id])
   end
 
   def update
+    @key_person = KeyPerson.find(params[:id])
+    @key_person.update(params_key_person)
+    redirect_to key_person_path(@key_person.id)
   end
 
   def search

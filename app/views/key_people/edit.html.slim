@@ -1,2 +1,16 @@
-h1 KeyPeople#edit
-p Find me in app/views/key_people/edit.html.slim
+.container
+	h2 窓口担当者編集
+	.row
+		.col-md-4
+		= form_with model: @key_person, local: true do |f|
+			  .form-group
+			    = f.label :name
+			    = f.text_field :name, class: "form-control name"
+			  .form-group
+			    = f.label :career
+			    = f.text_area :career, class: "form-control career"
+			  .form-group
+			  	= f.label :note
+			  	= f.text_area :note, class: "form-control note"
+			  .form-group
+			    = f.submit "変更保存", class: "btn btn-primary"

@@ -2,6 +2,7 @@
 	h2 窓口担当者編集
 	.row
 		.col-md-4
+		= render "shared/error", obj: @key_person
 		= form_with model: @key_person, local: true do |f|
 			  .form-group
 			    = f.label :name

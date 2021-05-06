@@ -6,8 +6,12 @@ class KeyPeopleController < ApplicationController
 
   def create
     @key_person = KeyPerson.new(params_key_person)
-    @key_person.save
-    redirect_to key_people_path
+    if @key_person.save
+      redirect_to key_people_path
+    else
+      @key_people = KeyPerson.all
+      render "index"
+    end
   end
 
   def show
@@ -20,8 +24,11 @@ class KeyPeopleController < ApplicationController
 
   def update
     @key_person = KeyPerson.find(params[:id])
-    @key_person.update(params_key_person)
-    redirect_to key_person_path(@key_person.id)
+    if @key_person.update(params_key_person)
+      redirect_to key_person_path(@key_person.id)
+    else
+      render "edit"
+    end
   end
 
   def search

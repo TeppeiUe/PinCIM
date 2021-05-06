@@ -25,6 +25,8 @@ class KeyPeopleController < ApplicationController
   end
 
   def search
+    @key_people = KeyPerson.search_name(params[:value])
+    render "index"
   end
 
   private

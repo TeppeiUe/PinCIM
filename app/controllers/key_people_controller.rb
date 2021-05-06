@@ -11,6 +11,7 @@ class KeyPeopleController < ApplicationController
   end
 
   def show
+    @key_person = KeyPerson.find(params[:id])
   end
 
   def edit

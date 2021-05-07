@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :key_people, only: [:create, :index, :show, :edit, :update]
+  post 'key_people/search'
   resources :belongs, only: [:create, :index, :show, :edit, :update]
   post 'belongs/search'
   resources :sales_ends, only: [:create, :index, :show, :edit, :update]

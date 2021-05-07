@@ -1,0 +1,20 @@
+.container
+	h2 窓口担当者
+	.row
+		.col-md-8
+			.form-inline
+				= form_with url: key_people_search_path, method: :post, local: true do |f|
+					= f.search_field :value, class: "form-control value"
+					= f.submit "検索", class: "btn btn-outline-success"
+			table.table
+				  thead
+				    tr
+				      th 窓口担当者氏名
+				      th 顧客名
+				  tbody
+				    - @key_people.each do |key_person|
+				      tr
+				        td = link_to key_person.name, key_person_path(key_person.id)
+				        td
+		.col-md-4
+			= render "key_people/form", key_person: @key_person, btn_name: "新規登録"

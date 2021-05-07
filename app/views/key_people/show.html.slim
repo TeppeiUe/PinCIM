@@ -1,0 +1,11 @@
+.container
+	h2 窓口担当者詳細
+	.row
+		.col-md-8
+			p.h5 担当者名
+			p = @key_person.name
+			p.h5 経歴
+			p = @key_person.career
+			p.h5 備考
+			p = @key_person.note
+			= link_to "編集", edit_key_person_path(@key_person.id), class: "btn btn-primary"

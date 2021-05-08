@@ -32,6 +32,10 @@ class CustomersController < ApplicationController
   end
 
   def search
+    how = params[:how]
+    value = params[:value]
+    @customers = Customer.search_customer(how, value)
+    render "index"
   end
 
   private

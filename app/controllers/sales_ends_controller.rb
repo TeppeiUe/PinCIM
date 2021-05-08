@@ -17,6 +17,7 @@ class SalesEndsController < ApplicationController
   end
 
   def show
+    @customers = @sales_end.customers
   end
 
   def edit

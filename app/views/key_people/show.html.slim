@@ -9,3 +9,5 @@
 			p.h5 備考
 			p = @key_person.note
 			= link_to "編集", edit_key_person_path(@key_person.id), class: "btn btn-primary"
+			p.h5 所属
+			p = link_to @key_person.customer.name, customer_path(@key_person.customer.id)

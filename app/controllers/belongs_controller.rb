@@ -16,6 +16,7 @@ class BelongsController < ApplicationController
   end
 
   def show
+    @sales_ends = @belong.sales_ends
   end
 
   def edit

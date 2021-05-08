@@ -7,8 +7,13 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(params_customer)
-    @customer.save
-    redirect_to customers_path
+    if @customer.save
+      redirect_to customers_path
+    else
+      @key_people = KeyPerson.all
+      @sales_ends = SalesEnd.all
+      render "new"
+    end
   end
 
   def index
@@ -27,8 +32,13 @@ class CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(params_customer)
-    redirect_to customer_path(@customer.id)
+    if @customer.update(params_customer)
+      redirect_to customer_path(@customer.id)
+    else
+      @key_people = KeyPerson.all
+      @sales_ends = SalesEnd.all
+      render "edit"
+    end
   end
 
   def search

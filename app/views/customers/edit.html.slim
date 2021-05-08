@@ -2,6 +2,7 @@
 	h2 顧客編集
 	.row
 		.col-md-8
+		  = render "shared/error", obj: @customer
 		  = form_with model: @customer, local: true do |f|
 		    .form-group
 		      = f.label :name

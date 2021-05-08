@@ -1,9 +1,9 @@
 class BelongsController < ApplicationController
   before_action :set_belong_new, only: [:index, :search]
-  before_action :set_belongs, only: [:index, :create]
   before_action :set_belong, only: [:show, :edit, :update]
 
   def index
+    @belongs = Belong.all
   end
 
   def create
@@ -11,6 +11,7 @@ class BelongsController < ApplicationController
     if @belong.save
       redirect_to belongs_path
     else
+      @belongs = Belong.all
       render "index"
     end
   end
@@ -39,10 +40,6 @@ class BelongsController < ApplicationController
 
   def set_belong_new
     @belong = Belong.new
-  end
-
-  def set_belongs
-    @belongs = Belong.all
   end
 
   def set_belong

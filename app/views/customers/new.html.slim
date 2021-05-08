@@ -1,2 +1,19 @@
-h1 Customers#new
-p Find me in app/views/customers/new.html.slim
+.container
+	h2 顧客新規登録
+	.row
+		.col-md-8
+		  = form_with model: @customer, local: true do |f|
+		    .form-group
+		      = f.label :name
+		      = f.text_field :name, class: "form-control name"
+		    .form-group
+		      = f.label :address
+		      = f.text_field :address, class: "form-control address"
+		    .form-group
+		      = f.label :key_person_id
+		      = f.collection_select :key_person_id, @key_people, :id, :name, {prompt: "選択して下さい"}, class: "form-control key_person_id"
+		    .form-group
+		      = f.label :sales_end_id
+		      = f.collection_select :sales_end_id, @sales_ends, :id, :name, {prompt: "選択して下さい"}, class: "form-control sales_end_id"
+		    .form-group
+		      = f.submit "新規登録", class: "btn btn-primary"

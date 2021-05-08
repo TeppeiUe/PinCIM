@@ -1,10 +1,10 @@
 class SalesEndsController < ApplicationController
   before_action :set_sales_end_new, only: [:index, :search]
-  before_action :set_sales_ends, only: [:index, :create]
   before_action :set_sales_end, only: [:show, :edit, :update]
-  before_action :set_belongs, only: [:index, :create, :edit, :update, :search]
+  before_action :set_belongs, only: [:index, :edit, :search]
 
   def index
+    @sales_ends = SalesEnd.all
   end
 
   def create
@@ -12,11 +12,14 @@ class SalesEndsController < ApplicationController
     if @sales_end.save
       redirect_to sales_end_path(@sales_end.id)
     else
+      set_belongs
+      @sales_ends = SalesEnd.all
       render "index"
     end
   end
 
   def show
+    @customers = @sales_end.customers
   end
 
   def edit
@@ -26,6 +29,7 @@ class SalesEndsController < ApplicationController
     if @sales_end.update(params_sales_end)
       redirect_to sales_end_path(@sales_end.id)
     else
+      set_belongs
       render "edit"
     end
   end
@@ -41,10 +45,6 @@ class SalesEndsController < ApplicationController
 
   def set_sales_end_new
     @sales_end = SalesEnd.new
-  end
-
-  def set_sales_ends
-    @sales_ends = SalesEnd.all
   end
 
   def set_sales_end

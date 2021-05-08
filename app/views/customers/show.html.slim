@@ -1,0 +1,15 @@
+.container
+	h2 顧客詳細
+	.row
+		.col-md-8
+			p.h5 顧客名
+			p = @customer.name
+			p.h5 住所
+			p = @customer.address
+			p.h5 窓口担当者
+			p = link_to @customer.key_person.name, key_person_path(@customer.key_person.id)
+			p.h5 営業担当者所属
+			p = link_to @customer.sales_end.belong.name, belong_path(@customer.sales_end.belong.id)
+			p.h5 営業担当者
+			p = link_to @customer.sales_end.name, sales_end_path(@customer.sales_end.id)
+			= link_to "編集", edit_customer_path(@customer.id), class: "btn btn-primary"

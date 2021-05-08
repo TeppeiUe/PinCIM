@@ -20,9 +20,15 @@ class CustomersController < ApplicationController
   end
 
   def edit
+    @customer = Customer.find(params[:id])
+    @key_people = KeyPerson.all
+    @sales_ends = SalesEnd.all
   end
 
   def update
+    @customer = Customer.find(params[:id])
+    @customer.update(params_customer)
+    redirect_to customer_path(@customer.id)
   end
 
   def search

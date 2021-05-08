@@ -2,6 +2,7 @@ class SalesEnd < ApplicationRecord
   validates :name, presence: true
 
   belongs_to :belong
+  has_many :customers
 
   def self.search_name(value)
     SalesEnd.where("name LIKE ?", "%#{sanitize_sql_like(value)}%")

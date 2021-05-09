@@ -1,2 +1,29 @@
-h1 Activities#index
-p Find me in app/views/activities/index.html.slim
+.container
+	h2 活動種別
+	.row
+		.col-md-8
+			table.table
+				thead
+					tr
+						th 活動分類
+						th 活動種別
+						th
+				tbody
+					- @activities.each do |activity|
+						tr
+							td = activity.category
+							td = activity.name
+							td = link_to "編集", edit_activity_path(activity.id), class: "btn btn-primary"
+		.col-md-4
+			= form_with model: @activity, local: true do |f|
+				.form-group
+					= f.label :category
+					= f.select :category,
+						options_for_select(Activity.categories),
+						{include_blank: "選択して下さい"},
+						class: "form-control category"
+				.form-group
+					= f.label :name
+					= f.text_field :name, class: "form-control name"
+				.form-group
+					= f.submit "新規登録", class: "btn btn-primary"

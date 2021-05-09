@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  key_person_id: 1
+  belong_id: 1
+  sales_end_id: 1
+  visit_datetime: 2021-05-09 16:29:38
+  system: 1
+  next_datetime: 2021-05-09 16:29:38
+  note: MyText
+  rank: 1
+
+two:
+  customer_id: 1
+  key_person_id: 1
+  belong_id: 1
+  sales_end_id: 1
+  visit_datetime: 2021-05-09 16:29:38
+  system: 1
+  next_datetime: 2021-05-09 16:29:38
+  note: MyText
+  rank: 1

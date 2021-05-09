@@ -1,6 +1,8 @@
 class Activity < ApplicationRecord
   validates :name, :category, presence: true
 
+  has_many :activity_details
+
   enum category: {
     プレゼン: 0,
     定期訪問: 1,

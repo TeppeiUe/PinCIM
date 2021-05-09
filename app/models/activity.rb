@@ -7,4 +7,8 @@ class Activity < ApplicationRecord
     打ち合せ: 2,
     PR: 3,
   }
+
+  def self.search_name(value)
+    Activity.where("name LIKE ?", "%#{sanitize_sql_like(value)}%")
+  end
 end

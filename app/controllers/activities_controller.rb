@@ -24,6 +24,8 @@ class ActivitiesController < ApplicationController
   end
 
   def search
+    @activities = Activity.search_name(params[:value])
+    render "index"
   end
 
   private

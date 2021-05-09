@@ -2,11 +2,13 @@
 	h2 顧客一覧
 	.row
 		.col-md-8
-			.form-inline
-				= form_with url: customers_search_path, method: :post, local: true do |f|
-					= f.select :how, options_for_select("顧客名": "customer_name", "住所": "customer_address"), {}, class: "custom-select"
-					= f.search_field :value, class: "form-control value"
-					= f.submit "検索", class: "btn btn-outline-success"
+			.d-flex.justify-content-between
+				.form-inline
+					= form_with url: customers_search_path, method: :post, local: true do |f|
+						= f.select :how, options_for_select("顧客名": "customer_name", "住所": "customer_address"), {}, class: "custom-select"
+						= f.search_field :value, class: "form-control value"
+						= f.submit "検索", class: "btn btn-outline-success"
+				= link_to "新規登録", new_customer_path, class: "btn btn-primary"
 			table.table
 				  thead
 				    tr

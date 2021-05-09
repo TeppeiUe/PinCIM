@@ -1,2 +1,16 @@
-h1 Activities#edit
-p Find me in app/views/activities/edit.html.slim
+.container
+	h2 活動種別編集
+	.row
+		.col-md-4
+			= form_with model: @activity, local: true do |f|
+				.form-group
+					= f.label :category
+					= f.select :category,
+						options_for_select(Activity.categories.keys, @activity.category),
+						{include_blank: "選択して下さい"},
+						class: "form-control category"
+				.form-group
+					= f.label :name
+					= f.text_field :name, class: "form-control name"
+				.form-group
+					= f.submit "変更保存", class: "btn btn-primary"

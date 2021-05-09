@@ -11,9 +11,16 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    @activity = Activity.find(params[:id])
   end
 
   def update
+    @activity = Activity.find(params[:id])
+    if @activity.update(params_activity)
+      redirect_to activities_path
+    else
+      render "edit"
+    end
   end
 
   def search

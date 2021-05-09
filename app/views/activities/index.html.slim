@@ -1,0 +1,22 @@
+.container
+	h2 活動種別
+	.row
+		.col-md-8
+			.form-inline
+				= form_with url: activities_search_path, method: :post, local: true do |f|
+					= f.search_field :value, class: "form-control value"
+					= f.submit "検索", class: "btn btn-outline-success"
+			table.table
+				thead
+					tr
+						th 活動分類
+						th 活動種別
+						th
+				tbody
+					- @activities.each do |activity|
+						tr
+							td = activity.category
+							td = activity.name
+							td = link_to "編集", edit_activity_path(activity.id), class: "btn btn-primary"
+		.col-md-4
+			= render "activities/form", activity: @activity, btn_name: "新規登録"

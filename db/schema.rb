@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_225236) do
+ActiveRecord::Schema.define(version: 2021_05_09_054356) do
+
+  create_table "actions", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "category", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_actions_on_category"
+    t.index ["name"], name: "index_actions_on_name"
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "category", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_activities_on_category"
+    t.index ["name"], name: "index_activities_on_name"
+  end
 
   create_table "belongs", force: :cascade do |t|
     t.string "name", null: false

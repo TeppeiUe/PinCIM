@@ -19,13 +19,12 @@
 							td = activity.name
 							td = link_to "編集", edit_activity_path(activity.id), class: "btn btn-primary"
 		.col-md-4
+			= render "shared/error", obj: @activity
 			= form_with model: @activity, local: true do |f|
 				.form-group
 					= f.label :category
 					= f.select :category,
-						options_for_select(Activity.categories),
-						{include_blank: "選択して下さい"},
-						class: "form-control category"
+						options_for_select(Activity.categories.keys, @activity.category), {},	class: "form-control category"
 				.form-group
 					= f.label :name
 					= f.text_field :name, class: "form-control name"

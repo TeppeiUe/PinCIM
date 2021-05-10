@@ -26,4 +26,9 @@
 			p = @visit_record.note
 			p.h5 ランク
 			p = @visit_record.rank
+			p.h5 活動内容
+			p
+				- @visit_record.activity_details.each do |activity_detail|
+					= activity_detail.activity.name
+					<br>
 			=link_to "編集", edit_visit_record_path(@visit_record.id), class: "btn btn-primary"

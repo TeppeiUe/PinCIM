@@ -46,6 +46,11 @@
 						options_for_select(VisitRecord.ranks.keys, @visit_record.rank),
 						{},
 						class: "form-control rank"
+	
+				= f.fields_for :activity_details do |activity_detail|
+					.form-group
+						= activity_detail.label :activity_id
+						= activity_detail.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
 
 				.form-group
 					= f.submit "変更保存", class: "btn btn-primary"

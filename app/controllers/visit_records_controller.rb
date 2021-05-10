@@ -37,6 +37,7 @@ class VisitRecordsController < ApplicationController
     @key_people = KeyPerson.all
     @belongs = Belong.all
     @sales_ends = SalesEnd.all
+    @activities = Activity.all
   end
 
   def update
@@ -73,7 +74,7 @@ class VisitRecordsController < ApplicationController
         :next_datetime,
         :note,
         :rank,
-        activity_details_attributes: :activity_id,
+        activity_details_attributes: [:id, :activity_id],
       )
   end
 end

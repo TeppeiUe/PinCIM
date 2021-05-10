@@ -6,7 +6,8 @@ class VisitRecord < ApplicationRecord
   belongs_to :belong
   belongs_to :sales_end
 
-  has_many :activity_detail, dependent: :destroy
+  has_many :activity_details, dependent: :destroy, inverse_of: 'visit_record'
+  accepts_nested_attributes_for :activity_details
 
   enum system: {
     systemA: 0,

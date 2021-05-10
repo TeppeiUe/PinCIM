@@ -2,6 +2,7 @@
 	h2 訪問記録新規登録
 	.row
 		.col-md-8
+			= render "shared/error", obj: @visit_record
 			= form_with model: @visit_record, local: true do |f|
 				.form-group
 					= f.label :visit_datetime
@@ -46,6 +47,11 @@
 						options_for_select(VisitRecord.ranks.keys, @visit_record.rank),
 						{},
 						class: "form-control rank"
+
+				= f.fields_for :activity_details do |activity_detail|
+					.form-group
+						= activity_detail.label :activity_id
+						= activity_detail.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
 
 				.form-group
 					= f.submit "新規登録", class: "btn btn-primary"

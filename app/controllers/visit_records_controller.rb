@@ -1,16 +1,26 @@
 class VisitRecordsController < ApplicationController
   def new
     @visit_record = VisitRecord.new
+    @visit_record.activity_details.build
     @customers = Customer.all
     @key_people = KeyPerson.all
     @belongs = Belong.all
     @sales_ends = SalesEnd.all
+    @activities = Activity.all
   end
 
   def create
     @visit_record = VisitRecord.new(params_visit_record)
-    @visit_record.save
-    redirect_to visit_record_path(@visit_record.id)
+    if @visit_record.save
+      redirect_to visit_record_path(@visit_record.id)
+    else
+      @customers = Customer.all
+      @key_people = KeyPerson.all
+      @belongs = Belong.all
+      @sales_ends = SalesEnd.all
+      @activities = Activity.all
+      render "new"
+    end
   end
 
   def index
@@ -63,6 +73,7 @@ class VisitRecordsController < ApplicationController
         :next_datetime,
         :note,
         :rank,
+        activity_details_attributes: :activity_id,
       )
   end
 end

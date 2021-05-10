@@ -1,2 +1,17 @@
-h1 VisitRecords#index
-p Find me in app/views/visit_records/index.html.slim
+.container
+	h2 訪問記録一覧
+	.row
+		.col-md-8
+			=link_to "新規登録", new_visit_record_path, class: "btn btn-primary"
+			table.table
+				thead
+					tr
+						th 訪問日
+						th 顧客名
+						th 活動内容
+				tbody
+					- @visit_records.each do |visit_record|
+						tr
+							td = link_to visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), visit_record_path(visit_record.id)
+							td = link_to visit_record.customer.name, customer_path(visit_record.customer.id)
+							td

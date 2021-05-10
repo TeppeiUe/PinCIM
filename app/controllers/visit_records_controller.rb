@@ -14,6 +14,7 @@ class VisitRecordsController < ApplicationController
   end
 
   def index
+    @visit_records = VisitRecord.all
   end
 
   def show

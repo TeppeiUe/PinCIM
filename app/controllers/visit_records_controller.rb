@@ -36,6 +36,9 @@ class VisitRecordsController < ApplicationController
   end
 
   def destroy
+    @visit_record = VisitRecord.find(params[:id])
+    @visit_record.destroy
+    redirect_to visit_records_path
   end
 
   def search

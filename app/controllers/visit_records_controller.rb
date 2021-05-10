@@ -42,6 +42,10 @@ class VisitRecordsController < ApplicationController
   end
 
   def search
+    from = params[:from_date]
+    to = params[:to_date]
+    @visit_records = VisitRecord.search_period(from, to)
+    render "index"
   end
 
   private

@@ -2,7 +2,8 @@
 	h2 訪問記録一覧
 	.row
 		.col-md-8
-			=link_to "新規登録", new_visit_record_path, class: "btn btn-primary"
+			.d-flex.justify-content-end
+				= link_to "新規登録", new_visit_record_path, class: "btn btn-primary"
 			table.table
 				thead
 					tr
@@ -15,3 +16,13 @@
 							td = link_to visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), visit_record_path(visit_record.id)
 							td = link_to visit_record.customer.name, customer_path(visit_record.customer.id)
 							td
+		.col-md-4
+			= form_with url: visit_records_search_path, method: :post, local: true do |f|
+				.form-group
+					= f.label :from_date, "期間の開始日"
+					=	f.date_field :from_date, class: "form-control from_date"
+				.form-group
+					= f.label :to_date, "期間の最終日"
+					= f.date_field :to_date, class: "form-control to_date"
+				.form-group
+					= f.submit "検索", class: "btn btn-outline-success"

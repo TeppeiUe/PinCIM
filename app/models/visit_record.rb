@@ -19,4 +19,8 @@ class VisitRecord < ApplicationRecord
     rankB: 1,
     rankC: 2,
   }
+
+  def self.search_period(from, to)
+    VisitRecord.where("visit_datetime BETWEEN ? AND ?", from, to)
+  end
 end

@@ -2,56 +2,11 @@
 	h2 訪問記録編集
 	.row
 		.col-md-8
-			= render "shared/error", obj: @visit_record
-			= form_with model: @visit_record, local: true do |f|
-				.form-group
-					= f.label :visit_datetime
-					= f.datetime_field :visit_datetime, class: "form-control visit_datetime"
-
-				.form-row
-					.form-group.col
-						= f.label :customer_id
-						= f.collection_select :customer_id, @customers, :id, :name, {prompt: "選択して下さい"}, class: "form-control customer_id"
-
-					.form-group.col
-						= f.label :key_person_id
-						= f.collection_select :key_person_id, @key_people, :id, :name, {prompt: "選択して下さい"}, class: "form-control key_person_id"
-
-				.form-row
-					.form-group.col
-						= f.label :belong_id
-						= f.collection_select :belong_id, @belongs, :id, :name, {prompt: "選択して下さい"}, class: "form-control belong_id"
-
-					.form-group.col
-						= f.label :sales_end_id
-						= f.collection_select :sales_end_id, @sales_ends, :id, :name, {prompt: "選択して下さい"}, class: "form-control sales_end_id"
-
-				.form-group
-					= f.label :system
-					= f.select :system,
-						options_for_select(VisitRecord.systems.keys, @visit_record.system),
-						{},
-						class: "form-control system"
-
-				.form-group
-					= f.label :next_datetime
-					= f.datetime_field :next_datetime, class: "form-control next_datetime"
-
-				.form-group
-					= f.label :note
-					= f.text_area :note, class: "form-control note"
-
-				.form-group
-					= f.label :rank
-					= f.select :rank,
-						options_for_select(VisitRecord.ranks.keys, @visit_record.rank),
-						{},
-						class: "form-control rank"
-
-				= f.fields_for :activity_details do |activity_detail|
-					.form-group
-						= activity_detail.label :activity_id
-						= activity_detail.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
-
-				.form-group
-					= f.submit "変更保存", class: "btn btn-primary"
+			= render "visit_records/form",
+				visit_record: @visit_record,
+				customers: @customers,
+				key_people: @key_people,
+				belongs: @belongs,
+				sales_ends: @sales_ends,
+				activities: @activities,
+				btn_name: "変更保存"

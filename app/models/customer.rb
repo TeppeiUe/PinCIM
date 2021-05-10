@@ -3,6 +3,7 @@ class Customer < ApplicationRecord
 
   belongs_to :sales_end
   belongs_to :key_person
+  has_many :visit_records
 
   def self.search_name(value)
     Customer.where("name LIKE ?", "%#{sanitize_sql_like(value)}%")

@@ -42,8 +42,16 @@ class VisitRecordsController < ApplicationController
 
   def update
     @visit_record = VisitRecord.find(params[:id])
-    @visit_record.update(params_visit_record)
-    redirect_to visit_record_path(@visit_record.id)
+    if @visit_record.update(params_visit_record)
+      redirect_to visit_record_path(@visit_record.id)
+    else
+      @customers = Customer.all
+      @key_people = KeyPerson.all
+      @belongs = Belong.all
+      @sales_ends = SalesEnd.all
+      @activities = Activity.all
+      render "edit"
+    end
   end
 
   def destroy

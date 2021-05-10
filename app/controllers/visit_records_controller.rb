@@ -1,12 +1,10 @@
 class VisitRecordsController < ApplicationController
+  before_action :set_visit_record, only: [:show, :edit, :update, :destroy]
+
   def new
     @visit_record = VisitRecord.new
     @visit_record.activity_details.build
-    @customers = Customer.all
-    @key_people = KeyPerson.all
-    @belongs = Belong.all
-    @sales_ends = SalesEnd.all
-    @activities = Activity.all
+    set_form_select
   end
 
   def create
@@ -14,11 +12,7 @@ class VisitRecordsController < ApplicationController
     if @visit_record.save
       redirect_to visit_record_path(@visit_record.id)
     else
-      @customers = Customer.all
-      @key_people = KeyPerson.all
-      @belongs = Belong.all
-      @sales_ends = SalesEnd.all
-      @activities = Activity.all
+      set_form_select
       render "new"
     end
   end
@@ -28,34 +22,22 @@ class VisitRecordsController < ApplicationController
   end
 
   def show
-    @visit_record = VisitRecord.find(params[:id])
   end
 
   def edit
-    @visit_record = VisitRecord.find(params[:id])
-    @customers = Customer.all
-    @key_people = KeyPerson.all
-    @belongs = Belong.all
-    @sales_ends = SalesEnd.all
-    @activities = Activity.all
+    set_form_select
   end
 
   def update
-    @visit_record = VisitRecord.find(params[:id])
     if @visit_record.update(params_visit_record)
       redirect_to visit_record_path(@visit_record.id)
     else
-      @customers = Customer.all
-      @key_people = KeyPerson.all
-      @belongs = Belong.all
-      @sales_ends = SalesEnd.all
-      @activities = Activity.all
+      set_form_select
       render "edit"
     end
   end
 
   def destroy
-    @visit_record = VisitRecord.find(params[:id])
     @visit_record.destroy
     redirect_to visit_records_path
   end
@@ -68,6 +50,18 @@ class VisitRecordsController < ApplicationController
   end
 
   private
+
+  def set_visit_record
+    @visit_record = VisitRecord.find(params[:id])
+  end
+
+  def set_form_select
+    @customers = Customer.all
+    @key_people = KeyPerson.all
+    @belongs = Belong.all
+    @sales_ends = SalesEnd.all
+    @activities = Activity.all
+  end
 
   def params_visit_record
     params.

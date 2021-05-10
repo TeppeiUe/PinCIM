@@ -5,7 +5,7 @@ class VisitRecord < ApplicationRecord
   belongs_to :key_person
   belongs_to :belong
   belongs_to :sales_end
-
+  has_many :tasks
   has_many :activity_details, dependent: :destroy, inverse_of: 'visit_record'
   accepts_nested_attributes_for :activity_details
 

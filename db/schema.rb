@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_162938) do
+ActiveRecord::Schema.define(version: 2021_05_10_151037) do
 
   create_table "actions", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 2021_05_09_162938) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_sales_ends_on_name"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "visit_record_id", null: false
+    t.string "title", null: false
+    t.text "content"
+    t.datetime "deadline"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "visit_records", force: :cascade do |t|

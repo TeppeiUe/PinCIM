@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visit_record_id: 1
+  title: MyString
+  content: MyText
+  deadline: 2021-05-10 15:10:37
+  is_active: false
+
+two:
+  visit_record_id: 1
+  title: MyString
+  content: MyText
+  deadline: 2021-05-10 15:10:37
+  is_active: false

@@ -1,2 +1,29 @@
-h1 VisitRecords#show
-p Find me in app/views/visit_records/show.html.slim
+.container
+	h2 訪問記録詳細
+	.row
+		.col-md-8
+			p.h5 訪問日時
+			p = @visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M")
+			.row
+				.col
+					p.h5 顧客名
+					p = link_to @visit_record.customer.name, customer_path(@visit_record.customer.id)
+				.col
+					p.h5 窓口担当者
+					p = link_to @visit_record.key_person.name, key_person_path(@visit_record.key_person.id)
+			.row
+				.col
+					p.h5 所属
+					p = link_to @visit_record.belong.name, belong_path(@visit_record.belong.id)
+				.col
+					p.h5 営業担当者
+					p = link_to @visit_record.sales_end.name, sales_end_path(@visit_record.sales_end.id)
+			p.h5 システム
+			p = @visit_record.system
+			p.h5 次回訪問日時
+			p = @visit_record.next_datetime.strftime("%Y-%m-%d %H:%M")
+			p.h5 備考
+			p = @visit_record.note
+			p.h5 ランク
+			p = @visit_record.rank
+			=link_to "編集", edit_visit_record_path(@visit_record.id), class: "btn btn-primary"

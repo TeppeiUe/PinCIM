@@ -17,6 +17,7 @@ class VisitRecordsController < ApplicationController
   end
 
   def show
+    @visit_record = VisitRecord.find(params[:id])
   end
 
   def edit

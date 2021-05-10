@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :visit_records
+  resources :visit_records do
+    resources :tasks, only: [:new, :create, :index, :show, :edit, :update]
+  end
   post 'visit_records/search'
   resources :activities, only: [:create, :index, :edit, :update]
   post 'activities/search'

@@ -1,0 +1,12 @@
+.container
+	h2 訪問記録新規登録
+	.row
+		.col-md-8
+			= render "visit_records/form",
+				visit_record: @visit_record,
+				customers: @customers,
+				key_people: @key_people,
+				belongs: @belongs,
+				sales_ends: @sales_ends,
+				activities: @activities,
+				btn_name: "新規登録"

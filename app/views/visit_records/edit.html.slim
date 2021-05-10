@@ -1,0 +1,12 @@
+.container
+	h2 訪問記録編集
+	.row
+		.col-md-8
+			= render "visit_records/form",
+				visit_record: @visit_record,
+				customers: @customers,
+				key_people: @key_people,
+				belongs: @belongs,
+				sales_ends: @sales_ends,
+				activities: @activities,
+				btn_name: "変更保存"

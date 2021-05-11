@@ -6,8 +6,12 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params_task)
-    @task.save
-    redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
+    if @task.save
+      redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
+    else
+      @visit_record = VisitRecord.find(params[:visit_record_id])
+      render "new"
+    end
   end
 
   def index
@@ -25,8 +29,12 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @task.update(params_task)
-    redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
+    if @task.update(params_task)
+      redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
+    else
+      @visit_record = VisitRecord.find(params[:visit_record_id])
+      render "edit"
+    end
   end
 
   private

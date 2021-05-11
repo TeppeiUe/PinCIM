@@ -2,8 +2,9 @@
 	h2 タスク新規登録
 	.row
 		.col-md-8
+			= render "shared/error", obj: @task
 			= form_with model: [@visit_record, @task], local: true do |f|
-				= f.hidden_field :visit_record_id, :value => @visit_record.id
+				= f.hidden_field :visit_record_id, value: @visit_record.id
 				.form-group
 				  = f.label :title
 				  = f.text_field :title, class: "form-control title"

@@ -2,6 +2,7 @@
 	h2 タスク編集
 	.row
 		.col-md-8
+			= render "shared/error", obj: @task
 			= form_with model: [@visit_record, @task], local: true do |f|
 				= f.hidden_field :visit_record_id, value: @visit_record.id
 				.form-group

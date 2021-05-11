@@ -1,0 +1,21 @@
+header
+	nav.navbar.navbar-expand-lg.navbar-light.bg-light
+		.container
+			a.navbar-brand[href="/"]
+				= image_tag "PinCIM-logo&title_bg-none.png", alt: "PinCIM logo", size: "100x26"
+
+			button.navbar-toggler[
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown"
+				aria-expanded="false"
+				aria-label="Toggle navigation"]
+				span.navbar-toggler-icon
+
+			#navbarNavDropdown.collapse.navbar-collapse
+				ul.navbar-nav
+					li.nav-item = link_to "トップページ", "/", class: "nav-link"
+					li.nav-item = link_to "訪問記録", visit_records_path, class: "nav-link"
+					li.nav-item = link_to "タスク", tasks_path, class: "nav-link"
+					li.nav-item = link_to "ログアウト", "/", class: "nav-link"

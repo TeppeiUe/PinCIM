@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update]
+
   def new
-    @visit_record = VisitRecord.find(params[:visit_record_id])
+    set_visit_record
     @task = Task.new
   end
 
@@ -9,7 +11,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
     else
-      @visit_record = VisitRecord.find(params[:visit_record_id])
+      set_visit_record
       render "new"
     end
   end
@@ -19,25 +21,30 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
   end
 
   def edit
-    @visit_record = VisitRecord.find(params[:visit_record_id])
-    @task = Task.find(params[:id])
+    set_visit_record
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update(params_task)
       redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
     else
-      @visit_record = VisitRecord.find(params[:visit_record_id])
+      set_visit_record
       render "edit"
     end
   end
 
   private
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  def set_visit_record
+    @visit_record = VisitRecord.find(params[:visit_record_id])
+  end
 
   def params_task
     params.

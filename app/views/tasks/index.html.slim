@@ -1,0 +1,18 @@
+.container
+	h2 タスク一覧
+	.row
+		.col-md-8
+			table.table style="table-layout:fixed;"
+				thead
+					tr
+						th タイトル
+						th 内容
+						th 期限
+						th 訪問記録
+				tbody
+					- @tasks.each do |task|
+						tr
+							td = link_to task.title, visit_record_task_path(task.visit_record_id, task.id)
+							td.text-truncate = task.content
+							td = task.deadline.strftime("%Y-%m-%d %H:%M")
+							td = link_to task.visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), visit_record_path(task.visit_record_id)

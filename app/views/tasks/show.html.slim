@@ -1,0 +1,18 @@
+.container
+	h2 タスク詳細
+	.row
+		.col-md-8
+			p.h5 タイトル
+			p = @task.title
+			p.h5 内容
+			p = @task.content
+			p.h5 期限
+			p = @task.deadline.strftime("%Y-%m-%d %H:%M")
+			p.h5 タスクの状態
+			- if @task.is_active?
+					p 実行中
+			- else
+					p 完了
+			= link_to "編集", edit_visit_record_task_path(@task.visit_record_id, @task.id), class: "btn btn-primary"
+			p.h4 訪問記録の詳細
+			= render "visit_records/show", visit_record: @task.visit_record

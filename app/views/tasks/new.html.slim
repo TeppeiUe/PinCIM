@@ -2,17 +2,4 @@
 	h2 タスク新規登録
 	.row
 		.col-md-8
-			= render "shared/error", obj: @task
-			= form_with model: [@visit_record, @task], local: true do |f|
-				= f.hidden_field :visit_record_id, value: @visit_record.id
-				.form-group
-				  = f.label :title
-				  = f.text_field :title, class: "form-control title"
-				.form-group
-				  = f.label :content
-				  = f.text_area :content, class: "form-control content"
-				.form-group
-					= f.label :deadline
-					= f.datetime_field :deadline, class: "form-control deadline"
-				.form-group
-				  = f.submit "新規登録", class: "btn btn-primary"
+			= render "tasks/form", task: @task, visit_record: @visit_record, btn_name: "新規登録"

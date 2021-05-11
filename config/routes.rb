@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'homes#top'
   resources :visit_records do
     resources :tasks, only: [:new, :create, :show, :edit, :update]
   end

@@ -5,6 +5,8 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.string :address
       t.integer :key_person_id
       t.integer :sales_end_id
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end

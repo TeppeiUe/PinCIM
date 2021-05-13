@@ -47,7 +47,9 @@
 	= f.fields_for :activity_details do |activity_detail|
 		.form-group
 			= activity_detail.label :activity_id
-			= activity_detail.collection_select :activity_id, activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
+			= activity_detail.collection_select :activity_id, activities, :id, :name,
+				{include_hidden: false},
+				{class: "form-control activity_id", multiple: true}
 
 	.form-group
 		= f.submit btn_name, class: "btn btn-primary"

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   resources :visit_records do
     resources :tasks, only: [:new, :create, :show, :edit, :update]
+    resources :activity_details, only: [:create, :update, :destroy]
   end
   post 'visit_records/search'
   get '/tasks' => 'tasks#index'

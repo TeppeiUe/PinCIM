@@ -17,7 +17,10 @@ p = link_to_unless_current visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"
 p.h5 システム
 p = visit_record.system
 p.h5 次回訪問日時
-p = visit_record.next_datetime.strftime("%Y-%m-%d %H:%M")
+- if visit_record.next_datetime.present?
+	p = visit_record.next_datetime.strftime("%Y-%m-%d %H:%M")
+- else
+	p なし
 p.h5 備考
 p = visit_record.note
 p.h5 ランク

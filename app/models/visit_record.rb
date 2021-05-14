@@ -26,4 +26,8 @@ class VisitRecord < ApplicationRecord
   def self.search_period(from, to)
     VisitRecord.where("visit_datetime BETWEEN ? AND ?", from, to)
   end
+
+  def find_active_tasks
+    Task.where(visit_record_id: self.id, is_active: true)
+  end
 end

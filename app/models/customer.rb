@@ -23,4 +23,11 @@ class Customer < ApplicationRecord
       Customer.search_address(value)
     end
   end
+
+  def latest_visit_record
+    VisitRecord.find(
+      VisitRecord.order(visit_datetime: :desc).
+      find_by(customer_id: self.id).id
+    )
+  end
 end

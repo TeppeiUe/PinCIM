@@ -5,5 +5,6 @@ class HomesController < ApplicationController
   end
 
   def map
+    @customers = Customer.all
   end
 end

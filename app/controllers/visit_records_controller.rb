@@ -9,22 +9,29 @@ class VisitRecordsController < ApplicationController
 
   def create
     @visit_record = VisitRecord.new(params_visit_record)
+    if @visit_record.save
+      redirect_to visit_record_path(@visit_record.id)
+    else
+      set_form_select
+      render "new"
+    end
 
+    # TODO: 以下の方法で実装出来るか試す
     # 複数のactivity_detailレコードが一括で保存できなかったため、展開し個別に保存
     # 空で保存しないよう、トランザクション処理とした
-    @visit_record.transaction do
-      @visit_record.save!
-      params[:visit_record][:activity_details_attributes].each do |k, activity_detail|
-        activity_detail[:activity_id].each do |id|
-          @visit_record.activity_details.create(activity_id: id)
-        end
-      end
-    end
-    redirect_to visit_record_path(@visit_record.id)
-  rescue => e
-    @visit_record.activity_details.build
-    set_form_select
-    render "new"
+    #   @visit_record.transaction do
+    #     @visit_record.save!
+    #     params[:visit_record][:activity_details_attributes].each do |k, activity_detail|
+    #       activity_detail[:activity_id].each do |id|
+    #         @visit_record.activity_details.create(activity_id: id)
+    #       end
+    #     end
+    #   end
+    #   redirect_to visit_record_path(@visit_record.id)
+    # rescue => e
+    #   @visit_record.activity_details.build
+    #   set_form_select
+    #   render "new"
   end
 
   def index

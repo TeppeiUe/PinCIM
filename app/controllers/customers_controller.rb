@@ -49,6 +49,7 @@ class CustomersController < ApplicationController
   end
 
   def show
+    gon.customer = @customer
   end
 
   def edit
@@ -85,6 +86,8 @@ class CustomersController < ApplicationController
       :address,
       :key_person_id,
       :sales_end_id,
+      :latitude,
+      :longitude,
     )
   end
 end

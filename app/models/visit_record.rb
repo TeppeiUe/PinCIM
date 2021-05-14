@@ -11,12 +11,6 @@ class VisitRecord < ApplicationRecord
   # , inverse_of: :visit_record
   # accepts_nested_attributes_for :activity_details
 
-  enum system: {
-    systemA: 0,
-    systemB: 1,
-    systemC: 2,
-  }
-
   enum rank: {
     rankA: 0,
     rankB: 1,

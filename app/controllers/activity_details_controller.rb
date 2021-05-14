@@ -6,6 +6,9 @@ class ActivityDetailsController < ApplicationController
   end
 
   def update
+    @activity_detail = ActivityDetail.find(params[:id])
+    @activity_detail.update(params_activity_detail)
+    redirect_to visit_record_path(@activity_detail.visit_record_id)
   end
 
   def destroy

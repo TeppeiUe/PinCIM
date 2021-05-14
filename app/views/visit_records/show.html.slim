@@ -12,6 +12,13 @@
 					= f.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
 					= f.submit "新規登録", class: "btn btn-primary"
 
+			- @visit_record.activity_details.each do |activity_detail|
+				= form_with model: [@visit_record, activity_detail], local: true do |f|
+					= f.hidden_field :visit_record_id, value: @visit_record.id
+					.form-inline
+						= f.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
+						= f.submit "変更", class: "btn btn-primary"
+
 			.form-group
 				= link_to "タスク追加", new_visit_record_task_path(@visit_record.id), class: "btn btn-success	"
 	- if @visit_record.tasks.present?

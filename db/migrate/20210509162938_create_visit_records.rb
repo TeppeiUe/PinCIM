@@ -6,7 +6,6 @@ class CreateVisitRecords < ActiveRecord::Migration[5.2]
       t.integer :belong_id
       t.integer :sales_end_id
       t.datetime :visit_datetime
-      t.integer :system, default: 0
       t.datetime :next_datetime
       t.text :note
       t.integer :rank, default: 0

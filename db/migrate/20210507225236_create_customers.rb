@@ -7,6 +7,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.integer :sales_end_id
       t.float :latitude
       t.float :longitude
+      t.integer :system, default: 0
 
       t.timestamps
     end

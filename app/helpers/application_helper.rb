@@ -7,4 +7,8 @@ module ApplicationHelper
       base_title + " | " + page_title
     end
   end
+
+  def def_datetime(datetime)
+    datetime.strftime("%Y-%m-%d %H:%M")
+  end
 end

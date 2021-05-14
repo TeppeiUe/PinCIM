@@ -12,6 +12,9 @@ class ActivityDetailsController < ApplicationController
   end
 
   def destroy
+    @activity_detail = ActivityDetail.find(params[:id])
+    @activity_detail.destroy
+    redirect_to visit_record_path(@activity_detail.visit_record_id)
   end
 
   private

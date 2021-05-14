@@ -46,6 +46,9 @@
 		          = f.radio_button :belong, :name
 		          = f.label :belong_name, "新規登録"
 		          = f.text_field :belong_name, class: "form-control belong_name"
+		    .form-group
+		      = f.label :system
+		      = f.select :system, options_for_select(Customer.systems.keys, @customer.system), {}, class: "form-control system"
 
 		    .form-group
 		      = f.submit "新規登録", class: "btn btn-primary"

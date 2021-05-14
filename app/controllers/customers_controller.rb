@@ -88,6 +88,7 @@ class CustomersController < ApplicationController
       :sales_end_id,
       :latitude,
       :longitude,
+      :system,
     )
   end
 end

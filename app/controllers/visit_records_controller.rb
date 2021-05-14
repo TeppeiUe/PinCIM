@@ -32,6 +32,8 @@ class VisitRecordsController < ApplicationController
   end
 
   def show
+    @activity_detail = ActivityDetail.new
+    @activities = Activity.all
   end
 
   def edit

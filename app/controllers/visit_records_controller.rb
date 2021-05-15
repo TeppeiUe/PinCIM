@@ -69,6 +69,26 @@ class VisitRecordsController < ApplicationController
   end
 
   def counting
+    from = params[:from_date_counting]
+    to = params[:to_date_counting]
+    redirect_to visit_records_path if from.blank? || to.blank?
+
+    visit_records = VisitRecord.counting_period(from, to)
+
+    @rows = []
+    @columns = []
+    # テーブルの行と列名を取得
+    visit_records.each do |k, v|
+      @rows << k[0] unless @rows.include?(k[0])
+      @columns << k[1] unless @columns.include?(k[1])
+    end
+    # テーブル(多次元配列)のインスタンスにデータを格納
+    @table = Array.new(@rows.length).map { Array.new(@columns.length) }
+    visit_records.each do |k, v|
+      @table[@rows.index(k[0])][@columns.index(k[1])] = v
+    end
+    # 行集計用のインスタンス
+    @sums = Array.new(@columns.length, 0)
   end
 
   private

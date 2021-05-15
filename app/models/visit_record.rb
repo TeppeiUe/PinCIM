@@ -21,6 +21,15 @@ class VisitRecord < ApplicationRecord
     VisitRecord.where("visit_datetime BETWEEN ? AND ?", from, to)
   end
 
+  def self.counting_period(from, to)
+    VisitRecord.
+      search_period(from, to).
+      joins(:belong, activity_details: :activity).
+      group("belongs.name").
+      group("activities.name").
+      order("activities.category").count
+  end
+
   def find_active_tasks
     Task.where(visit_record_id: self.id, is_active: true)
   end

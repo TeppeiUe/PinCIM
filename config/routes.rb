@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :tasks, only: [:new, :create, :show, :edit, :update]
     resources :activity_details, only: [:create, :update, :destroy]
     collection do
-      get 'counting'
+      post 'counting'
       post 'search'
     end
   end

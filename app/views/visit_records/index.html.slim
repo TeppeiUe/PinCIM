@@ -29,3 +29,13 @@
 					= f.date_field :to_date, class: "form-control to_date"
 				.form-group
 					= f.submit "検索", class: "btn btn-outline-success"
+
+			= form_with url: counting_visit_records_path, method: :post, local: true do |f|
+				.form-group
+					= f.label :from_date, "期間の開始日"
+					=	f.date_field :from_date_counting, class: "form-control from_date_counting"
+				.form-group
+					= f.label :to_date, "期間の最終日"
+					= f.date_field :to_date_counting, class: "form-control to_date_conting"
+				.form-group
+					= f.submit "選択した期間で集計", class: "btn btn-outline-success"

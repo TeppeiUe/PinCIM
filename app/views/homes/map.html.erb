@@ -1,0 +1,69 @@
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<!--<div id="mapTop" style="height: 500px;"></div>-->
+		</div>
+	</div>
+</div>
+
+<script>
+  let mapTop;
+  let marker = [];
+  let infoWindow = [];
+
+  function initMap() {
+    geocoder = new google.maps.Geocoder()
+
+    // 地図の中心は登録されている住所の平均値
+    mapTop = new google.maps.Map(document.getElementById('mapTop'), {
+    	center: {
+    		lat: <%= sprintf("%.6f", Customer.average(:latitude)) %>,
+    		lng: <%= sprintf("%.6f", Customer.average(:longitude)) %>
+    	},
+    	zoom: 15,
+    });
+
+		let i = 0;
+    <% @customers.each do |customer| %>
+    	<% visit_record = customer.latest_visit_record %>
+
+      markerLatLng = new google.maps.LatLng({
+        lat: <%= customer.latitude %>,
+        lng: <%= customer.longitude %>
+      });
+
+		// 	マーカーの選択
+			<% icon_color = visit_record.find_active_tasks.blank? ? "blue" : "red" %>
+			<% icon_style = customer.system.include?("systemA") ? "-pushpin" : "-dot" %>
+			icon_url = "https://maps.google.com/mapfiles/ms/micons/" + "<%= icon_color %>" + "<%= icon_style %>" + ".png"
+
+      marker[i] = new google.maps.Marker({
+        position: markerLatLng,
+        map: mapTop,
+        icon: icon_url
+      });
+
+      // content: 情報ウィンドウ内容の設定
+      // 内容が整備しづらいため、要対応
+      infoWindow[i] = new google.maps.InfoWindow({
+        content:
+        	'<table><tr><th>顧客名:</th><td><%= customer.name %></td></tr><tr><th>前回訪問日:</th>' +
+        	'<td><%= link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id) %>' +
+        	'</td></tr><tr><th>窓口担当者:</th><td><%= link_to visit_record.key_person.name, key_person_path(visit_record.key_person_id) %>' +
+        	'</td></tr><tr><th>営業担当者:</th><td><%= link_to visit_record.sales_end.name, sales_end_path(visit_record.sales_end_id) %></td></tr>' +
+				  '<tr><th>次回訪問予定日:</th><td><%= visit_record.next_datetime.nil? ? "なし" : def_datetime(visit_record.next_datetime) %>' +
+				  '</td></tr><tr><th>タスク:</th><td><%= "なし" if visit_record.find_active_tasks.blank? %><% visit_record.find_active_tasks.each do |active_task| %>' +
+					'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br><% end %></td></tr></table>',
+      });
+
+      markerEvent(i);
+      i += 1
+    <% end %>
+  }
+
+  function markerEvent(i) {
+    marker[i].addListener('click', function () {
+      infoWindow[i].open(mapTop, marker[i]);
+    });
+  }
+</script>

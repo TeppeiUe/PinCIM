@@ -3,4 +3,8 @@ class HomesController < ApplicationController
     @visit_records = VisitRecord.all
     @tasks = Task.where(is_active: true)
   end
+
+  def map
+    @customers = Customer.all
+  end
 end

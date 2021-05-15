@@ -12,8 +12,10 @@
 			p = link_to @customer.sales_end.belong.name, belong_path(@customer.sales_end.belong.id)
 			p.h5 営業担当者
 			p = link_to @customer.sales_end.name, sales_end_path(@customer.sales_end.id)
+			p.h5 導入システム
+			p = @customer.system
 			= link_to "編集", edit_customer_path(@customer.id), class: "btn btn-primary"
-		.col
+		/.col
 			#map.mx-auto style='height: 350px;'
 
 javascript:

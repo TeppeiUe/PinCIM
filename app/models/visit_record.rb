@@ -11,12 +11,6 @@ class VisitRecord < ApplicationRecord
   # , inverse_of: :visit_record
   # accepts_nested_attributes_for :activity_details
 
-  enum system: {
-    systemA: 0,
-    systemB: 1,
-    systemC: 2,
-  }
-
   enum rank: {
     rankA: 0,
     rankB: 1,
@@ -25,5 +19,9 @@ class VisitRecord < ApplicationRecord
 
   def self.search_period(from, to)
     VisitRecord.where("visit_datetime BETWEEN ? AND ?", from, to)
+  end
+
+  def find_active_tasks
+    Task.where(visit_record_id: self.id, is_active: true)
   end
 end

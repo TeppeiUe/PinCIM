@@ -8,6 +8,12 @@ class Customer < ApplicationRecord
   geocoded_by :address
   before_validation :geocode
 
+  enum system: {
+    systemA: 0,
+    systemB: 1,
+    systemC: 2,
+  }
+
   def self.search_name(value)
     Customer.where("name LIKE ?", "%#{sanitize_sql_like(value)}%")
   end
@@ -22,5 +28,12 @@ class Customer < ApplicationRecord
     elsif how == "customer_address"
       Customer.search_address(value)
     end
+  end
+
+  def latest_visit_record
+    VisitRecord.find(
+      VisitRecord.order(visit_datetime: :desc).
+      find_by(customer_id: self.id).id
+    )
   end
 end

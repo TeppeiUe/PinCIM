@@ -91,7 +91,6 @@ class VisitRecordsController < ApplicationController
         :belong_id,
         :sales_end_id,
         :visit_datetime,
-        :system,
         :next_datetime,
         :note,
         :rank,

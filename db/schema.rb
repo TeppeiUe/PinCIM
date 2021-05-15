@@ -12,15 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_05_10_151037) do
 
-  create_table "actions", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "category", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category"], name: "index_actions_on_category"
-    t.index ["name"], name: "index_actions_on_name"
-  end
-
   create_table "activities", force: :cascade do |t|
     t.string "name", null: false
     t.integer "category", default: 0, null: false
@@ -52,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_05_10_151037) do
     t.integer "sales_end_id"
     t.float "latitude"
     t.float "longitude"
+    t.integer "system", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_customers_on_address"
@@ -94,7 +86,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_151037) do
     t.integer "belong_id", null: false
     t.integer "sales_end_id", null: false
     t.datetime "visit_datetime", null: false
-    t.integer "system", default: 0
     t.datetime "next_datetime"
     t.text "note"
     t.integer "rank", default: 0

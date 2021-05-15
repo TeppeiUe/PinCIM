@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'homes#top'
+  get '/map' => 'homes#map'
   resources :visit_records do
     resources :tasks, only: [:new, :create, :show, :edit, :update]
     resources :activity_details, only: [:create, :update, :destroy]

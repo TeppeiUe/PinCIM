@@ -68,6 +68,9 @@ class VisitRecordsController < ApplicationController
     render "index"
   end
 
+  def counting
+  end
+
   private
 
   def set_visit_record

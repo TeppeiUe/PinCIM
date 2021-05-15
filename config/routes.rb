@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :activity_details, only: [:create, :update, :destroy]
   end
   post 'visit_records/search'
+  post 'visit_records/counting'
   get '/tasks' => 'tasks#index'
   resources :activities, only: [:create, :index, :edit, :update]
   post 'activities/search'

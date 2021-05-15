@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<div id="mapTop" style="height: 500px;"></div>
+			<!--<div id="mapTop" style="height: 500px;"></div>-->
 		</div>
 	</div>
 </div>
@@ -14,6 +14,7 @@
   function initMap() {
     geocoder = new google.maps.Geocoder()
 
+    // 地図の中心は登録されている住所の平均値
     mapTop = new google.maps.Map(document.getElementById('mapTop'), {
     	center: {
     		lat: <%= sprintf("%.6f", Customer.average(:latitude)) %>,
@@ -31,18 +32,19 @@
         lng: <%= customer.longitude %>
       });
 
-			<% if visit_record.find_active_tasks.blank? %>
-				<% icon_url = "https://maps.google.com/mapfiles/ms/micons/blue-dot.png" %>
-			<% else %>
-				<% icon_url = "https://maps.google.com/mapfiles/ms/micons/yellow-dot.png" %>
-			<% end %>
+		// 	マーカーの選択
+			<% icon_color = visit_record.find_active_tasks.blank? ? "blue" : "red" %>
+			<% icon_style = customer.system.include?("systemA") ? "-pushpin" : "-dot" %>
+			icon_url = "https://maps.google.com/mapfiles/ms/micons/" + "<%= icon_color %>" + "<%= icon_style %>" + ".png"
 
       marker[i] = new google.maps.Marker({
         position: markerLatLng,
         map: mapTop,
-        icon: <%= raw icon_url.to_json %>
+        icon: icon_url
       });
 
+      // content: 情報ウィンドウ内容の設定
+      // 内容が整備しづらいため、要対応
       infoWindow[i] = new google.maps.InfoWindow({
         content:
         	'<table><tr><th>顧客名:</th><td><%= customer.name %></td></tr><tr><th>前回訪問日:</th>' +

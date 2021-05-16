@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :visit_records do
     resources :tasks, only: [:new, :create, :show, :edit, :update]
     resources :activity_details, only: [:create, :update, :destroy]
+    collection do
+      post 'counting'
+      post 'search'
+    end
   end
-  post 'visit_records/search'
   get '/tasks' => 'tasks#index'
   resources :activities, only: [:create, :index, :edit, :update]
   post 'activities/search'

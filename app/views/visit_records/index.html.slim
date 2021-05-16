@@ -13,14 +13,14 @@
 				tbody
 					- @visit_records.each do |visit_record|
 						tr
-							td = link_to visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), visit_record_path(visit_record.id)
+							td = link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id)
 							td = link_to visit_record.customer.name, customer_path(visit_record.customer.id)
 							td
 								- visit_record.activity_details.each do |activity_detail|
 									= activity_detail.activity.name
 									<br>
 		.col-md-4
-			= form_with url: visit_records_search_path, method: :post, local: true do |f|
+			= form_with url: search_visit_records_path, method: :post, local: true do |f|
 				.form-group
 					= f.label :from_date, "期間の開始日"
 					=	f.date_field :from_date, class: "form-control from_date"
@@ -29,3 +29,13 @@
 					= f.date_field :to_date, class: "form-control to_date"
 				.form-group
 					= f.submit "検索", class: "btn btn-outline-success"
+
+			= form_with url: counting_visit_records_path, method: :post, local: true do |f|
+				.form-group
+					= f.label :from_date, "期間の開始日"
+					=	f.date_field :from_date_counting, class: "form-control from_date_counting"
+				.form-group
+					= f.label :to_date, "期間の最終日"
+					= f.date_field :to_date_counting, class: "form-control to_date_conting"
+				.form-group
+					= f.submit "選択した期間で集計", class: "btn btn-outline-success"

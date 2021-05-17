@@ -51,8 +51,8 @@
         	'<td><%= link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id) %>' +
         	'</td></tr><tr><th>窓口担当者:</th><td><%= link_to visit_record.key_person.name, key_person_path(visit_record.key_person_id) %>' +
         	'</td></tr><tr><th>営業担当者:</th><td><%= link_to visit_record.sales_end.name, sales_end_path(visit_record.sales_end_id) %></td></tr>' +
-				  '<tr><th>次回訪問予定日:</th><td><%= visit_record.next_datetime.nil? ? "なし" : def_datetime(visit_record.next_datetime) %>' +
-				  '</td></tr><tr><th>タスク:</th><td><%= "なし" if visit_record.find_active_tasks.blank? %><% visit_record.find_active_tasks.each do |active_task| %>' +
+				  '<tr><th>次回訪問予定日:</th><td><%= def_datetime(visit_record.next_datetime) %></td></tr><tr><th>タスク:</th><td>' +
+				  '<%= "なし" if visit_record.find_active_tasks.blank? %><% visit_record.find_active_tasks.each do |active_task| %>' +
 					'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br><% end %></td></tr></table>',
       });
 

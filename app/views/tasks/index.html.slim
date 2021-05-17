@@ -14,5 +14,5 @@
 						tr
 							td = link_to task.title, visit_record_task_path(task.visit_record_id, task.id)
 							td.text-truncate = task.content
-							td = task.deadline.strftime("%Y-%m-%d %H:%M")
-							td = link_to task.visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), visit_record_path(task.visit_record_id)
+							td = def_datetime(task.deadline)
+							td = link_to def_datetime(task.visit_record.visit_datetime), visit_record_path(task.visit_record_id)

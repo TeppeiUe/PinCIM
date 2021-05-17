@@ -7,7 +7,7 @@
 			p.h5 内容
 			p = @task.content
 			p.h5 期限
-			p = @task.deadline.strftime("%Y-%m-%d %H:%M")
+			p = def_datetime(@task.deadline)
 			p.h5 タスクの状態
 			- if @task.is_active?
 					p 実行中

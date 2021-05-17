@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.integer "activity_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["visit_record_id", "activity_id"], name: "index_activity_details_on_visit_record_id_and_activity_id", unique: true
   end
 
   create_table "belongs", force: :cascade do |t|

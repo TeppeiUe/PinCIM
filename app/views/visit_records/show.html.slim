@@ -21,22 +21,21 @@
 				btn_name: "活動種別 追加"
 
 	.row
-		.col-md-4
+		.col-md-6
 			p.h4 タスク
 			- if @visit_record.tasks.present?
 				table.table
 					thead
 						tr
 							th タイトル
+							th 期限
 							th タスクの状態
 					tbody
 						- @visit_record.tasks.each do |task|
 							tr
 								td = link_to task.title, visit_record_task_path(@visit_record.id, task.id)
-								td
-									- if task.is_active?
-										p 実行中
-									- else
-										p 完了
+								td = def_datetime(task.deadline)
+								td = task.status
+
 			.form-group
 				= link_to "タスク追加", new_visit_record_task_path(@visit_record.id), class: "btn btn-success	"

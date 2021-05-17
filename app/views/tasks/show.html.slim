@@ -9,10 +9,7 @@
 			p.h5 期限
 			p = def_datetime(@task.deadline)
 			p.h5 タスクの状態
-			- if @task.is_active?
-					p 実行中
-			- else
-					p 完了
+			p = @task.status
 			= link_to "編集", edit_visit_record_task_path(@task.visit_record_id, @task.id), class: "btn btn-primary"
 			p.h4 訪問記録の詳細
 			= render "visit_records/show", visit_record: @task.visit_record

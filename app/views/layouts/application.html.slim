@@ -11,7 +11,7 @@ html
     = favicon_link_tag 'favicon.ico'
   body
     = render "layouts/header"
-    = render "layouts/items"
+    p#notice = notice
     = yield
     - google_api = "https://maps.googleapis.com/maps/api/js?key=#{ ENV['GOOGLE_MAP_API'] }&callback=initMap".html_safe
     script{ async src=google_api }

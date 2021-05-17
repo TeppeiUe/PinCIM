@@ -1,5 +1,5 @@
 header
-	nav.navbar.navbar-expand-lg.navbar-light.bg-light
+	nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
 		.container
 			a.navbar-brand[href="/"]
 				= image_tag "PinCIM-logo&title_bg-none.png", alt: "PinCIM logo", size: "100x26"
@@ -13,9 +13,26 @@ header
 				aria-label="Toggle navigation"]
 				span.navbar-toggler-icon
 
-			#navbarNavDropdown.collapse.navbar-collapse
-				ul.navbar-nav
-					li.nav-item = link_to "トップページ", "/", class: "nav-link"
-					li.nav-item = link_to "訪問記録", visit_records_path, class: "nav-link"
-					li.nav-item = link_to "タスク", tasks_path, class: "nav-link"
-					li.nav-item = link_to "ログアウト", "/", class: "nav-link"
+			- if user_signed_in?
+				#navbarNavDropdown.collapse.navbar-collapse
+					ul.navbar-nav
+						li.nav-item = link_to "トップページ", "/", class: "nav-link"
+						li.nav-item = link_to "訪問記録", visit_records_path, class: "nav-link"
+						li.nav-item = link_to "タスク", tasks_path, class: "nav-link"
+						li.nav-item = link_to "ログアウト", sign_out_path, method: :delete, class: "nav-link"
+						li.nav-item.dropdown
+						  a#navbarDropdownMenuLink.nav-link.dropdown-toggle[
+						  	href="#"
+						  	role="button"
+						  	data-toggle="dropdown"
+						  	aria-haspopup="true"
+						  	aria-expanded="false"]
+						    |  各種設定
+						  ul.dropdown-menu[aria-labelledby="navbarDropdownMenuLink"]
+						    li.dropdown-item = link_to "顧客", customers_path
+						    li.dropdown-item = link_to "窓口担当者", key_people_path
+						    .dropdown-divider
+						    li.dropdown-item = link_to "所属", belongs_path
+						    li.dropdown-item = link_to "営業担当者", sales_ends_path
+						    .dropdown-divider
+						    li.dropdown-item = link_to "活動種別", activities_path

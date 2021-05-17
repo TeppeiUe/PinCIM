@@ -19,3 +19,9 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// bootstrapヘッダー固定時のページ開始位置の調節
+$(document).on('turbolinks:load', () => {
+  var height = $('.navbar').height();
+  $('body').css('padding-top',height);
+});

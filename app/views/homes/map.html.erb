@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<!--<div id="mapTop" style="height: 500px;"></div>-->
+			<div id="mapTop" style="height: 500px;"></div>
 		</div>
 	</div>
 </div>
@@ -20,7 +20,7 @@
     		lat: <%= sprintf("%.6f", Customer.average(:latitude)) %>,
     		lng: <%= sprintf("%.6f", Customer.average(:longitude)) %>
     	},
-    	zoom: 15,
+    	zoom: 10,
     });
 
 		let i = 0;
@@ -33,7 +33,11 @@
       });
 
 		// 	マーカーの選択
-			<% icon_color = visit_record.find_active_tasks.blank? ? "blue" : "red" %>
+		  <% icon_color = if visit_record.nil?
+		                    "blue"
+		                  else
+		                    visit_record.find_active_tasks.blank? ? "blue" : "red"
+		                  end %>
 			<% icon_style = customer.system.include?("systemA") ? "-pushpin" : "-dot" %>
 			icon_url = "https://maps.google.com/mapfiles/ms/micons/" + "<%= icon_color %>" + "<%= icon_style %>" + ".png"
 
@@ -47,13 +51,13 @@
       // 内容が整備しづらいため、要対応
       infoWindow[i] = new google.maps.InfoWindow({
         content:
-        	'<table><tr><th>顧客名:</th><td><%= customer.name %></td></tr><tr><th>前回訪問日:</th>' +
+        	'<table><tr><th>顧客名:</th><td><%= customer.name %></td></tr><% unless visit_record.nil? %><tr><th>前回訪問日:</th>' +
         	'<td><%= link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id) %>' +
         	'</td></tr><tr><th>窓口担当者:</th><td><%= link_to visit_record.key_person.name, key_person_path(visit_record.key_person_id) %>' +
         	'</td></tr><tr><th>営業担当者:</th><td><%= link_to visit_record.sales_end.name, sales_end_path(visit_record.sales_end_id) %></td></tr>' +
 				  '<tr><th>次回訪問予定日:</th><td><%= def_datetime(visit_record.next_datetime) %></td></tr><tr><th>タスク:</th><td>' +
 				  '<%= "なし" if visit_record.find_active_tasks.blank? %><% visit_record.find_active_tasks.each do |active_task| %>' +
-					'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br><% end %></td></tr></table>',
+					'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br><% end %></td></tr><% end %></table>',
       });
 
       markerEvent(i);

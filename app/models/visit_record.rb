@@ -31,6 +31,6 @@ class VisitRecord < ApplicationRecord
   end
 
   def find_active_tasks
-    Task.where(visit_record_id: self.id, is_active: true)
+    tasks.where(is_active: true)
   end
 end

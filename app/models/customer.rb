@@ -32,9 +32,6 @@ class Customer < ApplicationRecord
   end
 
   def latest_visit_record
-    VisitRecord.find(
-      VisitRecord.order(visit_datetime: :desc).
-      find_by(customer_id: self.id).id
-    )
+    visit_records.order(visit_datetime: :desc).last
   end
 end

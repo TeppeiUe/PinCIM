@@ -1,5 +1,6 @@
 class Activity < ApplicationRecord
   validates :name, :category, presence: true
+  validates :name, uniqueness: true
 
   has_many :activity_details
 

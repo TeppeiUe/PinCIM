@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   validates :name, presence: true
+  validates :name, :address, uniqueness: true
 
   belongs_to :sales_end
   belongs_to :key_person

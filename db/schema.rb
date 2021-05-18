@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_sales_ends_on_name"
+    t.index ["name"], name: "index_sales_ends_on_name", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|

@@ -10,6 +10,6 @@ class CreateSalesEnds < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     change_column_null :sales_ends, :name, false
-    add_index :sales_ends, :name
+    add_index :sales_ends, :name, unique: true
   end
 end

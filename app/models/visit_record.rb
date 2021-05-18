@@ -5,7 +5,7 @@ class VisitRecord < ApplicationRecord
   belongs_to :key_person
   belongs_to :belong
   belongs_to :sales_end
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_many :activity_details, dependent: :destroy
   # TODO: 以下の方法で実装出来るか試す
   # , inverse_of: :visit_record

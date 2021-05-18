@@ -1,5 +1,5 @@
 $(function(){
-	$(document).on('turbolinks:load', () => {
+	$(document).on('turbolinks:load', function() {
 	  function eventCalendar() {
       return $('#calendar').fullCalendar({});
       };
@@ -8,7 +8,7 @@ $(function(){
         $('#calendar').html('');
     };
 
-    $(document).on('turbolinks:load', () => {
+    $(document).on('turbolinks:load', function() {
       eventCalendar();
     });
 
@@ -47,7 +47,7 @@ $(function(){
         $('#calendar').html('');
     };
 
-    $(document).on('turbolinks:load', () => {
+    $(document).on('turbolinks:load', function() {
       eventCalendar();
     });
 
@@ -88,7 +88,7 @@ $(function() {
         $('#calendar').html('');
     };
 
-    $(document).on('turbolinks:load', () => {
+    $(document).on('turbolinks:load', function() {
       eventCalendar();
     });
 

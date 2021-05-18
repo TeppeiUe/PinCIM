@@ -12,7 +12,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     change_column_null :customers, :name, false
-    add_index :customers, :name
-    add_index :customers, :address
+    add_index :customers, :name, unique: true
+    add_index :customers, :address, unique: true
   end
 end

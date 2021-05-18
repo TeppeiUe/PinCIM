@@ -14,17 +14,11 @@ p = link_to_unless_current def_datetime(visit_record.visit_datetime), visit_reco
 	.col
 		p.h5 営業担当者
 		p = link_to visit_record.sales_end.name, sales_end_path(visit_record.sales_end.id)
+.row
+	.col
 		p.h5 次回訪問日時
-		- if visit_record.next_datetime.present?
-			p = def_datetime(visit_record.next_datetime)
-		- else
-			p なし
+		p = def_datetime(visit_record.next_datetime)
 		p.h5 備考
 		p = visit_record.note
 		p.h5 ランク
 		p = visit_record.rank
-		p.h5 活動内容
-		p
-			- visit_record.activity_details.each do |activity_detail|
-				= activity_detail.activity.name
-				<br>

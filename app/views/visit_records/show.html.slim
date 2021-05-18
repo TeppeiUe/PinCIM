@@ -6,37 +6,36 @@
 			.form-group
 				= link_to "編集", edit_visit_record_path(@visit_record.id), class: "btn btn-primary"
 
-			= form_with model: [@visit_record, @activity_detail], local: true do |f|
-				= f.hidden_field :visit_record_id, value: @visit_record.id
-				.form-inline
-					= f.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
-					= f.submit "新規登録", class: "btn btn-primary"
-
+			p.h4 活動内容
 			- @visit_record.activity_details.each do |activity_detail|
-				= form_with model: [@visit_record, activity_detail], local: true do |f|
-					= f.hidden_field :visit_record_id, value: @visit_record.id
-					.form-inline
-						= f.collection_select :activity_id, @activities, :id, :name, {prompt: "選択して下さい"}, class: "form-control activity_id"
-						= f.submit "変更", class: "btn btn-primary"
-						= link_to "削除", visit_record_activity_detail_path(@visit_record.id, activity_detail.id), method: :delete, class: "btn btn-danger"
+				= render "activity_details/form",
+					visit_record: @visit_record,
+					activity_detail: activity_detail,
+					activities: @activities,
+					btn_name: "変更"
 
-			.form-group
-				= link_to "タスク追加", new_visit_record_task_path(@visit_record.id), class: "btn btn-success	"
-	- if @visit_record.tasks.present?
-		.row
-			.col-md-4
-				p.h4 タスク一覧
+			= render "activity_details/form",
+				visit_record: @visit_record,
+				activity_detail: @activity_detail,
+				activities: @activities,
+				btn_name: "活動種別 追加"
+
+	.row
+		.col-md-6
+			p.h4 タスク
+			- if @visit_record.tasks.present?
 				table.table
 					thead
 						tr
 							th タイトル
+							th 期限
 							th タスクの状態
 					tbody
 						- @visit_record.tasks.each do |task|
 							tr
 								td = link_to task.title, visit_record_task_path(@visit_record.id, task.id)
-								td
-									- if task.is_active?
-										p 実行中
-									- else
-										p 完了
+								td = def_datetime(task.deadline)
+								td = task.status
+
+			.form-group
+				= link_to "タスク追加", new_visit_record_task_path(@visit_record.id), class: "btn btn-success	"

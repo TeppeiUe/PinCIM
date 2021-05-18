@@ -1,5 +1,6 @@
 class Belong < ApplicationRecord
   validates :name, presence: true
+  validates :name, uniqueness: true
 
   has_many :sales_ends
   has_many :visit_records

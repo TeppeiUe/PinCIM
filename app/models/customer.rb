@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   validates :name, presence: true
+  validates :name, :address, uniqueness: true
 
   belongs_to :sales_end
   belongs_to :key_person
@@ -31,9 +32,6 @@ class Customer < ApplicationRecord
   end
 
   def latest_visit_record
-    VisitRecord.find(
-      VisitRecord.order(visit_datetime: :desc).
-      find_by(customer_id: self.id).id
-    )
+    visit_records.order(visit_datetime: :desc).last
   end
 end

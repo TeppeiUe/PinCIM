@@ -5,19 +5,29 @@
 		  = render "shared/error", obj: @customer
 		  = form_with model: @customer, local: true do |f|
 		    .form-group
-		      = f.label :name
+		      = f.label :name, "顧客名"
 		      = f.text_field :name, class: "form-control name"
+
 		    .form-group
-		      = f.label :address
+		      = f.label :address, "住所"
 		      = f.text_field :address, class: "form-control address"
+
 		    .form-group
-		      = f.label :key_person_id
-		      = f.collection_select :key_person_id, @key_people, :id, :name, {prompt: "選択して下さい"}, class: "form-control key_person_id"
+		      = f.label :key_person_id, "窓口担当者"
+		      = f.collection_select :key_person_id,
+		      	@key_people, :id, :name,
+		      	{prompt: "選択して下さい"},
+		      	class: "form-control key_person_id"
+
 		    .form-group
-		      = f.label :sales_end_id
-		      = f.collection_select :sales_end_id, @sales_ends, :id, :name, {prompt: "選択して下さい"}, class: "form-control sales_end_id"
+		      = f.label :sales_end_id, "営業担当者"
+		      = f.collection_select :sales_end_id,
+		      	@sales_ends, :id, :name,
+		      	{prompt: "選択して下さい"},
+		      	class: "form-control sales_end_id"
+
 		    .form-group
-					= f.label :system
+					= f.label :system, "導入システム"
 					= f.select :system,
 						options_for_select(Customer.systems.keys, @customer.system),
 						{},

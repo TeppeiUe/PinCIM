@@ -9,6 +9,10 @@ module ApplicationHelper
   end
 
   def def_datetime(datetime)
-    datetime.strftime("%Y-%m-%d %H:%M")
+    datetime.nil? ? "なし" : datetime.strftime("%Y-%m-%d %H:%M")
+  end
+
+  def btn_type(btn_name)
+    btn_name.include?("変更") ? "primary" : "success"
   end
 end

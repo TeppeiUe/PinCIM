@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_belongs_on_name"
+    t.index ["name"], name: "index_belongs_on_name", unique: true
   end
 
   create_table "customers", force: :cascade do |t|

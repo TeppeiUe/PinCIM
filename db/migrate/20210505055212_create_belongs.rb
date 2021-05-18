@@ -7,6 +7,6 @@ class CreateBelongs < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     change_column_null :belongs, :name, false
-    add_index :belongs, :name
+    add_index :belongs, :name, unique: true
   end
 end

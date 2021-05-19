@@ -3,7 +3,7 @@ class KeyPeopleController < ApplicationController
   before_action :set_key_person, only: [:show, :edit, :update]
 
   def index
-    @key_people = KeyPerson.all
+    @key_people = KeyPerson.page(params[:page]).per(10)
   end
 
   def create
@@ -11,7 +11,7 @@ class KeyPeopleController < ApplicationController
     if @key_person.save
       redirect_to key_people_path
     else
-      @key_people = KeyPerson.all
+      @key_people = KeyPerson.page(params[:page]).per(10)
       render "index"
     end
   end
@@ -31,7 +31,9 @@ class KeyPeopleController < ApplicationController
   end
 
   def search
-    @key_people = KeyPerson.search_name(params[:value])
+    @key_people = KeyPerson.
+      search_name(params[:value]).
+      page(params[:page]).per(10)
     render "index"
   end
 

@@ -16,5 +16,7 @@
 				      tr
 				        td = link_to key_person.name, key_person_path(key_person.id)
 				        td
+			.d-flex.justify-content-center
+				= paginate @key_people
 		.col-md-4
 			= render "key_people/form", key_person: @key_person, btn_name: "新規登録"

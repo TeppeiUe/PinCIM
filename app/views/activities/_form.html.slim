@@ -3,11 +3,14 @@
 	.form-group
 		= f.label :category, "カテゴリー"
 		= f.select :category,
-			options_for_select(Activity.categories.keys, activity.category), {}, class: "form-control category"
+			options_for_select(Activity.categories.keys, activity.category),
+			{},
+			autofocus: true,
+			class: "form-control category"
 
 	.form-group
 		= f.label :name, "活動種別名"
-		= f.text_field :name, class: "form-control name"
+		= f.text_field :name, autofocus: true, class: "form-control name"
 
 	.form-group
 		= f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"

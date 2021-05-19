@@ -45,7 +45,7 @@ class CustomersController < ApplicationController
   end
 
   def index
-    @customers = Customer.all
+    @customers = Customer.page(params[:page]).per(10).order(:address)
   end
 
   def show
@@ -70,7 +70,9 @@ class CustomersController < ApplicationController
   def search
     how = params[:how]
     value = params[:value]
-    @customers = Customer.search_customer(how, value)
+    @customers = Customer.
+      search_customer(how, value).
+      page(params[:page]).per(10)
     render "index"
   end
 

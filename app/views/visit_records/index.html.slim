@@ -18,7 +18,9 @@
 							td
 								- visit_record.activity_details.each do |activity_detail|
 									= activity_detail.activity.name
-									<br>
+			.d-flex.justify-content-center
+				= paginate @visit_records
+
 		.col-md-4
 			= form_with url: search_visit_records_path, method: :post, local: true do |f|
 				.form-group

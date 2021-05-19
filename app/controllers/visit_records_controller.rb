@@ -3,7 +3,7 @@ class VisitRecordsController < ApplicationController
 
   def new
     @visit_record = VisitRecord.new
-    @visit_record.activity_details.build
+    # @visit_record.activity_details.build
     set_form_select
   end
 
@@ -35,7 +35,7 @@ class VisitRecordsController < ApplicationController
   end
 
   def index
-    @visit_records = VisitRecord.all
+    @visit_records = VisitRecord.page(params[:page]).per(10).order(visit_datetime: :desc)
   end
 
   def show
@@ -64,7 +64,10 @@ class VisitRecordsController < ApplicationController
   def search
     from = params[:from_date]
     to = params[:to_date]
-    @visit_records = VisitRecord.search_period(from, to)
+    @visit_records = VisitRecord.
+      search_period(from, to).
+      page(params[:page]).per(10).
+      order(visit_datetime: :desc)
     render "index"
   end
 

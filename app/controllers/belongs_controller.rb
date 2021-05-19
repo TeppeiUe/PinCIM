@@ -3,7 +3,7 @@ class BelongsController < ApplicationController
   before_action :set_belong, only: [:show, :edit, :update]
 
   def index
-    @belongs = Belong.all
+    @belongs = Belong.page(params[:page]).per(10)
   end
 
   def create
@@ -11,7 +11,7 @@ class BelongsController < ApplicationController
     if @belong.save
       redirect_to belongs_path
     else
-      @belongs = Belong.all
+      @belongs = Belong.page(params[:page]).per(10)
       render "index"
     end
   end
@@ -32,7 +32,9 @@ class BelongsController < ApplicationController
   end
 
   def search
-    @belongs = Belong.search_name(params[:value])
+    @belongs = Belong.
+      search_name(params[:value]).
+      page(params[:page]).per(10)
     render "index"
   end
 

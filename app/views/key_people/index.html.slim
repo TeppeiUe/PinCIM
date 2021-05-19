@@ -9,13 +9,16 @@
 			table.table
 				  thead
 				    tr
-				      th 窓口担当者氏名
+				      th 窓口担当者名
 				      th 顧客名
 				  tbody
 				    - @key_people.each do |key_person|
 				      tr
 				        td = link_to key_person.name, key_person_path(key_person.id)
 				        td
+				        	- unless key_person.customer.nil?
+				        		= link_to key_person.customer.name, customer_path(key_person.customer.id)
+
 			.d-flex.justify-content-center
 				= paginate @key_people
 		.col-md-4

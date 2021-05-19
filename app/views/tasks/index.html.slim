@@ -1,12 +1,13 @@
 .container
 	h2 タスク一覧
 	.row
-		.col-md-8
+		.col
 			table.table style="table-layout:fixed;"
 				thead
 					tr
 						th タイトル
 						th 内容
+						th タスクの状態
 						th 期限
 						th 訪問記録
 				tbody
@@ -14,5 +15,8 @@
 						tr
 							td = link_to task.title, visit_record_task_path(task.visit_record_id, task.id)
 							td.text-truncate = task.content
+							td = task.status
 							td = def_datetime(task.deadline)
 							td = link_to def_datetime(task.visit_record.visit_datetime), visit_record_path(task.visit_record_id)
+			.d-flex.justify-content-center
+				= paginate @tasks

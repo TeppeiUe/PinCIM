@@ -21,5 +21,7 @@
 			        td = link_to sales_end.belong.name, belong_path(sales_end.belong_id)
 			        td = sales_end.post
 			        td = sales_end.telephone_number
+			.d-flex.justify-content-center
+				= paginate @sales_ends
 		.col-md-4
 			= render "sales_ends/form", sales_end: @sales_end, belongs: @belongs, btn_name: "新規登録"

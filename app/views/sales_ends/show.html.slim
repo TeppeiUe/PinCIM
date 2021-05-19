@@ -11,14 +11,16 @@
 			p.h5 電話番号
 			p = @sales_end.telephone_number
 			p.h5 備考
-			p = @sales_end.note
+			p = simple_format(@sales_end.note)
 			= link_to "編集", edit_sales_end_path(@sales_end.id), class: "btn btn-primary"
-			p.h5 担当顧客一覧
-			table.table
-				thead
-					tr
-						th 顧客名
-				tbody
-					- @customers.each do |customer|
+
+			- if @customers.exists?
+				p.h5 担当顧客一覧
+				table.table
+					thead
 						tr
-							td = link_to customer.name, customer_path(customer.id)
+							th 顧客名
+					tbody
+						- @customers.each do |customer|
+							tr
+								td = link_to customer.name, customer_path(customer.id)

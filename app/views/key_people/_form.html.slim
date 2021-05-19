@@ -2,15 +2,15 @@
 = form_with model: key_person, local: true do |f|
   .form-group
     = f.label :name, "営業担当者名"
-    = f.text_field :name, class: "form-control name"
+    = f.text_field :name, autofocus: true, class: "form-control name"
 
   .form-group
     = f.label :career, "経歴"
-    = f.text_area :career, class: "form-control career"
+    = f.text_area :career, autofocus: true, class: "form-control career"
 
   .form-group
   	= f.label :note, "備考"
-  	= f.text_area :note, class: "form-control note"
+  	= f.text_area :note, autofocus: true, class: "form-control note"
 
   .form-group
     = f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"

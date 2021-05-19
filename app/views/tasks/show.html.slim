@@ -5,7 +5,7 @@
 			p.h5 タイトル
 			p = @task.title
 			p.h5 内容
-			p = @task.content
+			p = simple_format(@task.content)
 			p.h5 期限
 			p = def_datetime(@task.deadline)
 			p.h5 タスクの状態

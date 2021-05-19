@@ -1,40 +1,57 @@
 = render "shared/error", obj: visit_record
 = form_with model: visit_record, local: true do |f|
 	.form-group
-		= f.label :visit_datetime
-		= f.datetime_field :visit_datetime, class: "form-control visit_datetime"
+		= f.label :visit_datetime, "訪問日時"
+		= f.datetime_field :visit_datetime, autofocus: true, class: "form-control visit_datetime"
 
 	.form-row
 		.form-group.col
-			= f.label :customer_id
-			= f.collection_select :customer_id, customers, :id, :name, {prompt: "選択して下さい"}, class: "form-control customer_id"
+			= f.label :customer_id, "顧客名"
+			= f.collection_select :customer_id,
+				customers, :id, :name,
+				{prompt: "選択して下さい"},
+				autofocus: true,
+				class: "form-control customer_id"
 
 		.form-group.col
-			= f.label :key_person_id
-			= f.collection_select :key_person_id, key_people, :id, :name, {prompt: "選択して下さい"}, class: "form-control key_person_id"
+			= f.label :key_person_id, "窓口担当者名"
+			= f.collection_select :key_person_id,
+				key_people, :id, :name,
+				{prompt: "選択して下さい"},
+				autofocus: true,
+				class: "form-control key_person_id"
 
 	.form-row
 		.form-group.col
-			= f.label :belong_id
-			= f.collection_select :belong_id, belongs, :id, :name, {prompt: "選択して下さい"}, class: "form-control belong_id"
+			= f.label :belong_id, "営業担当者所属"
+			= f.collection_select :belong_id,
+				belongs, :id, :name,
+				{prompt: "選択して下さい"},
+				autofocus: true,
+				class: "form-control belong_id"
 
 		.form-group.col
-			= f.label :sales_end_id
-			= f.collection_select :sales_end_id, sales_ends, :id, :name, {prompt: "選択して下さい"}, class: "form-control sales_end_id"
+			= f.label :sales_end_id, "営業担当者名"
+			= f.collection_select :sales_end_id,
+				sales_ends, :id, :name,
+				{prompt: "選択して下さい"},
+				autofocus: true,
+				class: "form-control sales_end_id"
 
 	.form-group
-		= f.label :next_datetime
-		= f.datetime_field :next_datetime, class: "form-control next_datetime"
+		= f.label :next_datetime, "次回訪問予定日"
+		= f.datetime_field :next_datetime, autofocus: true, class: "form-control next_datetime"
 
 	.form-group
-		= f.label :note
-		= f.text_area :note, class: "form-control note"
+		= f.label :note, "備考"
+		= f.text_area :note, autofocus: true, class: "form-control note"
 
 	.form-group
-		= f.label :rank
+		= f.label :rank, "ランク"
 		= f.select :rank,
 			options_for_select(VisitRecord.ranks.keys, visit_record.rank),
 			{},
+			autofocus: true,
 			class: "form-control rank"
 
 	/TODO: 以下の方法で実装出来るか試す

@@ -6,17 +6,18 @@
 		  = form_with model: @customer, local: true do |f|
 		    .form-group
 		      = f.label :name, "顧客名"
-		      = f.text_field :name, class: "form-control name"
+		      = f.text_field :name, autofocus: true, class: "form-control name"
 
 		    .form-group
 		      = f.label :address, "住所"
-		      = f.text_field :address, class: "form-control address"
+		      = f.text_field :address, autofocus: true, class: "form-control address"
 
 		    .form-group
 		      = f.label :key_person_id, "窓口担当者"
 		      = f.collection_select :key_person_id,
 		      	@key_people, :id, :name,
 		      	{prompt: "選択して下さい"},
+		      	autofocus: true,
 		      	class: "form-control key_person_id"
 
 		    .form-group
@@ -24,6 +25,7 @@
 		      = f.collection_select :sales_end_id,
 		      	@sales_ends, :id, :name,
 		      	{prompt: "選択して下さい"},
+		      	autofocus: true,
 		      	class: "form-control sales_end_id"
 
 		    .form-group
@@ -31,6 +33,7 @@
 					= f.select :system,
 						options_for_select(Customer.systems.keys, @customer.system),
 						{},
+						autofocus: true,
 						class: "form-control system"
 
 		    .form-group

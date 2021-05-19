@@ -15,8 +15,9 @@
 		    p 窓口担当者
 		    .form-group.row
 		      .form-group.col
-		        = f.radio_button :key_person, :id, checked: "checked"
-		        = f.label :key_person_id, "登録済より選択"
+		      	.form-check
+		        	= f.radio_button :key_person, :id, checked: "checked", class: "form-check-input"
+		        	label.form-check-label 登録済より選択
 		        = f.collection_select :key_person_id,
 		          @key_people, :id, :name,
 		          {prompt: "選択して下さい"},
@@ -24,15 +25,17 @@
 		          class: "form-control key_person_id"
 
 		      .form-group.col
-		        = f.radio_button :key_person, :name
-		        = f.label :key_person_name, "新規登録"
+		      	.form-check
+		        	= f.radio_button :key_person, :name, class: "form-check-input"
+		        	label.form-check-label 新規登録
 		        = f.text_field :key_person_name, class: "form-control key_person_name"
 
 		    p 営業担当者
 		    .form-group.row
 		      .form-group.col
-		        = f.radio_button :sales_end, :id, checked: "checked"
-		        = f.label :sales_end_id, "登録済より選択"
+		      	.form-check
+		        	= f.radio_button :sales_end, :id, checked: "checked", class: "form-check-input"
+		        	label.form-check-label 登録済より選択
 		        = f.collection_select :sales_end_id,
 		          @sales_ends, :id, :name,
 		          {prompt: "選択して下さい"},
@@ -40,8 +43,9 @@
 		          class: "form-control sales_end_id"
 
 		      .form-group.col
-		        = f.radio_button :sales_end, :name
-		        = f.label :sales_end_name, "新規登録"
+		      	.form-check
+		        	= f.radio_button :sales_end, :name, class: "form-check-input"
+		        	label.form-check-label 新規登録
 		        = f.text_field :sales_end_name, class: "form-control sales_end_name"
 
 		    /営業担当者で"新規登録"を選択した場合表示
@@ -49,24 +53,27 @@
 		      p 所属
 		      .form-group.row
 		        .form-group.col
-		          = f.radio_button :belong, :id, checked: "checked"
-		          = f.label :belong_id, "登録済より選択"
-		          = f.collection_select :belong_id,
-		            @belongs, :id, :name,
-		            {prompt: "選択して下さい"},
-		            autofocus: true,
-		            class: "form-control belong_id"
+		        	.form-check
+		        		= f.radio_button :belong, :id, checked: "checked", class: "form-check-input"
+		        		label.form-check-label 登録済より選択
+		        	= f.collection_select :belong_id,
+		        		@belongs, :id, :name,
+		        		{prompt: "選択して下さい"},
+		        		autofocus: true,
+		        		class: "form-control belong_id"
 
 		        .form-group.col
-		          = f.radio_button :belong, :name
-		          = f.label :belong_name, "新規登録"
-		          = f.text_field :belong_name, class: "form-control belong_name"
+		        	.form-check
+		        		= f.radio_button :belong, :name, class: "form-check-input"
+		        		label.form-check-label 新規登録
+		        	= f.text_field :belong_name, class: "form-control belong_name"
 
 		    .form-group
 		      = f.label :system, "導入システム"
 		      = f.select :system,
 		        options_for_select(Customer.systems.keys, @customer.system),
 		        {},
+		        autofocus: true,
 		        class: "form-control system"
 
 		    .form-group

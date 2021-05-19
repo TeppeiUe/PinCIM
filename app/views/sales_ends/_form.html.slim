@@ -2,18 +2,27 @@
 = form_with model: sales_end, local: true do |f|
   .form-group
     = f.label :name
-    = f.text_field :name, class: "form-control name"
+    = f.text_field :name, autofocus: true, autofocus: true, class: "form-control name"
+
   .form-group
     = f.label :belong_id
-    = f.collection_select :belong_id, belongs, :id, :name, {prompt: "選択して下さい"}, class: "form-control belong_id"
+    = f.collection_select :belong_id,
+      belongs, :id, :name,
+      {prompt: "選択して下さい"},
+      autofocus: true,
+      class: "form-control belong_id"
+
   .form-group
   	= f.label :post
-  	= f.text_field :post, class: "form-control post"
+  	= f.text_field :post, autofocus: true, class: "form-control post"
+
   .form-group
   	= f.label :telephone_number
-  	= f.text_field :telephone_number, class: "form-control telephone_number"
+  	= f.text_field :telephone_number, autofocus: true, class: "form-control telephone_number"
+
   .form-group
   	= f.label :note
-  	= f.text_area :note, class: "form-control note"
+  	= f.text_area :note, autofocus: true, class: "form-control note"
+
   .form-group
     = f.submit btn_name, class: "btn btn-primary"

@@ -2,26 +2,26 @@
 = form_with model: [visit_record, task], local: true do |f|
 	= f.hidden_field :visit_record_id, value: visit_record.id
 	.form-group
-	  = f.label :title
+	  = f.label :title, "タイトル"
 	  = f.text_field :title, class: "form-control title"
 
 	.form-group
-	  = f.label :content
+	  = f.label :content, "内容"
 	  = f.text_area :content, class: "form-control content"
 
 	.form-group
-		= f.label :deadline
+		= f.label :deadline, "期限"
 		= f.datetime_field :deadline, class: "form-control deadline"
 
 	- if action_name == "edit"
 		.form-group
-			= f.label :is_active
-			.radio-inline
-				span 実行中
-				= f.radio_button :is_active, true
-			.radio-inline
-				span 完了
-				= f.radio_button :is_active, false
+			= f.label :is_active, "タスクの状態"
+			.form-check
+				= f.radio_button :is_active, true, class: "form-check-input"
+				label.form-check-label 実行中
+			.form-check
+				= f.radio_button :is_active, false, class: "form-check-input"
+				label.form-check-label 完了
 
 	.form-group
 	  = f.submit btn_name, class: "btn btn-primary"

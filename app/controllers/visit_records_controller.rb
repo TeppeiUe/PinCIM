@@ -105,7 +105,7 @@ class VisitRecordsController < ApplicationController
     @key_people = KeyPerson.all
     @belongs = Belong.all
     @sales_ends = SalesEnd.all
-    @activities = Activity.all
+    # @activities = Activity.all
   end
 
   def params_visit_record

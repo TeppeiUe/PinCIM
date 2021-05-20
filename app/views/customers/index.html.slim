@@ -1,3 +1,4 @@
+- provide(:title, "顧客")
 .container
 	h2 顧客一覧
 	.row
@@ -9,8 +10,9 @@
 						= f.search_field :value, class: "form-control value"
 						= f.submit "検索", class: "btn btn-outline-success"
 				= link_to "新規登録", new_customer_path, class: "btn btn-success"
-			table.table
-				  thead
+
+			table.table.table-hover
+				  thead.bg-light
 				    tr
 				      th 顧客名
 				      th 住所
@@ -25,5 +27,6 @@
 				        td = link_to customer.key_person.name, key_person_path(customer.key_person.id)
 				        td = link_to customer.sales_end.belong.name, belong_path(customer.sales_end.belong.id)
 				        td = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)
+
 			.d-flex.justify-content-center
 				= paginate @customers

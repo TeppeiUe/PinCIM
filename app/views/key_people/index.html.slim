@@ -1,13 +1,15 @@
+- provide(:title, "窓口担当者")
 .container
-	h2 窓口担当者
+	h2 窓口担当者一覧
 	.row
-		.col-md-8
+		.col-lg-8
 			.form-inline
 				= form_with url: key_people_search_path, method: :post, local: true do |f|
 					= f.search_field :value, class: "form-control value"
 					= f.submit "検索", class: "btn btn-outline-success"
-			table.table
-				  thead
+
+			table.table.table-hover
+				  thead.bg-light
 				    tr
 				      th 窓口担当者名
 				      th 顧客名
@@ -21,5 +23,9 @@
 
 			.d-flex.justify-content-center
 				= paginate @key_people
-		.col-md-4
-			= render "key_people/form", key_person: @key_person, btn_name: "新規登録"
+
+		.col-lg-4
+			.card.my-4
+				h4.card-header 窓口担当者新規登録
+				.card-body
+					= render "key_people/form", key_person: @key_person, btn_name: "新規登録"

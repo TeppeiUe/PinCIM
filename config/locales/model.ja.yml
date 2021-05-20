@@ -1,0 +1,45 @@
+ja:
+  activerecord:
+    models:
+      activity: 活動種別
+      belong: 所属
+      customer: 顧客
+      key_person: 窓口担当者
+      sales_end: 営業担当者
+      task: タスク
+      visit_record: 訪問記録
+
+    attributes:
+        activity:
+          name: 活動種別名
+          category: カテゴリー
+
+        belong:
+          name: 所属名
+
+        customer:
+          name: 顧客名
+          key_person: 窓口担当者
+          sales_end: 営業担当者
+
+        key_person:
+          name: 窓口担当者名
+
+        sales_end:
+          name: 営業担当者名
+          belong: 所属
+
+        task:
+          title: タイトル
+
+        visit_record:
+          customer: 顧客
+          key_person: 窓口担当者
+          belong: 所属
+          sales_end: 営業担当者
+          visit_datetime: 訪問日
+
+  attributes:
+    id: ID
+    created_at: 作成日
+    updated_at: 更新日

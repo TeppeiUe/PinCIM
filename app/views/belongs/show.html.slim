@@ -1,17 +1,22 @@
+- provide(:title, "所属詳細")
 .container
-	h2 所属詳細
+	h2 #{@belong.name}詳細
 	.row
-		.col-md-8
-			p.h5 所属名
-			p = @belong.name
-			p.h5 住所
-			p = @belong.address
-			= link_to "編集", edit_belong_path(@belong.id), class: "btn btn-primary"
+		.col-lg-8
+			.card.mb-4.shadow-lg
+				.card-body
+					h5.card-title 所属名
+					p.card-text = @belong.name
+
+					h5.card-title 住所
+					p.card-text = @belong.address
+
+					= link_to "編集", edit_belong_path(@belong.id), class: "btn btn-primary"
 
 			- if @sales_ends.exists?
-				p.h5 所属メンバー
-				table.table
-					thead
+				h5 所属メンバー
+				table.table.table-hover
+					thead.bg-light
 						tr
 							th 名前
 							th 役職

@@ -1,41 +1,52 @@
+- provide(:title, "訪問記録詳細")
 .container
 	h2 訪問記録詳細
 	.row
-		.col-md-8
-			= render "visit_records/show", visit_record: @visit_record
-			.form-group
-				= link_to "編集", edit_visit_record_path(@visit_record.id), class: "btn btn-primary"
+		.col-lg-8
+			.card.mb-4.shadow-lg
+				h4.card-header 訪問記録
+				.card-body
+					= render "visit_records/show", visit_record: @visit_record
+					= link_to "編集", edit_visit_record_path(@visit_record.id), class: "btn btn-primary"
 
-			p.h4 活動内容
-			- @visit_record.activity_details.each do |activity_detail|
-				= render "activity_details/form",
-					visit_record: @visit_record,
-					activity_detail: activity_detail,
-					activities: @activities,
-					btn_name: "変更"
+			.card.mb-4.shadow-lg
+				h4.card-header 活動内容
+				.card-body
+					ul
+						- @visit_record.activity_details.each do |activity_detail|
+							li = render "activity_details/form",
+								visit_record: @visit_record,
+								activity_detail: activity_detail,
+								activities: @activities,
+								btn_name: "変更"
 
-			= render "activity_details/form",
-				visit_record: @visit_record,
-				activity_detail: @activity_detail,
-				activities: @activities,
-				btn_name: "活動種別 追加"
+					= render "activity_details/form",
+						visit_record: @visit_record,
+						activity_detail: @activity_detail,
+						activities: @activities,
+						btn_name: "活動内容 追加"
 
-	.row
-		.col-md-6
-			p.h4 タスク
-			- if @visit_record.tasks.present?
-				table.table
-					thead
-						tr
-							th タイトル
-							th 期限
-							th タスクの状態
-					tbody
-						- @visit_record.tasks.each do |task|
-							tr
-								td = link_to task.title, visit_record_task_path(@visit_record.id, task.id)
-								td = def_datetime(task.deadline)
-								td = task.status
+			.card.mb-4.shadow-lg
+				h4.card-header タスク
+				.card-body
+					- if @visit_record.tasks.present?
+						table.table.table-hover
+							thead.bg-light
+								tr
+									th タイトル
+									th 期限
+									th タスクの状態
+							tbody
+								- @visit_record.tasks.each do |task|
+									- deadline_color = "text-danger" if task.is_active && task.deadline < Time.now
+									- status_color = "text-success" if task.is_active
+									tr
+										td = link_to task.title, visit_record_task_path(@visit_record.id, task.id)
+										td class="#{deadline_color}"
+											|
+											= def_datetime(task.deadline)
+										td class="#{status_color}"
+											|
+											= task.status
 
-			.form-group
-				= link_to "タスク追加", new_visit_record_task_path(@visit_record.id), class: "btn btn-success	"
+					= link_to "タスク追加", new_visit_record_task_path(@visit_record.id), class: "btn btn-success	"

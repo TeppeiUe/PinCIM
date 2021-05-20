@@ -12,16 +12,12 @@
 					h5.card-title 内容
 					p.card-text = simple_format(@task.content)
 
-					- deadline_color = "text-danger" if @task.is_active && @task.deadline < Time.now
 					h5.card-title 期限
-					p class="card-text #{deadline_color}"
-						|
+					p class="card-text #{deadline_color(@task.is_active, @task.deadline)}"
 						= def_datetime(@task.deadline)
 
-					- status_color = "text-success" if @task.is_active
 					h5.card-title タスクの状態
-					p class="card-text #{status_color}"
-						|
+					p class="#{status_color(@task.is_active)}"
 						= @task.status
 
 					= link_to "編集",

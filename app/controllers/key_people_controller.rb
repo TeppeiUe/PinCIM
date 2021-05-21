@@ -24,7 +24,7 @@ class KeyPeopleController < ApplicationController
 
   def update
     if @key_person.update(params_key_person)
-      redirect_to key_person_path(@key_person.id)
+      render "update"
     else
       render "edit"
     end

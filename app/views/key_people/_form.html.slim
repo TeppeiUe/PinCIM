@@ -1,7 +1,7 @@
 .modal-dialog.modal-dialog-centered
 	.modal-content
 		.modal-header
-			h4.modal-title 窓口担当者#{btn_name}
+			h4.modal-title 窓口担当者#{btn_name.delete("保存")}
 			- if btn_name.include?("変更")
 				button.close [type="button" data-dismiss="modal" aria-label="Close"]
 					span [aria-hidden="true"] &times;

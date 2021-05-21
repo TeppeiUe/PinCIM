@@ -1,0 +1,5 @@
+| $('.key_person_name_title').html("#{@key_person.name}氏詳細");
+| $('.key_person_name').html("#{@key_person.name}");
+| $('.key_person_career').html("#{safe_join(@key_person.career.split(/\R/), tag(:br))}");
+| $('.key_person_note').html("#{safe_join(@key_person.note.split(/\R/), tag(:br))}");
+| $("#key_person_edit-modal").modal('hide');

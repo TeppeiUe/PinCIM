@@ -1,0 +1,6 @@
+| $('.sales_end_name_title').html("#{@sales_end.name}氏詳細");
+| $('.card.mb-4.shadow-lg').html('');
+| $(".set_show").html(
+|    "#{j(render 'sales_ends/show', sales_end: @sales_end)}"
+| );
+| $("#sales_end_edit-modal").modal('hide');

@@ -12,6 +12,11 @@ module ApplicationHelper
     datetime.nil? ? "なし" : datetime.strftime("%Y-%m-%d %H:%M")
   end
 
+  # simple_formatメソッドではpタグが入って来て扱いにくいため定義した
+  def def_format(text)
+    text.empty? ? "なし" : safe_join(text.split(/\R/), tag(:br))
+  end
+
   def btn_type(btn_name)
     btn_name.include?("変更") ? "primary" : "success"
   end

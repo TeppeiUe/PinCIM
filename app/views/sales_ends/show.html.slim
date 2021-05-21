@@ -1,26 +1,11 @@
 - provide(:title, "営業担当者詳細")
+#sales_end_edit-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+
 .container
-	h2 #{@sales_end.name}氏詳細
+	h2.sales_end_name_title #{@sales_end.name}氏詳細
 	.row
-		.col-lg-8
-			.card.mb-4.shadow-lg
-				.card-body
-					h5.card-title 氏名
-					p.card-text = @sales_end.name
-
-					h5.card-title 所属
-					p.card-text = link_to @sales_end.belong.name, belong_path(@sales_end.belong_id)
-
-					h5.card-title 役職
-					p.card-text = @sales_end.post
-
-					h5.card-title 電話番号
-					p.card-text = @sales_end.telephone_number
-
-					h5.card-title 備考
-					p.card-text = simple_format(@sales_end.note)
-
-					= link_to "編集", edit_sales_end_path(@sales_end.id), class: "btn btn-primary"
+		.col-lg-8.set_show
+			= render "sales_ends/show", sales_end: @sales_end
 
 			- if @customers.exists?
 				h5 担当顧客一覧

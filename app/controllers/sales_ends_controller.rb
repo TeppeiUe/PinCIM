@@ -25,7 +25,7 @@ class SalesEndsController < ApplicationController
 
   def update
     if @sales_end.update(params_sales_end)
-      redirect_to sales_end_path(@sales_end.id)
+      render "update"
     else
       set_belongs
       render "edit"

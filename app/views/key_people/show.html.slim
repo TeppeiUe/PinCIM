@@ -4,22 +4,8 @@
 .container
 	h2.key_person_name_title #{@key_person.name}氏詳細
 	.row
-		.col-lg-8
-			.card.mb-4.shadow-lg
-				.card-body
-					h5.card-title 担当者名
-					p.card-text.key_person_name
-						= @key_person.name
-
-					h5.card-title 経歴
-					p.card-text.key_person_career
-						= safe_join(@key_person.career.split(/\R/), tag(:br))
-
-					h5.card-title 備考
-					p.card-text.key_person_note
-						= safe_join(@key_person.note.split(/\R/), tag(:br))
-
-					= link_to "編集", edit_key_person_path(@key_person.id), remote: true, class: "btn btn-primary"
+		.col-lg-8.set_show
+			= render "key_people/show", key_person: @key_person
 
 			- unless @key_person.customer.nil?
 				h5 所属

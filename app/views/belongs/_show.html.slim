@@ -1,0 +1,9 @@
+.card.mb-4.shadow-lg
+	.card-body
+		h5.card-title 所属名
+		p.card-text = belong.name
+
+		h5.card-title 住所
+		p.card-text = belong.address
+
+		= link_to "編集", edit_belong_path(belong.id), remote: true, class: "btn btn-primary"

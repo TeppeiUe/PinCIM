@@ -25,7 +25,7 @@ class BelongsController < ApplicationController
 
   def update
     if @belong.update(params_belong)
-      redirect_to belong_path(@belong.id)
+      render "update"
     else
       render "edit"
     end

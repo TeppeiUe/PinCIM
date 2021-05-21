@@ -23,7 +23,4 @@
 				= paginate @belongs
 
 		.col-lg-4
-			.card.my-4
-				h4.card-header 所属新規登録
-				.card-body
-					= render "belongs/form", belong: @belong, btn_name: "新規登録"
+			= render "belongs/form", belong: @belong, btn_name: "新規登録"

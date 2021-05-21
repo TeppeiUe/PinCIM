@@ -17,11 +17,11 @@
 //= require fullcalendar
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
+
 //= require_tree .
 
 // bootstrapヘッダー固定時のページ開始位置の調節
-$(document).on('turbolinks:load', function() {
+$(function() {
   var height = $('.navbar').height();
   $('body').css('padding-top',height);
 });

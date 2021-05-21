@@ -25,7 +25,4 @@
 				= paginate @key_people
 
 		.col-lg-4
-			.card.my-4
-				h4.card-header 窓口担当者新規登録
-				.card-body
-					= render "key_people/form", key_person: @key_person, btn_name: "新規登録"
+			= render "key_people/form", key_person: @key_person, btn_name: "新規登録"

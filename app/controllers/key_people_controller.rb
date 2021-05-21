@@ -9,10 +9,10 @@ class KeyPeopleController < ApplicationController
   def create
     @key_person = KeyPerson.new(params_key_person)
     if @key_person.save
-      redirect_to key_people_path
+      render "create"
     else
       @key_people = KeyPerson.page(params[:page]).per(10)
-      render "index"
+      render "error"
     end
   end
 

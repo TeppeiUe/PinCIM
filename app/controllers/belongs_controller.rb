@@ -9,10 +9,10 @@ class BelongsController < ApplicationController
   def create
     @belong = Belong.new(params_belong)
     if @belong.save
-      redirect_to belongs_path
+      render "create"
     else
       @belongs = Belong.page(params[:page]).per(10)
-      render "index"
+      render "error"
     end
   end
 

@@ -31,7 +31,4 @@
 				= paginate @sales_ends
 
 		.col-lg-4
-			.card.my-4
-				h4.card-header 営業担当者新規登録
-				.card-body
-					= render "sales_ends/form", sales_end: @sales_end, belongs: @belongs, btn_name: "新規登録"
+			= render "sales_ends/form", sales_end: @sales_end, belongs: @belongs, btn_name: "新規登録"

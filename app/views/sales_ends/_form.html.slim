@@ -1,28 +1,39 @@
-= render "shared/error", obj: sales_end
-= form_with model: sales_end, local: true do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, autofocus: true, autofocus: true, class: "form-control name"
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title 営業担当者#{btn_name.delete("保存")}
+			- if btn_name.include?("変更")
+				button.close [type="button" data-dismiss="modal" aria-label="Close"]
+					span [aria-hidden="true"] &times;
 
-  .form-group
-    = f.label :belong_id
-    = f.collection_select :belong_id,
-      belongs, :id, :name,
-      {prompt: "選択して下さい"},
-      autofocus: true,
-      class: "form-control belong_id"
+		.modal-body
+		  .js-message-errors
+		  = render "shared/error", obj: sales_end
 
-  .form-group
-  	= f.label :post
-  	= f.text_field :post, autofocus: true, class: "form-control post"
+		  = form_with model: sales_end, local: true do |f|
+		    .form-group
+		      = f.label :name, "営業担当者名"
+		      = f.text_field :name, autofocus: true, autofocus: true, class: "form-control name"
 
-  .form-group
-  	= f.label :telephone_number
-  	= f.text_field :telephone_number, autofocus: true, class: "form-control telephone_number"
+		    .form-group
+		      = f.label :belong_id, "所属"
+		      = f.collection_select :belong_id,
+		        belongs, :id, :name,
+		        {prompt: "選択して下さい"},
+		        autofocus: true,
+		        class: "form-control belong_id"
 
-  .form-group
-  	= f.label :note
-  	= f.text_area :note, autofocus: true, class: "form-control note"
+		    .form-group
+		      = f.label :post, "役職"
+		      = f.text_field :post, autofocus: true, class: "form-control post"
 
-  .form-group
-    = f.submit btn_name, class: "btn btn-primary"
+		    .form-group
+		      = f.label :telephone_number, "電話番号"
+		      = f.text_field :telephone_number, autofocus: true, class: "form-control telephone_number"
+
+		    .form-group
+		      = f.label :note, "備考"
+		      = f.text_area :note, autofocus: true, class: "form-control note"
+
+		    .modal-footer
+		      = f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"

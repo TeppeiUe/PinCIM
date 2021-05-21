@@ -10,11 +10,9 @@ class SalesEndsController < ApplicationController
   def create
     @sales_end = SalesEnd.new(params_sales_end)
     if @sales_end.save
-      redirect_to sales_end_path(@sales_end.id)
+      render "create"
     else
-      set_belongs
-      @sales_ends = SalesEnd.page(params[:page]).per(10)
-      render "index"
+      render "error"
     end
   end
 

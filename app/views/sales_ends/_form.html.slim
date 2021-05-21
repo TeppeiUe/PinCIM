@@ -10,7 +10,7 @@
 		  .js-message-errors
 		  = render "shared/error", obj: sales_end
 
-		  = form_with model: sales_end, local: true do |f|
+		  = form_with model: sales_end, remote: true do |f|
 		    .form-group
 		      = f.label :name, "営業担当者名"
 		      = f.text_field :name, autofocus: true, autofocus: true, class: "form-control name"

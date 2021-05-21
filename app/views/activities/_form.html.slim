@@ -1,16 +1,27 @@
-= render "shared/error", obj: activity
-= form_with model: activity, local: true do |f|
-	.form-group
-		= f.label :category, "カテゴリー"
-		= f.select :category,
-			options_for_select(Activity.categories.keys, activity.category),
-			{},
-			autofocus: true,
-			class: "form-control category"
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title 活動種別#{btn_name}
+			- if btn_name.include?("変更")
+				button.close [type="button" data-dismiss="modal" aria-label="Close"]
+					span [aria-hidden="true"] &times;
 
-	.form-group
-		= f.label :name, "活動種別名"
-		= f.text_field :name, autofocus: true, class: "form-control name"
+		.modal-body
+			.js-message-errors
+			= render "shared/error", obj: activity
 
-	.form-group
-		= f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"
+			= form_with model: activity, remote: true do |f|
+				.form-group
+					= f.label :category, "カテゴリー"
+					= f.select :category,
+						options_for_select(Activity.categories.keys, activity.category),
+						{},
+						autofocus: true,
+						class: "form-control category"
+
+				.form-group
+					= f.label :name, "活動種別名"
+					= f.text_field :name, autofocus: true, class: "form-control name"
+
+				.modal-footer
+					= f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"

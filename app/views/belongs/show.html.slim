@@ -1,4 +1,6 @@
 - provide(:title, "所属詳細")
+#belong_edit-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+
 .container
 	h2 #{@belong.name}詳細
 	.row
@@ -11,7 +13,7 @@
 					h5.card-title 住所
 					p.card-text = @belong.address
 
-					= link_to "編集", edit_belong_path(@belong.id), class: "btn btn-primary"
+					= link_to "編集", edit_belong_path(@belong.id), remote: true, class: "btn btn-primary"
 
 			- if @sales_ends.exists?
 				h5 所属メンバー

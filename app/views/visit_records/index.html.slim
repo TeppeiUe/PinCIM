@@ -18,7 +18,7 @@
 							td = link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id)
 							td = link_to visit_record.customer.name, customer_path(visit_record.customer.id)
 							td.text-truncate
-								- visit_record.activity_details.each do |activity_detail|
+								- visit_record.activity_details.order(:category).each do |activity_detail|
 									= activity_detail.activity.name
 									<br>
 			.d-flex.justify-content-center

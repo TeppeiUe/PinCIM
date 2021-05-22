@@ -4,16 +4,16 @@ header
 			a.navbar-brand[href="/"]
 				= image_tag "PinCIM-logo&title_bg-none.png", alt: "PinCIM logo", size: "100x26"
 
-			button.navbar-toggler[
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarNavDropdown"
-				aria-controls="navbarNavDropdown"
-				aria-expanded="false"
-				aria-label="Toggle navigation"]
-				span.navbar-toggler-icon
-
 			- if user_signed_in?
+				button.navbar-toggler[
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarNavDropdown"
+					aria-controls="navbarNavDropdown"
+					aria-expanded="false"
+					aria-label="Toggle navigation"]
+					span.navbar-toggler-icon
+
 				#navbarNavDropdown.collapse.navbar-collapse
 					ul.navbar-nav
 						li.nav-item = link_to "トップページ", "/", class: "nav-link"

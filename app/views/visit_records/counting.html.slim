@@ -1,25 +1,29 @@
 .container
 	.row
 		.col
-			table.table
-				thead
+			h2.mb-4
+				| 期間#{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
+				| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの集計結果
+
+			table.table.table-bordered.table-hover.text-center [style="table-layout:fixed;"]
+				thead.bg-light
 					tr
-						th
+						th [scope="col"]
 						- @columns.each do |column|
-							th = column
-						th 合計
+							th.align-middle [scope="col"] = column
+						th.align-middle [scope="col"] 合計
 				tbody
 					- @table.each_with_index do |tr, i|
 						tr
-							th = @rows[i]
+							th.bg-light.align-middle [scope="row"] = @rows[i]
 							- countsum = 0
 							- tr.each_with_index do |count, i|
-								td = count
+								td.align-middle = count
 								- @sums[i] += count.to_i
 								- countsum += count.to_i
-							td = countsum
+							td.align-middle = countsum
 					tr
-						th 合計
+						th.bg-light.align-middle [scope="row"] 合計
 						- @sums.each do |sum|
-							td = sum
+							td.align-middle = sum
 						th

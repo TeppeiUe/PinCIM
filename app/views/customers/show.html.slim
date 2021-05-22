@@ -5,4 +5,10 @@
 	h2.customer_name_title #{@customer.name}詳細
 	.row
 		.col
-			= render "customers/show", customer: @customer
+			.card.shadow-lg
+			  .card-body
+			  	.row
+			  		.col-md.set_show
+			  			= render "customers/show", customer: @customer
+			  		.col-md.set_map
+			  			= render "customers/map", customer: @customer

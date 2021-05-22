@@ -1,48 +1,19 @@
-.card.shadow-lg.set_show
-  .card-body
-  	.row
-  		.col-md
-  		  h5.card-title 顧客名
-  		  p.card-text = customer.name
+h5.card-title 顧客名
+p.card-text = customer.name
 
-  		  h5.catd-title 住所
-  		  p.card-text = customer.address
+h5.catd-title 住所
+p.card-text = customer.address
 
-  		  h5.card-title 窓口担当者
-  		  p.card-text = link_to customer.key_person.name, key_person_path(customer.key_person.id)
+h5.card-title 窓口担当者
+p.card-text = link_to customer.key_person.name, key_person_path(customer.key_person.id)
 
-  		  h5.card-title 営業担当者所属
-  		  p.card-text = link_to customer.sales_end.belong.name, belong_path(customer.sales_end.belong.id)
+h5.card-title 営業担当者所属
+p.card-text = link_to customer.sales_end.belong.name, belong_path(customer.sales_end.belong.id)
 
-  		  h5.card-title 営業担当者
-  		  p.card-text = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)
+h5.card-title 営業担当者
+p.card-text = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)
 
-  		  h5.card-title 導入システム
-  		  p.card-text = customer.system
+h5.card-title 導入システム
+p.card-text = customer.system
 
-  		  = link_to "編集", edit_customer_path(customer.id), remote: true, class: "btn btn-primary"
-
-  		.col-md
-  		  #map.mx-auto.my-4 style='height: 350px;'
-
-javascript:
-	let map;
-
-  function initMap() {
-    geocoder = new google.maps.Geocoder()
-
-		pos = new google.maps.LatLng(
-			#{customer.latitude},
-			#{customer.longitude}
-		);
-
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: pos,
-      zoom: 15,
-    });
-
-    marker = new google.maps.Marker({
-      position: pos,
-      map: map
-    });
-  }
+= link_to "編集", edit_customer_path(customer.id), remote: true, class: "btn btn-primary"

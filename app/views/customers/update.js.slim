@@ -1,6 +1,10 @@
-| $('.customer_name_title').html("#{@customer.name}氏詳細");
-| $('.card.shadow-lg').html('');
+| $('.customer_name_title').html("#{@customer.name}詳細");
+| $('.set_show').html('');
 | $(".set_show").html(
 |    "#{j(render 'customers/show', customer: @customer)}"
 | );
+- if @map_status == "change"
+  | $(".set_map").html(
+  |    "#{j(render 'customers/map', customer: @customer)}"
+  | );
 | $("#customer_edit-modal").modal('hide');

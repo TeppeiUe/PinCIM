@@ -1,0 +1,36 @@
+.card.mb-4.shadow-lg
+	h4.card-header 活動内容
+	.card-body
+		.js-message-errors
+		= render "shared/error", obj: @activity_detail
+
+		ul.activity_detail_list
+			- visit_record.activity_details.each do |activity_detail|
+				li class="li-#{activity_detail.id}"
+					= form_with model: [visit_record, activity_detail], remote: true do |f|
+						= f.hidden_field :visit_record_id, value: visit_record.id
+
+						.form-inline
+							= f.collection_select :activity_id,
+								activities, :id, :name,
+								{prompt: "選択して下さい"},
+								class: "form-control activity_id"
+
+							= f.submit "変更", class: "btn btn-primary"
+
+							= link_to "削除",
+								visit_record_activity_detail_path(visit_record.id, activity_detail.id),
+								remote: true,
+								method: :delete,
+								class: "btn btn-danger"
+
+		= form_with model: [visit_record, @activity_detail], remote: true do |f|
+			= f.hidden_field :visit_record_id, value: visit_record.id
+
+			.form-inline
+				= f.collection_select :activity_id,
+					activities, :id, :name,
+					{prompt: "選択して下さい"},
+					class: "form-control activity_id add_activity"
+
+				= f.submit "活動内容 追加", class: "btn btn-success"

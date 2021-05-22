@@ -8,22 +8,7 @@
 			.set_show
 				= render "visit_records/show", visit_record: @visit_record
 
-			.card.mb-4.shadow-lg
-				h4.card-header 活動内容
-				.card-body
-					ul
-						- @visit_record.activity_details.each do |activity_detail|
-							li = render "activity_details/form",
-								visit_record: @visit_record,
-								activity_detail: activity_detail,
-								activities: @activities,
-								btn_name: "変更"
-
-					= render "activity_details/form",
-						visit_record: @visit_record,
-						activity_detail: @activity_detail,
-						activities: @activities,
-						btn_name: "活動内容 追加"
+			= render "activity_details/show", visit_record: @visit_record, activities: @activities
 
 			.card.mb-4.shadow-lg
 				h4.card-header タスク

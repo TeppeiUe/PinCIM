@@ -7,7 +7,7 @@ class Customer < ApplicationRecord
   has_many :visit_records
 
   geocoded_by :address
-  before_validation :geocode
+  before_validation :geocode, if: :address_changed?
 
   enum system: {
     systemA: 0,

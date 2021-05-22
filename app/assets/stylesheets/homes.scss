@@ -1,3 +1,14 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.calendar-color{
+  width: 160px;
+  &__visitRecord{
+    background-color: #6495ed;
+    border-radius: 3px;
+  }
+  &__task{
+    background-color: #98fb98;
+    border-radius: 3px;
+  }
+}

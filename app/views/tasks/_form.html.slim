@@ -1,27 +1,36 @@
-= render "shared/error", obj: task
-= form_with model: [visit_record, task], local: true do |f|
-	= f.hidden_field :visit_record_id, value: visit_record.id
-	.form-group
-	  = f.label :title, "タイトル"
-	  = f.text_field :title, class: "form-control title"
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title タスク#{btn_name.delete("保存")}
+			button.close [type="button" data-dismiss="modal" aria-label="Close"]
+				span [aria-hidden="true"] &times;
 
-	.form-group
-	  = f.label :content, "内容"
-	  = f.text_area :content, class: "form-control content"
+		.modal-body
+			= render "shared/error", obj: task
 
-	.form-group
-		= f.label :deadline, "期限"
-		= f.datetime_field :deadline, class: "form-control deadline"
+			= form_with model: [visit_record, task], remote: true do |f|
+				= f.hidden_field :visit_record_id, value: visit_record.id
+				.form-group
+				  = f.label :title, "タイトル"
+				  = f.text_field :title, class: "form-control title"
 
-	- if action_name == "edit"
-		.form-group
-			= f.label :is_active, "タスクの状態"
-			.form-check
-				= f.radio_button :is_active, true, class: "form-check-input"
-				label.form-check-label 実行中
-			.form-check
-				= f.radio_button :is_active, false, class: "form-check-input"
-				label.form-check-label 完了
+				.form-group
+				  = f.label :content, "内容"
+				  = f.text_area :content, class: "form-control content"
 
-	.form-group
-	  = f.submit btn_name, class: "btn btn-primary"
+				.form-group
+					= f.label :deadline, "期限"
+					= f.datetime_field :deadline, class: "form-control deadline"
+
+				- if action_name == "edit"
+					.form-group
+						= f.label :is_active, "タスクの状態"
+						.form-check
+							= f.radio_button :is_active, true, class: "form-check-input"
+							label.form-check-label 実行中
+						.form-check
+							= f.radio_button :is_active, false, class: "form-check-input"
+							label.form-check-label 完了
+
+				.modal-footer
+				  = f.submit btn_name, class: "btn btn-primary"

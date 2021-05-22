@@ -1,12 +1,23 @@
-= render "shared/error", obj: belong
-= form_with model: belong, local: true do |f|
-  .form-group
-    = f.label :name, "所属名"
-    = f.text_field :name, autofocus: true, class: "form-control name"
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title 所属#{btn_name.delete("保存")}
+			- if btn_name.include?("変更")
+				button.close [type="button" data-dismiss="modal" aria-label="Close"]
+					span [aria-hidden="true"] &times;
 
-  .form-group
-    = f.label :address, "住所"
-    = f.text_field :address, autofocus: true, class: "form-control address"
+		.modal-body
+		  .js-message-errors
+		  = render "shared/error", obj: belong
 
-  .form-group
-    = f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"
+		  = form_with model: belong, remote: true do |f|
+		    .form-group
+		      = f.label :name, "所属名"
+		      = f.text_field :name, autofocus: true, class: "form-control name"
+
+		      .form-group
+		        = f.label :address, "住所"
+		        = f.text_field :address, autofocus: true, class: "form-control address"
+
+		      .modal-footer
+		        = f.submit btn_name, class: "btn btn-#{btn_type(btn_name)}"

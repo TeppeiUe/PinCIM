@@ -1,0 +1,4 @@
+tr class="tr-#{activity.id}"
+  td = activity.category
+  td = activity.name
+  td = link_to "編集", edit_activity_path(activity.id), remote: true, class: "btn btn-primary"

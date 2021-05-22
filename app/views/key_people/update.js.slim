@@ -1,0 +1,6 @@
+| $('.key_person_name_title').html("#{@key_person.name}氏詳細");
+| $('.card.mb-4.shadow-lg').html('');
+| $(".set_show").html(
+|    "#{j(render 'key_people/show', key_person: @key_person)}"
+| );
+| $("#key_person_edit-modal").modal('hide');

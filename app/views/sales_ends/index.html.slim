@@ -1,14 +1,19 @@
+- provide(:title, "営業担当者")
 .container
-	h2 営業担当者
+	h2 営業担当者一覧
 	.row
-		.col-md-8
+		.col-lg-8
 			.form-inline
 				= form_with url: sales_ends_search_path, method: :post, local: true do |f|
-					= f.select :how, options_for_select("担当者名": "sales_end_name", "所属名": "belong_name"), {}, class: "custom-select"
+					= f.select :how,
+						options_for_select("担当者名": "sales_end_name", "所属名": "belong_name"),
+						{},
+						class: "custom-select"
 					= f.search_field :value, class: "form-control value"
 					= f.submit "検索", class: "btn btn-outline-success"
-			table.table
-			  thead
+
+			table.table.table-hover
+			  thead.bg-light
 			    tr
 			      th 氏名
 			      th 所属
@@ -21,7 +26,9 @@
 			        td = link_to sales_end.belong.name, belong_path(sales_end.belong_id)
 			        td = sales_end.post
 			        td = sales_end.telephone_number
+
 			.d-flex.justify-content-center
 				= paginate @sales_ends
-		.col-md-4
+
+		.col-lg-4
 			= render "sales_ends/form", sales_end: @sales_end, belongs: @belongs, btn_name: "新規登録"

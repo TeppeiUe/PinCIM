@@ -12,7 +12,22 @@ module ApplicationHelper
     datetime.nil? ? "なし" : datetime.strftime("%Y-%m-%d %H:%M")
   end
 
+  # simple_formatメソッドではpタグが入って来て扱いにくいため定義した
+  def def_format(text)
+    text.empty? ? "なし" : safe_join(text.split(/\R/), tag(:br))
+  end
+
   def btn_type(btn_name)
     btn_name.include?("変更") ? "primary" : "success"
+  end
+
+  # タスクが実行中である場合緑色の文字
+  def status_color(active)
+    "text-success" if active
+  end
+
+  # タスクが期限切れでかつ実行中である場合赤文字
+  def deadline_color(active, deadline)
+    "text-danger" if active && deadline < Time.now
   end
 end

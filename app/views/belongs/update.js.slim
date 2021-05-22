@@ -1,0 +1,6 @@
+| $('.belong_name_title').html("#{@belong.name}詳細");
+| $('.card.mb-4.shadow-lg').html('');
+| $(".set_show").html(
+|    "#{j(render 'belongs/show', belong: @belong)}"
+| );
+| $("#belong_edit-modal").modal('hide');

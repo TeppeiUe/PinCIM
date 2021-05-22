@@ -1,0 +1,6 @@
+| $('.customer_name_title').html("#{@customer.name}氏詳細");
+| $('.card.shadow-lg').html('');
+| $(".set_show").html(
+|    "#{j(render 'customers/show', customer: @customer)}"
+| );
+| $("#customer_edit-modal").modal('hide');

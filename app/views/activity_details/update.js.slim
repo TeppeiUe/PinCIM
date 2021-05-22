@@ -1,0 +1,5 @@
+| $('.li-#{@activity_detail.id}').replaceWith(
+|    "#{j(render 'activity_details/li', visit_record: @activity_detail.visit_record, activity_detail: @activity_detail, activities: @activities)}"
+| );
+| $('.error_explanation').empty();
+| $('.js-message-errors').empty();

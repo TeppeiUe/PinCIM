@@ -49,7 +49,6 @@ class CustomersController < ApplicationController
   end
 
   def show
-    gon.customer = @customer
   end
 
   def edit
@@ -59,7 +58,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(params_customer)
-      redirect_to customer_path(@customer.id)
+      render "update"
     else
       @key_people = KeyPerson.all
       @sales_ends = SalesEnd.all

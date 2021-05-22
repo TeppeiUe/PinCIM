@@ -1,14 +1,12 @@
+- provide(:title, "窓口担当者詳細")
+#key_person_edit-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+
 .container
-	h2 窓口担当者詳細
+	h2.key_person_name_title #{@key_person.name}氏詳細
 	.row
-		.col-md-8
-			p.h5 担当者名
-			p = @key_person.name
-			p.h5 経歴
-			p = simple_format(@key_person.career)
-			p.h5 備考
-			p = simple_format(@key_person.note)
-			= link_to "編集", edit_key_person_path(@key_person.id), class: "btn btn-primary"
+		.col-lg-8.set_show
+			= render "key_people/show", key_person: @key_person
+
 			- unless @key_person.customer.nil?
-				p.h5 所属
+				h5 所属
 				p = link_to @key_person.customer.name, customer_path(@key_person.customer.id)

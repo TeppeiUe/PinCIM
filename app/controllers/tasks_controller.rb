@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params_task)
     if @task.save
-      redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
+      render "create"
     else
       set_visit_record
       render "new"
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(params_task)
-      redirect_to visit_record_task_path(@task.visit_record_id, @task.id)
+      render "update"
     else
       set_visit_record
       render "edit"

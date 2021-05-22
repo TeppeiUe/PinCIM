@@ -9,10 +9,10 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(params_activity)
     if @activity.save
-      redirect_to activities_path
+      render "create"
     else
       @activities = Activity.all
-      render "index"
+      render "error"
     end
   end
 
@@ -21,7 +21,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.update(params_activity)
-      redirect_to activities_path
+      render "update"
     else
       render "edit"
     end

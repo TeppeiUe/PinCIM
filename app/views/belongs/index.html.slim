@@ -1,13 +1,15 @@
+- provide(:title, "所属")
 .container
-	h2 所属
+	h2 所属一覧
 	.row
-		.col-md-8
+		.col-lg-8
 			.form-inline
 				= form_with url: belongs_search_path, method: :post, local: true do |f|
 					= f.search_field :value, class: "form-control value"
 					= f.submit "検索", class: "btn btn-outline-success"
-			table.table.table
-			  thead
+
+			table.table.table-hover
+			  thead.bg-light
 			    tr
 			      th 所属
 			      th 住所
@@ -16,8 +18,9 @@
 			      tr
 			        td = link_to belong.name, belong_path(belong.id)
 			        td = belong.address
+
 			.d-flex.justify-content-center
 				= paginate @belongs
 
-		.col-md-4
+		.col-lg-4
 			= render "belongs/form", belong: @belong, btn_name: "新規登録"

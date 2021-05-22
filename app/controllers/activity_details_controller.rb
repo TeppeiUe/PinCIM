@@ -3,18 +3,25 @@ class ActivityDetailsController < ApplicationController
 
   def create
     @activity_detail = ActivityDetail.new(params_activity_detail)
-    @activity_detail.save
-    redirect_to visit_record_path(params[:activity_detail][:visit_record_id])
+    if @activity_detail.save
+      @activities = Activity.all
+      render "create"
+    else
+      render "error"
+    end
   end
 
   def update
-    @activity_detail.update(params_activity_detail)
-    redirect_to visit_record_path(params[:activity_detail][:visit_record_id])
+    if @activity_detail.update(params_activity_detail)
+      @activities = Activity.all
+      render "update"
+    else
+      render "error"
+    end
   end
 
   def destroy
     @activity_detail.destroy
-    redirect_to visit_record_path(@activity_detail.visit_record_id)
   end
 
   private

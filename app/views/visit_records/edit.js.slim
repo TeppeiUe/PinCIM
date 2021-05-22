@@ -1,0 +1,4 @@
+| $("#visit_record_edit-modal").html(
+|    "#{j(render 'visit_records/form_edit', visit_record: @visit_record, customers: @customers, key_people: @key_people, belongs: @belongs, sales_ends: @sales_ends, activities: @activities, btn_name: '変更保存')}"
+| );
+| $("#visit_record_edit-modal").modal('show');

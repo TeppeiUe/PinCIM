@@ -32,6 +32,6 @@ class Customer < ApplicationRecord
   end
 
   def latest_visit_record
-    visit_records.order(visit_datetime: :desc).last
+    visit_records.order(visit_datetime: :desc).first
   end
 end

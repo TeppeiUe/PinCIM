@@ -1,8 +1,35 @@
 <div class="container">
+  <h2>顧客一覧マップ</h2>
 	<div class="row">
 		<div class="col">
 			<div id="mapTop" style="height: 500px;"></div>
 		</div>
+	</div>
+	<div class="row">
+	  <div class="col-lg-7">
+	    <h4 class="mt-4">マーカー対応表</h4>
+	    <table class="table table-bordered text-center" style="table-layout:fixed;">
+			  <thead class="bg-light">
+			    <tr>
+			      <th scope="col"></th>
+			      <th scope="col" class="align-middle">systemAを導入顧客</th>
+			      <th scope="col" class="align-middle">その他</th>
+			    </tr>
+			   </thead>
+			   <tbody>
+			    <tr>
+			      <th scope="row" class="bg-light align-middle">実行中タスクあり</th>
+			      <td class="align-middle"><%= image_tag 'red-pushpin.png' %></td>
+			      <td class="align-middle"><%= image_tag 'red-dot.png' %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row" class="bg-light align-middle">実行中タスクなし</th>
+			      <td class="align-middle"><%= image_tag 'blue-pushpin.png' %></td>
+			      <td class="align-middle"><%= image_tag 'blue-dot.png' %></td>
+			    </tr>
+			   </tbody>
+			</table>
+	  </div>
 	</div>
 </div>
 
@@ -20,7 +47,7 @@
     		lat: <%= sprintf("%.6f", Customer.average(:latitude)) %>,
     		lng: <%= sprintf("%.6f", Customer.average(:longitude)) %>
     	},
-    	zoom: 10,
+    	zoom: 8,
     });
 
 		let i = 0;

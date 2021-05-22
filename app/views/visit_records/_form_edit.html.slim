@@ -1,10 +1,14 @@
-.container
-	h2 訪問記録新規登録
-	.row
-		.col-md-8
-			= render "shared/error", obj: @visit_record
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title 訪問記録変更
+			button.close [type="button" data-dismiss="modal" aria-label="Close"]
+				span [aria-hidden="true"] &times;
 
-			= form_with model: @visit_record, local: true do |f|
+		.modal-body
+			= render "shared/error", obj: visit_record
+
+			= form_with model: visit_record, remote: true do |f|
 				.form-group
 					= f.label :visit_datetime, "訪問日時"
 					= f.datetime_field :visit_datetime, autofocus: true, class: "form-control visit_datetime"
@@ -13,7 +17,7 @@
 					.form-group.col
 						= f.label :customer_id, "顧客名"
 						= f.collection_select :customer_id,
-							@customers, :id, :name,
+							customers, :id, :name,
 							{prompt: "選択して下さい"},
 							autofocus: true,
 							class: "form-control customer_id"
@@ -21,7 +25,7 @@
 					.form-group.col
 						= f.label :key_person_id, "窓口担当者名"
 						= f.collection_select :key_person_id,
-							@key_people, :id, :name,
+							key_people, :id, :name,
 							{prompt: "選択して下さい"},
 							autofocus: true,
 							class: "form-control key_person_id"
@@ -30,7 +34,7 @@
 					.form-group.col
 						= f.label :belong_id, "営業担当者所属"
 						= f.collection_select :belong_id,
-							@belongs, :id, :name,
+							belongs, :id, :name,
 							{prompt: "選択して下さい"},
 							autofocus: true,
 							class: "form-control belong_id"
@@ -38,7 +42,7 @@
 					.form-group.col
 						= f.label :sales_end_id, "営業担当者名"
 						= f.collection_select :sales_end_id,
-							@sales_ends, :id, :name,
+							sales_ends, :id, :name,
 							{prompt: "選択して下さい"},
 							autofocus: true,
 							class: "form-control sales_end_id"
@@ -54,18 +58,10 @@
 				.form-group
 					= f.label :rank, "ランク"
 					= f.select :rank,
-						options_for_select(VisitRecord.ranks.keys, @visit_record.rank),
+						options_for_select(VisitRecord.ranks.keys, visit_record.rank),
 						{},
 						autofocus: true,
 						class: "form-control rank"
 
-				/TODO: 以下の方法で実装出来るか試す
-					= f.fields_for :activity_details do |activity_detail|
-						.form-group
-							= activity_detail.label :activity_id
-							= activity_detail.collection_select :activity_id, activities, :id, :name,
-								{include_hidden: false},
-								{class: "form-control activity_id", multiple: true}
-
-				.form-group
-					= f.submit "新規登録", class: "btn btn-primary"
+				.modal-footer
+					= f.submit "変更保存", class: "btn btn-primary"

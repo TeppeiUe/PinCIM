@@ -1,13 +1,12 @@
 - provide(:title, "訪問記録詳細")
+#visit_record_edit-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+
 .container
 	h2 訪問記録詳細
 	.row
 		.col-lg-8
-			.card.mb-4.shadow-lg
-				h4.card-header 訪問記録
-				.card-body
-					= render "visit_records/show", visit_record: @visit_record
-					= link_to "編集", edit_visit_record_path(@visit_record.id), class: "btn btn-primary"
+			.set_show
+				= render "visit_records/show", visit_record: @visit_record
 
 			.card.mb-4.shadow-lg
 				h4.card-header 活動内容

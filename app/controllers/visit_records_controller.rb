@@ -49,7 +49,7 @@ class VisitRecordsController < ApplicationController
 
   def update
     if @visit_record.update(params_visit_record)
-      redirect_to visit_record_path(@visit_record.id)
+      render "update"
     else
       set_form_select
       render "edit"

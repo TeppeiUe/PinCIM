@@ -58,6 +58,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(params_customer)
+      @map_status = @customer.saved_change_to_attribute?(:address) ? "change" : "stay"
       render "update"
     else
       @key_people = KeyPerson.all

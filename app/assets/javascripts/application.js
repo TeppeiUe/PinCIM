@@ -22,7 +22,7 @@
 
 // bootstrapヘッダー固定時のページ開始位置の調節
 $(function() {
-  var height = $('.navbar').height();
+  var height = $('.navbar').innerHeight();
   $('body').css('padding-top',height);
 });
 

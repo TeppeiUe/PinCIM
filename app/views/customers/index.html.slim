@@ -1,6 +1,12 @@
 - provide(:title, "顧客")
 .container
-	h2 顧客一覧
+	h2
+		- if action_name == "index"
+			| 顧客一覧
+		- else
+			| "#{@how == "customer_name" ? "名称" : "住所"}"に
+			| "#{@value}"が含まれる顧客の検索結果
+
 	.row
 		.col
 			.d-flex.justify-content-between

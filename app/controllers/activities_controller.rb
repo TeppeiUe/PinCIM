@@ -28,7 +28,8 @@ class ActivitiesController < ApplicationController
   end
 
   def search
-    @activities = Activity.search_name(params[:value]).order(:category)
+    @value = params[:value]
+    @activities = Activity.search_name(@value).order(:category)
     render "index"
   end
 

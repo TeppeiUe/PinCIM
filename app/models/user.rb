@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :rememberable
+  devise :database_authenticatable, :rememberable, :timeoutable
 end

@@ -1,6 +1,12 @@
 - provide(:title, "営業担当者")
 .container
-	h2 営業担当者一覧
+	h2
+		- if action_name == "index"
+			| 営業担当者一覧
+		- else
+			| "#{@how == "sales_end_name" ? "氏名" : "所属"}"に
+			| "#{@value}"が含まれる営業担当者の検索結果
+
 	.row
 		.col-lg-8
 			.form-inline

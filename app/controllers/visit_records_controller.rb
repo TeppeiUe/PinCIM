@@ -44,10 +44,10 @@ class VisitRecordsController < ApplicationController
   end
 
   def search
-    from = params[:from_date]
-    to = params[:to_date]
+    @from = params[:from_date]
+    @to = params[:to_date]
     @visit_records = VisitRecord.
-      search_period(from, to).
+      search_period(@from, @to).
       page(params[:page]).per(10).
       order(visit_datetime: :desc)
     render "index"

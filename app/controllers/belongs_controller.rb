@@ -32,8 +32,9 @@ class BelongsController < ApplicationController
   end
 
   def search
+    @value = params[:value]
     @belongs = Belong.
-      search_name(params[:value]).
+      search_name(@value).
       page(params[:page]).per(10)
     render "index"
   end

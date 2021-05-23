@@ -1,10 +1,11 @@
+- provide(:title, "訪問記録 集計")
 .container
+	h2.mb-4
+		| #{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
+		| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの訪問記録集計結果
+
 	.row
 		.col
-			h2.mb-4
-				| 期間#{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
-				| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの集計結果
-
 			table.table.table-bordered.table-hover.text-center [style="table-layout:fixed;"]
 				thead.bg-light
 					tr

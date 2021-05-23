@@ -1,9 +1,15 @@
 - provide(:title, "訪問記録")
 .container
-	h2 訪問記録一覧
+	h2
+		- if action_name == "index"
+			| 訪問記録一覧
+		- else
+			| #{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
+			| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの訪問記録検索結果
+
 	.row
 		.col-lg-8
-			.d-flex.justify-content-end
+			.d-sm-flex.justify-content-end
 				= link_to "新規登録", new_visit_record_path, class: "btn btn-success"
 
 			table.table.table-hover

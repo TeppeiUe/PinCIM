@@ -33,10 +33,10 @@ class SalesEndsController < ApplicationController
   end
 
   def search
-    how = params[:how]
-    value = params[:value]
+    @how = params[:how]
+    @value = params[:value]
     @sales_ends = SalesEnd.
-      search_sales_end(how, value).
+      search_sales_end(@how, @value).
       page(params[:page]).per(10)
     render "index"
   end

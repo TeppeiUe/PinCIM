@@ -17,11 +17,30 @@
 //= require fullcalendar
 //= require rails-ujs
 //= require activestorage
-
+// require turbolinks
 //= require_tree .
 
 // bootstrapヘッダー固定時のページ開始位置の調節
 $(function() {
   var height = $('.navbar').height();
   $('body').css('padding-top',height);
+});
+
+// リダイレクト対策、urlの書き換え
+$(function(){
+  var path = location.pathname;
+
+  var check_pattern_search = "/search";
+  var check_pattern_counting = "/counting";
+
+  var check_path_search = path.lastIndexOf(check_pattern_search);
+  var check_path_counting = path.lastIndexOf(check_pattern_counting);
+
+  if(check_path_search !== -1){
+    var set_path = path.slice(0, -check_pattern_search.length);
+    history.replaceState(null, null, set_path);
+  } else if(check_path_counting !== -1){
+    var set_path = path.slice(0, -check_pattern_counting.length);
+    history.replaceState(null, null, set_path);
+  }
 });

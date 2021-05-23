@@ -17,7 +17,7 @@ class SalesEnd < ApplicationRecord
   def self.search_sales_end(how, value)
     if how == "sales_end_name"
       SalesEnd.search_name(value)
-    elsif how == "belong_name"
+    elsif how == "sales_end_belong_name"
       SalesEnd.search_belong(
         Belong.search_name(value).pluck(:id)
       )

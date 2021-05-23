@@ -68,10 +68,10 @@ class CustomersController < ApplicationController
   end
 
   def search
-    how = params[:how]
-    value = params[:value]
+    @how = params[:how]
+    @value = params[:value]
     @customers = Customer.
-      search_customer(how, value).
+      search_customer(@how, @value).
       page(params[:page]).per(10)
     render "index"
   end

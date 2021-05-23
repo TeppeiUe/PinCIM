@@ -2,12 +2,17 @@
 #activity_edit-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
 
 .container
-	h2 活動種別一覧
+	h2
+		- if action_name == "index"
+			| 活動種別一覧
+		- else
+			| 活動種別名に"#{@value}"が含まれる活動種別の検索結果
+
 	.row
 		.col-lg-8
 			.form-inline
 				= form_with url: activities_search_path, method: :post, local: true do |f|
-					= f.search_field :value, class: "form-control value"
+					= f.search_field :value, placeholder: "活動種別名", class: "form-control value"
 					= f.submit "検索", class: "btn btn-outline-success"
 			table.table.table-hover
 				thead

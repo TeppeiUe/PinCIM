@@ -1,13 +1,22 @@
 - provide(:title, "顧客")
 .container
-	h2 顧客一覧
+	h2
+		- if action_name == "index"
+			| 顧客一覧
+		- else
+			| "#{@how == "customer_name" ? "名称" : "住所"}"に
+			| "#{@value}"が含まれる顧客の検索結果
+
 	.row
 		.col
-			.d-flex.justify-content-between
+			.d-md-flex.justify-content-between
 				.form-inline
 					= form_with url: customers_search_path, method: :post, local: true do |f|
-						= f.select :how, options_for_select("顧客名": "customer_name", "住所": "customer_address"), {}, class: "custom-select"
-						= f.search_field :value, class: "form-control value"
+						= f.select :how,
+							options_for_select("顧客名": "customer_name", "住所": "customer_address"),
+							{},
+							class: "custom-select"
+						= f.search_field :value, placeholder: "顧客名", class: "form-control value"
 						= f.submit "検索", class: "btn btn-outline-success"
 				= link_to "新規登録", new_customer_path, class: "btn btn-success"
 

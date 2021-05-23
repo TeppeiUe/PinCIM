@@ -1,5 +1,4 @@
 class ActivityDetail < ApplicationRecord
-  validates :activity_id, :visit_record_id, presence: true
   validates :activity_id, uniqueness: { scope: :visit_record_id }
 
   belongs_to :visit_record

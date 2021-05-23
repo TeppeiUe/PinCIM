@@ -40,7 +40,7 @@ class VisitRecordsController < ApplicationController
 
   def show
     @activity_detail = ActivityDetail.new
-    @activities = Activity.all
+    @activities = Activity.all.order(:category)
   end
 
   def edit

@@ -1,6 +1,11 @@
 - provide(:title, "窓口担当者")
 .container
-	h2 窓口担当者一覧
+	h2
+		- if action_name == "index"
+			| 窓口担当者一覧
+		- else
+			| 氏名に"#{@value}"が含まれる窓口担当者の検索結果
+
 	.row
 		.col-lg-8
 			.form-inline

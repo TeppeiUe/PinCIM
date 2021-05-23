@@ -31,8 +31,9 @@ class KeyPeopleController < ApplicationController
   end
 
   def search
+    @value = params[:value]
     @key_people = KeyPerson.
-      search_name(params[:value]).
+      search_name(@value).
       page(params[:page]).per(10)
     render "index"
   end

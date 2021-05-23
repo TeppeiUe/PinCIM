@@ -4,8 +4,9 @@
 .container
 	h2.key_person_name_title #{@key_person.name}氏詳細
 	.row
-		.col-lg-8.set_show
-			= render "key_people/show", key_person: @key_person
+		.col-lg-8
+			.set_show
+				= render "key_people/show", key_person: @key_person
 
 			- unless @key_person.customer.nil?
 				h5 所属

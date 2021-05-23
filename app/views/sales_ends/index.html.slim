@@ -12,10 +12,10 @@
 			.form-inline
 				= form_with url: sales_ends_search_path, method: :post, local: true do |f|
 					= f.select :how,
-						options_for_select("担当者名": "sales_end_name", "所属名": "belong_name"),
+						options_for_select("担当者名": "sales_end_name", "所属名": "sales_end_belong_name"),
 						{},
 						class: "custom-select"
-					= f.search_field :value, class: "form-control value"
+					= f.search_field :value, placeholder: "担当者名", class: "form-control value"
 					= f.submit "検索", class: "btn btn-outline-success"
 
 			table.table.table-hover

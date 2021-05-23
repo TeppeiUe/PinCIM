@@ -3,7 +3,7 @@
 	h2 ログイン
 	.row
 		.col-md-4
-		  = form_with model: resource, as: resource_name, url: "/sign_in" do |f|
+		  = form_with model: resource, as: resource_name, url: "/sign_in", local: true do |f|
 		    .form-group
 		      = f.label :email, "メールアドレス"
 		      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control email"
@@ -15,7 +15,13 @@
 		    - if devise_mapping.rememberable?
 		      .form-check
 		        = f.check_box :remember_me, class: "form-check-input"
-		        = f.label :remember_me, "ログイン状態を維持"
+		        = f.label :remember_me, "ログイン状態を維持", class: "form-check-label"
 
-		    form-group
+		    .form-group
 		      = f.submit "ログイン", class: "btn btn-primary"
+
+		  = form_with model: resource, as: resource_name, url: "/sign_in", local: true do |guest|
+		  	= guest.hidden_field :email, value: "hoge@hoge.com", id: "guest_email"
+		  	= guest.hidden_field :password, value: "hogehoge", id: "guest_password"
+		  	.form-group
+		  		= guest.submit "ゲストログイン", class: "btn btn-warning"

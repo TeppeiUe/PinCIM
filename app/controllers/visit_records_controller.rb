@@ -3,7 +3,6 @@ class VisitRecordsController < ApplicationController
 
   def new
     @visit_record = VisitRecord.new
-    # @visit_record.activity_details.build
     set_form_select
   end
 
@@ -15,23 +14,6 @@ class VisitRecordsController < ApplicationController
       set_form_select
       render "new"
     end
-
-    # TODO: 以下の方法で実装出来るか試す
-    # 複数のactivity_detailレコードが一括で保存できなかったため、展開し個別に保存
-    # 空で保存しないよう、トランザクション処理とした
-    #   @visit_record.transaction do
-    #     @visit_record.save!
-    #     params[:visit_record][:activity_details_attributes].each do |k, activity_detail|
-    #       activity_detail[:activity_id].each do |id|
-    #         @visit_record.activity_details.create(activity_id: id)
-    #       end
-    #     end
-    #   end
-    #   redirect_to visit_record_path(@visit_record.id)
-    # rescue => e
-    #   @visit_record.activity_details.build
-    #   set_form_select
-    #   render "new"
   end
 
   def index
@@ -105,7 +87,6 @@ class VisitRecordsController < ApplicationController
     @key_people = KeyPerson.all
     @belongs = Belong.all
     @sales_ends = SalesEnd.all
-    # @activities = Activity.all
   end
 
   def params_visit_record
@@ -120,9 +101,6 @@ class VisitRecordsController < ApplicationController
         :next_datetime,
         :note,
         :rank,
-        # TODO: 以下の方法で実装出来るか試す
-        # activity_details_attributes: { activity_id: [] },
-        # activity_details_attributes: [:activity_id]
       )
   end
 end

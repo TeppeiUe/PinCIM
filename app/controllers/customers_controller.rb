@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
     end
 
     if @customer.save
-      redirect_to customers_path
+      redirect_to customer_path(@customer.id)
     else
       @key_people = KeyPerson.all
       @sales_ends = SalesEnd.all

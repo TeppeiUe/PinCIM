@@ -4,8 +4,9 @@
 .container
 	h2.sales_end_name_title #{@sales_end.name}氏詳細
 	.row
-		.col-lg-8.set_show
-			= render "sales_ends/show", sales_end: @sales_end
+		.col-lg-8
+			.set_show
+				= render "sales_ends/show", sales_end: @sales_end
 
 			- if @customers.exists?
 				h5 担当顧客一覧

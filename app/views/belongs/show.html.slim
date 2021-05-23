@@ -4,8 +4,9 @@
 .container
 	h2.belong_name_title #{@belong.name}詳細
 	.row
-		.col-lg-8.set_show
-			= render "belongs/show", belong: @belong
+		.col-lg-8
+			.set_show
+				= render "belongs/show", belong: @belong
 
 			- if @sales_ends.exists?
 				h5 所属メンバー

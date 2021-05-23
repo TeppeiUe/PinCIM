@@ -9,7 +9,7 @@
 
 	.row
 		.col
-			.d-flex.justify-content-between
+			.d-md-flex.justify-content-between
 				.form-inline
 					= form_with url: customers_search_path, method: :post, local: true do |f|
 						= f.select :how, options_for_select("顧客名": "customer_name", "住所": "customer_address"), {}, class: "custom-select"

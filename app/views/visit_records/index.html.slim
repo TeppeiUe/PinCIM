@@ -4,8 +4,12 @@
 		- if action_name == "index"
 			| 訪問記録一覧
 		- else
-			| #{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
-			| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの訪問記録検索結果
+			- if @from.blank? || @to.blank?
+				| 訪問記録検索結果
+				span.text-danger （期間を選択して下さい）
+			- else
+				| #{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
+				| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの訪問記録検索結果
 
 	.row
 		.col-lg-8
@@ -47,6 +51,9 @@
 			.card.mb-4
 				h4.card-header 活動記録の集計
 				.card-body
+					- unless alert.nil?
+						p.text-danger = alert
+
 					= form_with url: counting_visit_records_path, method: :post, local: true do |f|
 						.form-group
 							= f.label :from_date, "期間の開始日"

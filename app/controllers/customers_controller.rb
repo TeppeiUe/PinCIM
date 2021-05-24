@@ -6,10 +6,23 @@ class CustomersController < ApplicationController
     @key_people = KeyPerson.all
     @sales_ends = SalesEnd.all
     @belongs = Belong.all
+    @radio_sales_end_select = "checked"
+    @radio_sales_end_new = ""
+    @radio_belong_select = "checked"
+    @radio_belong_new = ""
+    @sales_end_new_value = ""
+    @belong_new_value = ""
+    gon.radio_sales_end_select = @radio_sales_end_select
   end
 
   def create
     @customer = Customer.new(name: params[:customer][:name], address: params[:customer][:address])
+    @radio_sales_end_select = "checked"
+    @radio_sales_end_new = ""
+    @radio_belong_select = "checked"
+    @radio_belong_new = ""
+    @sales_end_new_value = ""
+    @belong_new_value = ""
 
     # 窓口担当者の選択
     if params[:customer][:key_person] == "id"
@@ -23,12 +36,26 @@ class CustomersController < ApplicationController
     if params[:customer][:sales_end] == "id"
       @customer.sales_end_id = params[:customer][:sales_end_id]
     else
-      sales_end = SalesEnd.new(name: params[:customer][:sales_end_name])
+      @radio_sales_end_select = ""
+      @radio_sales_end_new = "checked"
+      @sales_end_new_value = params[:customer][:sales_end_name]
+      sales_end = SalesEnd.new(name: @sales_end_new_value)
       if params[:customer][:belong] == "id"
-        sales_end.belong_id = params[:customer][:belong_id]
+        if params[:customer][:belong_id].empty?
+          flash.now[:alert] = "所属を選択下さい"
+        else
+          sales_end.belong_id = params[:customer][:belong_id]
+        end
       else
-        belong = Belong.create(name: params[:customer][:belong_name])
-        sales_end.belong_id = belong.id
+        @radio_belong_select = ""
+        @radio_belong_new = "checked"
+        if params[:customer][:belong_name].blank?
+          flash.now[:alert] = "所属を入力下さい"
+        else
+          @belong_new_value = params[:customer][:belong_name]
+          belong = Belong.create(name: @belong_new_value)
+          sales_end.belong_id = belong.id
+        end
       end
       sales_end.save
       @customer.sales_end_id = sales_end.id
@@ -40,6 +67,7 @@ class CustomersController < ApplicationController
       @key_people = KeyPerson.all
       @sales_ends = SalesEnd.all
       @belongs = Belong.all
+      gon.radio_sales_end_select = @radio_sales_end_select
       render "new"
     end
   end

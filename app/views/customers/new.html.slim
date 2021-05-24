@@ -1,3 +1,6 @@
+- provide(:title, "顧客新規登録")
+= include_gon
+
 .container
 	h2 顧客新規登録
 	.row
@@ -34,7 +37,7 @@
 		    .form-group.row
 		      .form-group.col
 		      	.form-check
-		        	= f.radio_button :sales_end, :id, checked: "checked", class: "form-check-input"
+		        	= f.radio_button :sales_end, :id, checked: @radio_sales_end_select, class: "form-check-input"
 		        	label.form-check-label 登録済より選択
 		        = f.collection_select :sales_end_id,
 		          @sales_ends, :id, :name,
@@ -44,17 +47,19 @@
 
 		      .form-group.col
 		      	.form-check
-		        	= f.radio_button :sales_end, :name, class: "form-check-input"
+		        	= f.radio_button :sales_end, :name, checked: @radio_sales_end_new, class: "form-check-input"
 		        	label.form-check-label 新規登録
-		        = f.text_field :sales_end_name, class: "form-control sales_end_name"
+		        = f.text_field :sales_end_name, value: @sales_end_new_value, class: "form-control sales_end_name"
 
 		    /営業担当者で"新規登録"を選択した場合表示
 		    #selected_sales_end_name
-		      p 所属
+		      p 所属 (営業担当者で"新規登録"を選択した場合入力下さい)
+		      - unless alert.nil?
+		        p.text-danger = alert
 		      .form-group.row
 		        .form-group.col
 		        	.form-check
-		        		= f.radio_button :belong, :id, checked: "checked", class: "form-check-input"
+		        		= f.radio_button :belong, :id, checked: @radio_belong_select, class: "form-check-input"
 		        		label.form-check-label 登録済より選択
 		        	= f.collection_select :belong_id,
 		        		@belongs, :id, :name,
@@ -64,9 +69,9 @@
 
 		        .form-group.col
 		        	.form-check
-		        		= f.radio_button :belong, :name, class: "form-check-input"
+		        		= f.radio_button :belong, :name, checked: @radio_belong_new, class: "form-check-input"
 		        		label.form-check-label 新規登録
-		        	= f.text_field :belong_name, class: "form-control belong_name"
+		        	= f.text_field :belong_name, value: @belong_new_value,class: "form-control belong_name"
 
 		    .form-group
 		      = f.label :system, "導入システム"

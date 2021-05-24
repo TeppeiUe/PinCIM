@@ -3,6 +3,7 @@ class Activity < ApplicationRecord
   validates :name, uniqueness: true
 
   has_many :activity_details
+  belongs_to :user
 
   enum category: {
     プレゼン: 0,

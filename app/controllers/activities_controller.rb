@@ -3,15 +3,15 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:edit, :update]
 
   def index
-    @activities = Activity.all.order(:category)
+    @activities = current_user.activities.order(:category)
   end
 
   def create
-    @activity = Activity.new(params_activity)
+    @activity = current_user.activities.new(params_activity)
     if @activity.save
       render "create"
     else
-      @activities = Activity.all
+      @activities = current_user.activities
       render "error"
     end
   end
@@ -29,7 +29,7 @@ class ActivitiesController < ApplicationController
 
   def search
     @value = params[:value]
-    @activities = Activity.search_name(@value).order(:category)
+    @activities = current_user.activities.search_name(@value).order(:category)
     render "index"
   end
 
@@ -40,7 +40,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_activity
-    @activity = Activity.find(params[:id])
+    @activity = current_user.activities.find(params[:id])
   end
 
   def params_activity

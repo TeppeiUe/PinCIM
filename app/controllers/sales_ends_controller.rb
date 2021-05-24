@@ -4,11 +4,11 @@ class SalesEndsController < ApplicationController
   before_action :set_belongs, only: [:index, :edit, :search]
 
   def index
-    @sales_ends = SalesEnd.page(params[:page]).per(10)
+    @sales_ends = current_user.sales_ends.page(params[:page]).per(10)
   end
 
   def create
-    @sales_end = SalesEnd.new(params_sales_end)
+    @sales_end = current_user.sales_ends.new(params_sales_end)
     if @sales_end.save
       render "create"
     else
@@ -35,7 +35,7 @@ class SalesEndsController < ApplicationController
   def search
     @how = params[:how]
     @value = params[:value]
-    @sales_ends = SalesEnd.
+    @sales_ends = current_user.sales_ends.
       search_sales_end(@how, @value).
       page(params[:page]).per(10)
     render "index"
@@ -48,11 +48,11 @@ class SalesEndsController < ApplicationController
   end
 
   def set_sales_end
-    @sales_end = SalesEnd.find(params[:id])
+    @sales_end = current_user.sales_ends.find(params[:id])
   end
 
   def set_belongs
-    @belongs = Belong.all
+    @belongs = current_user.belongs
   end
 
   def params_sales_end

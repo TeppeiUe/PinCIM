@@ -5,6 +5,7 @@ class SalesEnd < ApplicationRecord
   belongs_to :belong
   has_many :customers
   has_many :visit_records
+  belongs_to :user
 
   def self.search_name(value)
     SalesEnd.where("name LIKE ?", "%#{sanitize_sql_like(value)}%")

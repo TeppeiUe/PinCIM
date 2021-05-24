@@ -7,7 +7,7 @@ class VisitRecordsController < ApplicationController
   end
 
   def create
-    @visit_record = VisitRecord.new(params_visit_record)
+    @visit_record = current_user.visit_records.new(params_visit_record)
     if @visit_record.save
       redirect_to visit_record_path(@visit_record.id)
     else
@@ -17,12 +17,14 @@ class VisitRecordsController < ApplicationController
   end
 
   def index
-    @visit_records = VisitRecord.page(params[:page]).per(10).order(visit_datetime: :desc)
+    @visit_records = current_user.visit_records.
+      page(params[:page]).per(10).
+      order(visit_datetime: :desc)
   end
 
   def show
     @activity_detail = ActivityDetail.new
-    @activities = Activity.all.order(:category)
+    @activities = current_user.activities.order(:category)
   end
 
   def edit
@@ -46,7 +48,7 @@ class VisitRecordsController < ApplicationController
   def search
     @from = params[:from_date]
     @to = params[:to_date]
-    @visit_records = VisitRecord.
+    @visit_records = current_user.visit_records.
       search_period(@from, @to).
       page(params[:page]).per(10).
       order(visit_datetime: :desc)
@@ -58,7 +60,7 @@ class VisitRecordsController < ApplicationController
     @to = params[:to_date_counting]
     redirect_to visit_records_path, alert: "期間を選択して下さい" if @from.blank? || @to.blank?
 
-    visit_records = VisitRecord.counting_period(@from, @to)
+    visit_records = current_user.visit_records.counting_period(@from, @to)
 
     @rows = []
     @columns = []
@@ -79,14 +81,14 @@ class VisitRecordsController < ApplicationController
   private
 
   def set_visit_record
-    @visit_record = VisitRecord.find(params[:id])
+    @visit_record = current_user.visit_records.find(params[:id])
   end
 
   def set_form_select
-    @customers = Customer.all
-    @key_people = KeyPerson.all
-    @belongs = Belong.all
-    @sales_ends = SalesEnd.all
+    @customers = current_user.customers
+    @key_people = current_user.key_people
+    @belongs = current_user.belongs
+    @sales_ends = current_user.sales_ends
   end
 
   def params_visit_record

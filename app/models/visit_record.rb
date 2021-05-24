@@ -7,6 +7,7 @@ class VisitRecord < ApplicationRecord
   belongs_to :sales_end
   has_many :tasks, dependent: :destroy
   has_many :activity_details, dependent: :destroy
+  belongs_to :user
 
   enum rank: {
     rankA: 0,

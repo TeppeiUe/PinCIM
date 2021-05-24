@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
   belongs_to :sales_end
   belongs_to :key_person
   has_many :visit_records
+  belongs_to :user
 
   geocoded_by :address
   before_validation :geocode, if: :address_changed?

@@ -1,75 +1,67 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update]
+  before_action :set_ragistration_view, only: [:new, :create]
 
   def new
     @customer = Customer.new
     @key_people = KeyPerson.all
     @sales_ends = SalesEnd.all
     @belongs = Belong.all
-    @radio_sales_end_select = "checked"
-    @radio_sales_end_new = ""
-    @radio_belong_select = "checked"
-    @radio_belong_new = ""
-    @sales_end_new_value = ""
-    @belong_new_value = ""
     gon.radio_sales_end_select = @radio_sales_end_select
   end
 
   def create
-    @customer = Customer.new(name: params[:customer][:name], address: params[:customer][:address])
-    @radio_sales_end_select = "checked"
-    @radio_sales_end_new = ""
-    @radio_belong_select = "checked"
-    @radio_belong_new = ""
-    @sales_end_new_value = ""
-    @belong_new_value = ""
+    @customer = Customer.new(params_customer)
 
-    # 窓口担当者の選択
-    if params[:customer][:key_person] == "id"
-      @customer.key_person_id = params[:customer][:key_person_id]
-    else
-      key_person = KeyPerson.create(name: params[:customer][:key_person_name])
-      @customer.key_person_id = key_person.id
-    end
-
-    # 営業担当者の選択("新規登録"を選択した場合、所属の処理を実行)
-    if params[:customer][:sales_end] == "id"
-      @customer.sales_end_id = params[:customer][:sales_end_id]
-    else
-      @radio_sales_end_select = ""
-      @radio_sales_end_new = "checked"
-      @sales_end_new_value = params[:customer][:sales_end_name]
-      sales_end = SalesEnd.new(name: @sales_end_new_value)
-      if params[:customer][:belong] == "id"
-        if params[:customer][:belong_id].empty?
-          flash.now[:alert] = "所属を選択下さい"
-        else
-          sales_end.belong_id = params[:customer][:belong_id]
-        end
-      else
-        @radio_belong_select = ""
-        @radio_belong_new = "checked"
-        if params[:customer][:belong_name].blank?
-          flash.now[:alert] = "所属を入力下さい"
-        else
-          @belong_new_value = params[:customer][:belong_name]
-          belong = Belong.create(name: @belong_new_value)
-          sales_end.belong_id = belong.id
-        end
+    @customer.transaction do
+      # 窓口担当者で新規登録を選択
+      if params_key_person[:radio_key_person] == "new"
+        @radio_key_person_select = ""
+        @radio_key_person_new = "checked"
+        @key_person_new_value = params_key_person[:key_person_name]
+        key_person = KeyPerson.create(name: @key_person_new_value)
+        @customer.key_person_id = key_person.id
       end
-      sales_end.save
-      @customer.sales_end_id = sales_end.id
-    end
 
-    if @customer.save
-      redirect_to customer_path(@customer.id)
-    else
+      # 営業担当者で新規登録を選択
+      if params_sales_end[:radio_sales_end] == "new"
+        @radio_sales_end_select = ""
+        @radio_sales_end_new = "checked"
+        @sales_end_new_value = params_sales_end[:sales_end_name]
+        sales_end = SalesEnd.new(name: @sales_end_new_value)
+
+        # 所属で登録済を選択
+        if params_belong[:radio_belong] == "select"
+          if params_belong[:belong_id].empty?
+            flash.now[:alert_belong] = "所属を選択下さい"
+          else
+            sales_end.belong_id = params_belong[:belong_id]
+          end
+        # 所属で新規登録を選択
+        else
+          @radio_belong_select = ""
+          @radio_belong_new = "checked"
+          if params_belong[:belong_name].blank?
+            flash.now[:alert_belong] = "所属を入力下さい"
+          else
+            @belong_new_value = params_belong[:belong_name]
+            belong = Belong.create(name: @belong_new_value)
+            sales_end.belong_id = belong.id
+          end
+        end
+        sales_end.save
+        @customer.sales_end_id = sales_end.id
+      end
+      @customer.save!
+    end
+    redirect_to customer_path(@customer.id)
+
+    rescue => e
       @key_people = KeyPerson.all
       @sales_ends = SalesEnd.all
       @belongs = Belong.all
       gon.radio_sales_end_select = @radio_sales_end_select
       render "new"
-    end
   end
 
   def index
@@ -110,6 +102,18 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
 
+  def set_ragistration_view
+    @radio_key_person_select = "checked"
+    @radio_key_person_new = ""
+    @radio_sales_end_select = "checked"
+    @radio_sales_end_new = ""
+    @radio_belong_select = "checked"
+    @radio_belong_new = ""
+    @key_person_new_value = ""
+    @sales_end_new_value = ""
+    @belong_new_value = ""
+  end
+
   def params_customer
     params.require(:customer).permit(
       :name,
@@ -119,6 +123,28 @@ class CustomersController < ApplicationController
       :latitude,
       :longitude,
       :system,
+    )
+  end
+
+  def params_key_person
+    params.require(:customer).permit(
+      :radio_key_person,
+      :key_person_name,
+    )
+  end
+
+  def params_sales_end
+    params.require(:customer).permit(
+      :radio_sales_end,
+      :sales_end_name,
+    )
+  end
+
+  def params_belong
+    params.require(:customer).permit(
+      :radio_belong,
+      :belong_id,
+      :belong_name,
     )
   end
 end

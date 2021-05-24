@@ -14,7 +14,7 @@ module ApplicationHelper
 
   # simple_formatメソッドではpタグが入って来て扱いにくいため定義した
   def def_format(text)
-    text.empty? ? "なし" : safe_join(text.split(/\R/), tag(:br))
+    text.nil? ? "なし" : safe_join(text.split(/\R/), tag(:br))
   end
 
   def btn_type(btn_name)

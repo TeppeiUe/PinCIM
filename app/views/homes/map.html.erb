@@ -43,10 +43,12 @@
 
     // 地図の中心は登録されている住所の平均値
     mapTop = new google.maps.Map(document.getElementById('mapTop'), {
-    	center: {
-    		lat: <%= sprintf("%.6f", Customer.average(:latitude)) %>,
-    		lng: <%= sprintf("%.6f", Customer.average(:longitude)) %>
-    	},
+    	<% unless Customer.average(:latitude).nil? %>
+	    	center: {
+	    		lat: <%= sprintf("%.6f", Customer.average(:latitude)) %>,
+	    		lng: <%= sprintf("%.6f", Customer.average(:longitude)) %>
+	    	},
+    	<% end %>
     	zoom: 8,
     });
 

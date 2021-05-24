@@ -56,7 +56,7 @@ class VisitRecordsController < ApplicationController
   def counting
     @from = params[:from_date_counting]
     @to = params[:to_date_counting]
-    redirect_to visit_records_path if @from.blank? || @to.blank?
+    redirect_to visit_records_path, alert: "期間を選択して下さい" if @from.blank? || @to.blank?
 
     visit_records = VisitRecord.counting_period(@from, @to)
 

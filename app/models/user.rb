@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :sales_ends
   has_many :customers
   has_many :visit_records
+  has_many :activity_details
 end

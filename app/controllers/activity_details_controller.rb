@@ -2,9 +2,9 @@ class ActivityDetailsController < ApplicationController
   before_action :set_activity_detail, only: [:update, :destroy]
 
   def create
-    @activity_detail = ActivityDetail.new(params_activity_detail)
+    @activity_detail = current_user.activity_details.new(params_activity_detail)
     if @activity_detail.save
-      @activities = Activity.all
+      @activities = current_user.activities
       render "create"
     else
       render "error"
@@ -13,7 +13,7 @@ class ActivityDetailsController < ApplicationController
 
   def update
     if @activity_detail.update(params_activity_detail)
-      @activities = Activity.all
+      @activities = current_user.activities
       render "update"
     else
       render "error"
@@ -27,7 +27,7 @@ class ActivityDetailsController < ApplicationController
   private
 
   def set_activity_detail
-    @activity_detail = ActivityDetail.find(params[:id])
+    @activity_detail = current_user.activity_details.find(params[:id])
   end
 
   def params_activity_detail

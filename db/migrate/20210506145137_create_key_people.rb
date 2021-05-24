@@ -4,6 +4,7 @@ class CreateKeyPeople < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :career
       t.text :note
+      t.integer :user_id
 
       t.timestamps
     end

@@ -9,6 +9,7 @@ class CreateVisitRecords < ActiveRecord::Migration[5.2]
       t.datetime :next_datetime
       t.text :note
       t.integer :rank, default: 0
+      t.integer :user_id
 
       t.timestamps
     end

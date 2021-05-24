@@ -3,6 +3,7 @@ class CreateActivities < ActiveRecord::Migration[5.2]
     create_table :activities do |t|
       t.string :name
       t.integer :category, default: 0
+      t.integer :user_id
 
       t.timestamps
     end

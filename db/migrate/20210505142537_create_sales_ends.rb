@@ -6,6 +6,7 @@ class CreateSalesEnds < ActiveRecord::Migration[5.2]
       t.string :post
       t.string :telephone_number
       t.text :note
+      t.integer :user_id
 
       t.timestamps
     end

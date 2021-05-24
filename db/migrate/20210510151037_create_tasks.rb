@@ -6,6 +6,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.text :content
       t.datetime :deadline
       t.boolean :is_active, default: true
+      t.integer :user_id
 
       t.timestamps
     end

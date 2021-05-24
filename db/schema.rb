@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
   create_table "activities", force: :cascade do |t|
     t.string "name", null: false
     t.integer "category", default: 0, null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_activities_on_category"
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
   create_table "activity_details", force: :cascade do |t|
     t.integer "visit_record_id", null: false
     t.integer "activity_id", null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["visit_record_id", "activity_id"], name: "index_activity_details_on_visit_record_id_and_activity_id", unique: true
@@ -32,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
   create_table "belongs", force: :cascade do |t|
     t.string "name", null: false
     t.string "address"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_belongs_on_name", unique: true
@@ -45,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.float "latitude"
     t.float "longitude"
     t.integer "system", default: 0
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_customers_on_address", unique: true
@@ -55,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.string "name", null: false
     t.text "career"
     t.text "note"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_key_people_on_name", unique: true
@@ -66,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.string "post"
     t.string "telephone_number"
     t.text "note"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_sales_ends_on_name", unique: true
@@ -77,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.text "content"
     t.datetime "deadline"
     t.boolean "is_active", default: true
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -98,6 +105,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.datetime "next_datetime"
     t.text "note"
     t.integer "rank", default: 0
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

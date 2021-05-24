@@ -3,6 +3,7 @@ class CreateBelongs < ActiveRecord::Migration[5.2]
     create_table :belongs do |t|
       t.string :name
       t.string :address
+      t.integer :user_id
 
       t.timestamps
     end

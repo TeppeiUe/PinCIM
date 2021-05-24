@@ -3,4 +3,5 @@ class User < ApplicationRecord
 
   has_many :activities
   has_many :belongs
+  has_many :key_people
 end

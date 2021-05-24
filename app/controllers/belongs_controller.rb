@@ -3,15 +3,15 @@ class BelongsController < ApplicationController
   before_action :set_belong, only: [:show, :edit, :update]
 
   def index
-    @belongs = Belong.page(params[:page]).per(10)
+    @belongs = current_user.belongs.page(params[:page]).per(10)
   end
 
   def create
-    @belong = Belong.new(params_belong)
+    @belong = current_user.belongs.new(params_belong)
     if @belong.save
       render "create"
     else
-      @belongs = Belong.page(params[:page]).per(10)
+      @belongs = current_user.belongs.page(params[:page]).per(10)
       render "error"
     end
   end
@@ -33,9 +33,7 @@ class BelongsController < ApplicationController
 
   def search
     @value = params[:value]
-    @belongs = Belong.
-      search_name(@value).
-      page(params[:page]).per(10)
+    @belongs = current_user.belongs.search_name(@value).page(params[:page]).per(10)
     render "index"
   end
 
@@ -46,7 +44,7 @@ class BelongsController < ApplicationController
   end
 
   def set_belong
-    @belong = Belong.find(params[:id])
+    @belong = current_user.belongs.find(params[:id])
   end
 
   def params_belong

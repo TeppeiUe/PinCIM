@@ -10,3 +10,8 @@ User.create!(
     email: "hoge@hoge.com",
     password: "hogehoge",
 )
+
+User.create!(
+    email: "#{ENV['DB_SEED_MAIL']}",
+    password: "#{ENV['DB_SEED_PASSWORD']}"
+)

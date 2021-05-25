@@ -4,10 +4,11 @@ class CreateKeyPeople < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :career
       t.text :note
+      t.integer :user_id
 
       t.timestamps
     end
     change_column_null :key_people, :name, false
-    add_index :key_people, :name, unique: true
+    add_index :key_people, [:name, :user_id], unique: true
   end
 end

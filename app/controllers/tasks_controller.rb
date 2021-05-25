@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params_task)
+    @task = current_user.tasks.new(params_task)
     if @task.save
       render "create"
     else
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.page(params[:page]).per(10).order(deadline: :desc)
+    @tasks = current_user.tasks.page(params[:page]).per(10).order(deadline: :desc)
   end
 
   def show
@@ -40,6 +40,7 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+    redirect_to root_path unless @task.user_id == current_user.id
   end
 
   def set_visit_record

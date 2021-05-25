@@ -3,15 +3,15 @@ class KeyPeopleController < ApplicationController
   before_action :set_key_person, only: [:show, :edit, :update]
 
   def index
-    @key_people = KeyPerson.page(params[:page]).per(10)
+    @key_people = current_user.key_people.page(params[:page]).per(10)
   end
 
   def create
-    @key_person = KeyPerson.new(params_key_person)
+    @key_person = current_user.key_people.new(params_key_person)
     if @key_person.save
       render "create"
     else
-      @key_people = KeyPerson.page(params[:page]).per(10)
+      @key_people = current_user.key_people.page(params[:page]).per(10)
       render "error"
     end
   end
@@ -32,9 +32,7 @@ class KeyPeopleController < ApplicationController
 
   def search
     @value = params[:value]
-    @key_people = KeyPerson.
-      search_name(@value).
-      page(params[:page]).per(10)
+    @key_people = current_user.key_people.search_name(@value).page(params[:page]).per(10)
     render "index"
   end
 
@@ -46,6 +44,7 @@ class KeyPeopleController < ApplicationController
 
   def set_key_person
     @key_person = KeyPerson.find(params[:id])
+    redirect_to root_path unless @key_person.user_id == current_user.id
   end
 
   def params_key_person

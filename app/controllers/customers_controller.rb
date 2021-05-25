@@ -4,14 +4,14 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
-    @key_people = KeyPerson.all
-    @sales_ends = SalesEnd.all
-    @belongs = Belong.all
+    @key_people = current_user.key_people
+    @sales_ends = current_user.sales_ends
+    @belongs = current_user.belongs
     gon.radio_sales_end_select = @radio_sales_end_select
   end
 
   def create
-    @customer = Customer.new(params_customer)
+    @customer = current_user.customers.new(params_customer)
 
     @customer.transaction do
       # 窓口担当者で新規登録を選択
@@ -19,7 +19,7 @@ class CustomersController < ApplicationController
         @radio_key_person_select = ""
         @radio_key_person_new = "checked"
         @key_person_new_value = params_key_person[:key_person_name]
-        key_person = KeyPerson.create(name: @key_person_new_value)
+        key_person = current_user.key_people.create(name: @key_person_new_value)
         @customer.key_person_id = key_person.id
       end
 
@@ -28,14 +28,15 @@ class CustomersController < ApplicationController
         @radio_sales_end_select = ""
         @radio_sales_end_new = "checked"
         @sales_end_new_value = params_sales_end[:sales_end_name]
-        sales_end = SalesEnd.new(name: @sales_end_new_value)
+        sales_end = current_user.sales_ends.new(name: @sales_end_new_value)
 
         # 所属で登録済を選択
         if params_belong[:radio_belong] == "select"
           if params_belong[:belong_id].empty?
             flash.now[:alert_belong] = "所属を選択下さい"
           else
-            sales_end.belong_id = params_belong[:belong_id]
+            @selected_belong = params_belong[:belong_id]
+            sales_end.belong_id = @selected_belong
           end
         # 所属で新規登録を選択
         else
@@ -45,7 +46,7 @@ class CustomersController < ApplicationController
             flash.now[:alert_belong] = "所属を入力下さい"
           else
             @belong_new_value = params_belong[:belong_name]
-            belong = Belong.create(name: @belong_new_value)
+            belong = current_user.belongs.create(name: @belong_new_value)
             sales_end.belong_id = belong.id
           end
         end
@@ -57,23 +58,23 @@ class CustomersController < ApplicationController
     redirect_to customer_path(@customer.id)
 
     rescue => e
-      @key_people = KeyPerson.all
-      @sales_ends = SalesEnd.all
-      @belongs = Belong.all
+      @key_people = current_user.key_people
+      @sales_ends = current_user.sales_ends
+      @belongs = current_user.belongs
       gon.radio_sales_end_select = @radio_sales_end_select
       render "new"
   end
 
   def index
-    @customers = Customer.page(params[:page]).per(10).order(:address)
+    @customers = current_user.customers.page(params[:page]).per(10).order(:address)
   end
 
   def show
   end
 
   def edit
-    @key_people = KeyPerson.all
-    @sales_ends = SalesEnd.all
+    @key_people = current_user.key_people
+    @sales_ends = current_user.sales_ends
   end
 
   def update
@@ -81,8 +82,8 @@ class CustomersController < ApplicationController
       @map_status = @customer.saved_change_to_attribute?(:address) ? "change" : "stay"
       render "update"
     else
-      @key_people = KeyPerson.all
-      @sales_ends = SalesEnd.all
+      @key_people = current_user.key_people
+      @sales_ends = current_user.sales_ends
       render "edit"
     end
   end
@@ -90,7 +91,7 @@ class CustomersController < ApplicationController
   def search
     @how = params[:how]
     @value = params[:value]
-    @customers = Customer.
+    @customers = current_user.customers.
       search_customer(@how, @value).
       page(params[:page]).per(10)
     render "index"
@@ -100,6 +101,7 @@ class CustomersController < ApplicationController
 
   def set_customer
     @customer = Customer.find(params[:id])
+    redirect_to root_path unless @customer.user_id == current_user.id
   end
 
   def set_ragistration_view
@@ -109,6 +111,7 @@ class CustomersController < ApplicationController
     @radio_sales_end_new = ""
     @radio_belong_select = "checked"
     @radio_belong_new = ""
+    @selected_belong = false
     @key_person_new_value = ""
     @sales_end_new_value = ""
     @belong_new_value = ""

@@ -8,11 +8,11 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.float :latitude
       t.float :longitude
       t.integer :system, default: 0
+      t.integer :user_id
 
       t.timestamps
     end
     change_column_null :customers, :name, false
-    add_index :customers, :name, unique: true
-    add_index :customers, :address, unique: true
+    add_index :customers, [:name, :user_id], unique: true
   end
 end

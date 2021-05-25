@@ -1,11 +1,8 @@
 class Belong < ApplicationRecord
   validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { scope: :user_id }
 
   has_many :sales_ends
   has_many :visit_records
-
-  def self.search_name(value)
-    Belong.where("name LIKE ?", "%#{sanitize_sql_like(value)}%")
-  end
+  belongs_to :user
 end

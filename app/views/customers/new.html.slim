@@ -1,6 +1,4 @@
 - provide(:title, "顧客新規登録")
-= include_gon
-
 .container
 	h2 顧客新規登録
 	.row
@@ -64,7 +62,8 @@
 		        		label.form-check-label 登録済より選択
 		        	= f.collection_select :belong_id,
 		        		@belongs, :id, :name,
-		        		{prompt: "選択して下さい"},
+		        		{selected: @selected_belong,
+		        		prompt: "選択して下さい"},
 		        		autofocus: true,
 		        		class: "form-control belong_id"
 

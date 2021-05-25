@@ -6,10 +6,11 @@ class CreateSalesEnds < ActiveRecord::Migration[5.2]
       t.string :post
       t.string :telephone_number
       t.text :note
+      t.integer :user_id
 
       t.timestamps
     end
     change_column_null :sales_ends, :name, false
-    add_index :sales_ends, :name, unique: true
+    add_index :sales_ends, [:name, :user_id], unique: true
   end
 end

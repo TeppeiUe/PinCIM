@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_activities_on_category"
-    t.index ["name"], name: "index_activities_on_name", unique: true
+    t.index ["name", "user_id"], name: "index_activities_on_name_and_user_id", unique: true
   end
 
   create_table "activity_details", force: :cascade do |t|
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_belongs_on_name", unique: true
+    t.index ["name", "user_id"], name: "index_belongs_on_name_and_user_id", unique: true
   end
 
   create_table "customers", force: :cascade do |t|
@@ -51,8 +51,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_customers_on_address", unique: true
-    t.index ["name"], name: "index_customers_on_name", unique: true
+    t.index ["name", "user_id"], name: "index_customers_on_name_and_user_id", unique: true
   end
 
   create_table "key_people", force: :cascade do |t|
@@ -62,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_key_people_on_name", unique: true
+    t.index ["name", "user_id"], name: "index_key_people_on_name_and_user_id", unique: true
   end
 
   create_table "sales_ends", force: :cascade do |t|
@@ -74,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_sales_ends_on_name", unique: true
+    t.index ["name", "user_id"], name: "index_sales_ends_on_name_and_user_id", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|

@@ -16,12 +16,11 @@ class VisitRecord < ApplicationRecord
   }
 
   def self.search_period(from, to)
-    VisitRecord.where("visit_datetime BETWEEN ? AND ?", from, to)
+    where("visit_datetime BETWEEN ? AND ?", from, to)
   end
 
   def self.counting_period(from, to)
-    VisitRecord.
-      search_period(from, to).
+    search_period(from, to).
       joins(:belong, activity_details: :activity).
       group("belongs.name").
       group("activities.name").

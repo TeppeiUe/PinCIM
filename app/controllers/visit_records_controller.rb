@@ -81,7 +81,8 @@ class VisitRecordsController < ApplicationController
   private
 
   def set_visit_record
-    @visit_record = current_user.visit_records.find(params[:id])
+    @visit_record = VisitRecord.find(params[:id])
+    redirect_to root_path unless @visit_record.user_id == current_user.id
   end
 
   def set_form_select

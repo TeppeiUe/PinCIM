@@ -43,7 +43,8 @@ class KeyPeopleController < ApplicationController
   end
 
   def set_key_person
-    @key_person = current_user.key_people.find(params[:id])
+    @key_person = KeyPerson.find(params[:id])
+    redirect_to root_path unless @key_person.user_id == current_user.id
   end
 
   def params_key_person

@@ -40,7 +40,8 @@ class ActivitiesController < ApplicationController
   end
 
   def set_activity
-    @activity = current_user.activities.find(params[:id])
+    @activity = Activity.find(params[:id])
+    redirect_to root_path unless @activity.user_id == current_user.id
   end
 
   def params_activity

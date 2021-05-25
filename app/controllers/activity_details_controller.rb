@@ -27,7 +27,8 @@ class ActivityDetailsController < ApplicationController
   private
 
   def set_activity_detail
-    @activity_detail = current_user.activity_details.find(params[:id])
+    @activity_detail = ActivityDetail.find(params[:id])
+    redirect_to root_path unless @activity_detail.user_id == current_user.id
   end
 
   def params_activity_detail

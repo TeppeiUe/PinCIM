@@ -40,6 +40,7 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+    redirect_to root_path unless @task.user_id == current_user.id
   end
 
   def set_visit_record

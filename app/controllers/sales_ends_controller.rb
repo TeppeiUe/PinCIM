@@ -48,7 +48,8 @@ class SalesEndsController < ApplicationController
   end
 
   def set_sales_end
-    @sales_end = current_user.sales_ends.find(params[:id])
+    @sales_end = SalesEnd.find(params[:id])
+    redirect_to root_path unless @sales_end.user_id == current_user.id
   end
 
   def set_belongs

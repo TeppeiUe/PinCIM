@@ -99,7 +99,8 @@ class CustomersController < ApplicationController
   private
 
   def set_customer
-    @customer = current_user.customers.find(params[:id])
+    @customer = Customer.find(params[:id])
+    redirect_to root_path unless @customer.user_id == current_user.id
   end
 
   def set_ragistration_view

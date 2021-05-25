@@ -44,7 +44,8 @@ class BelongsController < ApplicationController
   end
 
   def set_belong
-    @belong = current_user.belongs.find(params[:id])
+    @belong = Belong.find(params[:id])
+    redirect_to root_path unless @belong.user_id == current_user.id
   end
 
   def params_belong

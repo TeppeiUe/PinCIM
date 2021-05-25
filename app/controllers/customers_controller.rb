@@ -35,7 +35,8 @@ class CustomersController < ApplicationController
           if params_belong[:belong_id].empty?
             flash.now[:alert_belong] = "所属を選択下さい"
           else
-            sales_end.belong_id = params_belong[:belong_id]
+            @selected_belong = params_belong[:belong_id]
+            sales_end.belong_id = @selected_belong
           end
         # 所属で新規登録を選択
         else
@@ -110,6 +111,7 @@ class CustomersController < ApplicationController
     @radio_sales_end_new = ""
     @radio_belong_select = "checked"
     @radio_belong_new = ""
+    @selected_belong = false
     @key_person_new_value = ""
     @sales_end_new_value = ""
     @belong_new_value = ""

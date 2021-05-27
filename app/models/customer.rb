@@ -10,12 +10,6 @@ class Customer < ApplicationRecord
   geocoded_by :address
   before_validation :geocode, if: :address_changed?
 
-  enum system: {
-    systemA: 0,
-    systemB: 1,
-    systemC: 2,
-  }
-
   def self.search_address(value)
     where("address LIKE ?", "%#{sanitize_sql_like(value)}%")
   end

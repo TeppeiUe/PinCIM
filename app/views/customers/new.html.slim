@@ -75,11 +75,11 @@
 
 		    .form-group
 		      = f.label :system, "導入システム"
-		      = f.select :system,
-		        options_for_select(Customer.systems.keys, @customer.system),
-		        {},
-		        autofocus: true,
-		        class: "form-control system"
+		      = f.text_field :system, autofocus: true, class: "form-control system"
+
+		    .form-group
+		      = f.label :note, "備考"
+		      = f.text_area :note, autofocus: true, class: "form-control note"
 
 		    .form-group
 		      = f.submit "新規登録", class: "btn btn-success"

@@ -16,4 +16,7 @@ p.card-text = link_to customer.sales_end.name, sales_end_path(customer.sales_end
 h5.card-title 導入システム
 p.card-text = customer.system
 
+h5.card-title 備考
+p.card-text = def_format(customer.note)
+
 = link_to "編集", edit_customer_path(customer.id), remote: true, class: "btn btn-primary"

@@ -34,12 +34,12 @@
 		      	class: "form-control sales_end_id"
 
 		    .form-group
-					= f.label :system, "導入システム"
-					= f.select :system,
-						options_for_select(Customer.systems.keys, customer.system),
-						{},
-						autofocus: true,
-						class: "form-control system"
+		    	= f.label :system, "導入システム"
+		    	= f.text_field :system,	autofocus: true, class: "form-control system"
+
+		    .form-group
+		      = f.label :note, "備考"
+		      = f.text_area :note, autofocus: true, class: "form-control note"
 
 		    .modal-footer
 		      = f.submit "変更保存", class: "btn btn-primary"

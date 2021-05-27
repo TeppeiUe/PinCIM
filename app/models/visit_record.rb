@@ -10,9 +10,10 @@ class VisitRecord < ApplicationRecord
   belongs_to :user
 
   enum rank: {
-    rankA: 0,
-    rankB: 1,
-    rankC: 2,
+    なし: 0,
+    rankA: 1,
+    rankB: 2,
+    rankC: 3,
   }
 
   def self.search_period(from, to)

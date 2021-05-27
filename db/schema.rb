@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_063327) do
+ActiveRecord::Schema.define(version: 2021_05_27_111513) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name", null: false
@@ -47,10 +47,11 @@ ActiveRecord::Schema.define(version: 2021_05_17_063327) do
     t.integer "sales_end_id"
     t.float "latitude"
     t.float "longitude"
-    t.integer "system", default: 0
+    t.string "system"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "note"
     t.index ["name", "user_id"], name: "index_customers_on_name_and_user_id", unique: true
   end
 

@@ -5,7 +5,7 @@
 		= render "shared/error", obj: @activity_detail
 
 		ul.activity_detail_list
-			- visit_record.activity_details.order(:category).each do |activity_detail|
+			- visit_record.activity_details.each do |activity_detail|
 				li class="li-#{activity_detail.id}"
 					= form_with model: [visit_record, activity_detail], remote: true do |f|
 						= f.hidden_field :visit_record_id, value: visit_record.id

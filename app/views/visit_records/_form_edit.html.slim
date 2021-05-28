@@ -11,7 +11,19 @@
 			= form_with model: visit_record, remote: true do |f|
 				.form-group
 					= f.label :visit_datetime, "訪問日時"
-					= f.datetime_field :visit_datetime, autofocus: true, class: "form-control visit_datetime"
+					.form-inline
+						= f.date_field :visit_date,
+							value: @visit_date,
+							autofocus: true,
+							class: "form-control visit_datetime"
+
+						= f.time_select :visit_time,
+							{prompt: @visit_time_nodefault,
+							default: {hour: @visit_time_hour, min: @visit_time_minute},
+							start_hour: 8,
+							end_hour: 22,
+							minute_step: 15},
+							class: "form-control visit_datetime"
 
 				.form-row
 					.form-group.col
@@ -49,7 +61,19 @@
 
 				.form-group
 					= f.label :next_datetime, "次回訪問予定日"
-					= f.datetime_field :next_datetime, autofocus: true, class: "form-control next_datetime"
+					.form-inline
+						= f.date_field :next_date,
+							value: @next_date,
+							autofocus: true,
+							class: "form-control next_datetime"
+
+						= f.time_select :next_time,
+							{prompt: @next_time_nodefault,
+							default: {hour: @next_time_hour, min: @next_time_minute},
+							start_hour: 8,
+							end_hour: 22,
+							minute_step: 15},
+							class: "form-control next_datetime"
 
 				.form-group
 					= f.label :note, "備考"

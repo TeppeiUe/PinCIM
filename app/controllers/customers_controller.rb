@@ -126,6 +126,7 @@ class CustomersController < ApplicationController
       :latitude,
       :longitude,
       :system,
+      :note,
     )
   end
 

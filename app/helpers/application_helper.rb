@@ -28,6 +28,8 @@ module ApplicationHelper
 
   # タスクが期限切れでかつ実行中である場合赤文字
   def deadline_color(active, deadline)
-    "text-danger" if active && deadline < Time.now
+    unless deadline.nil?
+      "text-danger" if active && deadline < Time.now
+    end
   end
 end

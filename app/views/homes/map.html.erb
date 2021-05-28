@@ -39,8 +39,6 @@
   let infoWindow = [];
 
   function initMap() {
-    geocoder = new google.maps.Geocoder()
-
     // 地図の中心は登録されている住所の平均値
     mapTop = new google.maps.Map(document.getElementById('mapTop'), {
     	<% unless Customer.average(:latitude).nil? %>
@@ -77,16 +75,39 @@
       });
 
       // content: 情報ウィンドウ内容の設定
-      // 内容が整備しづらいため、要対応
       infoWindow[i] = new google.maps.InfoWindow({
         content:
-        	'<table><tr><th>顧客名:</th><td><%= customer.name %></td></tr><% unless visit_record.nil? %><tr><th>前回訪問日:</th>' +
-        	'<td><%= link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id) %>' +
-        	'</td></tr><tr><th>窓口担当者:</th><td><%= link_to visit_record.key_person.name, key_person_path(visit_record.key_person_id) %>' +
-        	'</td></tr><tr><th>営業担当者:</th><td><%= link_to visit_record.sales_end.name, sales_end_path(visit_record.sales_end_id) %></td></tr>' +
-				  '<tr><th>次回訪問予定日:</th><td><%= def_datetime(visit_record.next_datetime) %></td></tr><tr><th>タスク:</th><td>' +
-				  '<%= "なし" if visit_record.find_active_tasks.blank? %><% visit_record.find_active_tasks.each do |active_task| %>' +
-					'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br><% end %></td></tr><% end %></table>',
+        	'<table>' +
+        		'<tr><th>顧客名:</th><td><%= customer.name %></td></tr>' +
+        		'<tr><th>導入システム:</th><td><%= customer.system %></td></tr>' +
+        		'<% unless visit_record.nil? %>' +
+        			'<tr>' +
+        				'<th>前回訪問日:</th>' +
+        				'<td><%= link_to def_datetime(visit_record.visit_datetime), visit_record_path(visit_record.id) %></td>' +
+        			'</tr>' +
+        			'<tr>' +
+        				'<th>窓口担当者:</th>' +
+        				'<td><%= link_to visit_record.key_person.name, key_person_path(visit_record.key_person_id) %></td>' +
+        			'</tr>' +
+        			'<tr>' +
+        				'<th>営業担当者:</th>' +
+        				'<td><%= link_to visit_record.sales_end.name, sales_end_path(visit_record.sales_end_id) %></td>' +
+        			'</tr>' +
+				  		'<tr>' +
+				  			'<th>次回訪問予定日:</th>' +
+				  			'<td><%= def_datetime(visit_record.next_datetime) %></td>' +
+				  		'</tr>' +
+				  		'<tr>' +
+				  			'<th>タスク:</th>' +
+				  			'<td>' +
+				  				'<%= "なし" if visit_record.find_active_tasks.blank? %>' +
+				  				'<% visit_record.find_active_tasks.each do |active_task| %>' +
+										'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br>' +
+									'<% end %>' +
+								'</td>' +
+							'</tr>' +
+						'<% end %>' +
+					'</table>',
       });
 
       markerEvent(i);

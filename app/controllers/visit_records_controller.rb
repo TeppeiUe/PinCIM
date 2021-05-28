@@ -38,6 +38,7 @@ class VisitRecordsController < ApplicationController
     @visit_records = current_user.visit_records.
       page(params[:page]).per(10).
       order(visit_datetime: :desc)
+    session[:privious_url] = request.fullpath
   end
 
   def show
@@ -90,7 +91,7 @@ class VisitRecordsController < ApplicationController
 
   def destroy
     @visit_record.destroy
-    redirect_to visit_records_path
+    redirect_to session[:privious_url]
   end
 
   def search

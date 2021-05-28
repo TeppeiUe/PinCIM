@@ -1,5 +1,12 @@
-| $('.tr-#{@task.id}').replaceWith("#{j(render 'tasks/tr', task: @task, visit_record: @task.visit_record)}");
-| $("#task-modal").html(
-|    "#{j(render "tasks/show", task: @task)}"
-| );
-| $("#task-modal").modal('show');
+- if @render_page == "tr"
+	| $('.tr-#{@task.id}').replaceWith("#{j(render 'tasks/tr', task: @task, visit_record: @task.visit_record)}");
+	| $("#task-modal").html(
+	|    "#{j(render "tasks/show_modal", task: @task)}"
+	| );
+	| $("#task-modal").modal('show');
+- else
+	| $('.set_show').html('');
+	| $(".set_show").html(
+	|    "#{j(render 'tasks/show', task: @task)}"
+	| );
+	| $("#task-modal").modal('hide');

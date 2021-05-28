@@ -1,31 +1,10 @@
 - provide(:title, "タスク詳細")
+#task-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+
 .container
 	h2 タスク詳細
 	.row
 		.col-lg-8
-			.card.mb-4.shadow-lg
-				h4.card-header タスク
-				.card-body
-					h5.card-title タイトル
-					p.card-text = @task.title
-
-					h5.card-title 内容
-					p.card-text = simple_format(@task.content)
-
-					h5.card-title 期限
-					p class="card-text #{deadline_color(@task.is_active, @task.deadline)}"
-						= def_datetime(@task.deadline)
-
-					h5.card-title タスクの状態
-					p class="#{status_color(@task.is_active)}"
-						= @task.status
-
-					= link_to "編集",
-						edit_visit_record_task_path(@task.visit_record_id, @task.id),
-						class: "btn btn-primary"
-
-			.card.mb-4.shadow-lg
-				h4.card-header 訪問記録
-				.card-body
-					h4 訪問記録の詳細
-					= render "visit_records/show", visit_record: @task.visit_record
+			.set_show
+				= render "tasks/show", task: @task
+			= render "visit_records/show", visit_record: @task.visit_record

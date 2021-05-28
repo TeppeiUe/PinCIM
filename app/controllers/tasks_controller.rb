@@ -55,6 +55,7 @@ class TasksController < ApplicationController
     @task.deadline = datetime_join(@deadline_date, @deadline_time_hour, @deadline_time_minute)
 
     if @task.update(params_task)
+      @render_page = session[:privious_url] == "/visit_records" ? "tr" : "show"
       render "update"
     else
       set_visit_record

@@ -1,30 +1,21 @@
-.modal-dialog.modal-dialog-centered
-	.modal-content
-		.modal-header
-			h4.modal-title タスク詳細
-			button.close [type="button" data-dismiss="modal" aria-label="Close"]
-				span [aria-hidden="true"] &times;
+.card.mb-4.shadow-lg
+	h4.card-header タスク
+	.card-body
+		h5.card-title タイトル
+		p.card-text = task.title
 
-		.modal-body
-		  h5 タイトル
-		  p = @task.title
+		h5.card-title 内容
+		p.card-text = simple_format(task.content)
 
-		  h5 内容
-		  p = def_format(@task.content)
+		h5.card-title 期限
+		p class="card-text #{deadline_color(@task.is_active, @task.deadline)}"
+			= def_datetime(task.deadline)
 
-		  h5 期限
-		  p class="#{deadline_color(@task.is_active, @task.deadline)}"
-		    = def_datetime(@task.deadline)
+		h5.card-title タスクの状態
+		p class="#{status_color(@task.is_active)}"
+			= task.status
 
-		  h5 タスクの状態
-		  p class="#{status_color(@task.is_active)}"
-		    = @task.status
-
-		.modal-footer
-		  button.btn.btn-secondary [type="button" data-dismiss="modal"]
-		    | 閉じる
-
-		  = link_to "編集",
-		    edit_visit_record_task_path(@task.visit_record_id, @task.id),
-		    remote: true,
-		    class: "btn btn-primary"
+		= link_to "編集",
+			edit_visit_record_task_path(task.visit_record_id, task.id),
+			remote: true,
+			class: "btn btn-primary"

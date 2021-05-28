@@ -62,7 +62,9 @@ class VisitRecordsController < ApplicationController
 
     # time_selectフォームににデータ反映するか判定
     @visit_time_nodefault = time_select_nodefault(@visit_time_hour, @visit_time_minute)
-    @next_time_nodefault = time_select_nodefault(@next_time_hour, @next_time_minute)
+    # nilクラスのデータを引数で渡しても、nil?メソッドでnil判定出来なかったため、以下のように記述
+    @next_time_nodefault = next_datetime.nil? ?
+      true : time_select_nodefault(@next_time_hour, @next_time_minute)
   end
 
   def update

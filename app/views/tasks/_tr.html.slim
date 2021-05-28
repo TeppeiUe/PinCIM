@@ -1,5 +1,5 @@
 tr class="tr-#{task.id}"
-  td = link_to task.title, visit_record_task_path(visit_record.id, task.id)
+  td = link_to task.title, visit_record_task_path(visit_record.id, task.id), remote: true
 
   - if request.referer.include?("tasks")
     td.text-truncate = task.content

@@ -102,7 +102,7 @@
 				  			'<td>' +
 				  				'<%= "なし" if visit_record.find_active_tasks.blank? %>' +
 				  				'<% visit_record.find_active_tasks.each do |active_task| %>' +
-										'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id) %><br>' +
+										'<%= link_to active_task.title, visit_record_task_path(visit_record.id, active_task.id, format: :html) %><br>' +
 									'<% end %>' +
 								'</td>' +
 							'</tr>' +

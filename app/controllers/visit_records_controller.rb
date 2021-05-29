@@ -38,6 +38,7 @@ class VisitRecordsController < ApplicationController
     @visit_records = current_user.visit_records.
       page(params[:page]).per(10).
       order(visit_datetime: :desc)
+    session[:privious_url] = request.fullpath
   end
 
   def show
@@ -61,7 +62,9 @@ class VisitRecordsController < ApplicationController
 
     # time_selectフォームににデータ反映するか判定
     @visit_time_nodefault = time_select_nodefault(@visit_time_hour, @visit_time_minute)
-    @next_time_nodefault = time_select_nodefault(@next_time_hour, @next_time_minute)
+    # nilクラスのデータを引数で渡しても、nil?メソッドでnil判定出来なかったため、以下のように記述
+    @next_time_nodefault = next_datetime.nil? ?
+      true : time_select_nodefault(@next_time_hour, @next_time_minute)
   end
 
   def update
@@ -90,7 +93,7 @@ class VisitRecordsController < ApplicationController
 
   def destroy
     @visit_record.destroy
-    redirect_to visit_records_path
+    redirect_to session[:privious_url]
   end
 
   def search

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def new
     set_visit_record
@@ -31,6 +31,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    session[:task_show_view] = request.fullpath.include?(".html") ? "html" : "js"
   end
 
   def edit
@@ -55,12 +56,21 @@ class TasksController < ApplicationController
     @task.deadline = datetime_join(@deadline_date, @deadline_time_hour, @deadline_time_minute)
 
     if @task.update(params_task)
+      @render_page = session[:task_show_view]
       render "update"
     else
       set_visit_record
       # time_selectフォームににデータ反映するか判定
       @deadline_time_nodefault = time_select_nodefault(@deadline_time_hour, @deadline_time_minute)
       render "edit"
+    end
+  end
+
+  def destroy
+    @task.destroy
+    respond_to do |format|
+      format.html { redirect_to session[:privious_url] }
+      format.js { render "destroy" }
     end
   end
 

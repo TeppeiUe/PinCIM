@@ -13,8 +13,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # time_selectフォームのdefaultを操作するためのメソッド
+  # 時間範囲が8-22であるため、defaultを指定しなければ予期せぬ結果が生じる
   def time_select_nodefault(hour, minute)
     hour.blank? && minute.blank? ? true : false
+    true if hour == "00" && minute == "00"
   end
 
   def datetime_division(datetime, which)

@@ -1,4 +1,4 @@
-- if @render_page == "tr"
+- if @render_page == "js"
 	| $('.tr-#{@task.id}').replaceWith("#{j(render 'tasks/tr', task: @task, visit_record: @task.visit_record)}");
 	| $("#task-modal").html(
 	|    "#{j(render "tasks/show_modal", task: @task)}"

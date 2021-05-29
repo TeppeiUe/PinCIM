@@ -28,3 +28,10 @@
 		    edit_visit_record_task_path(@task.visit_record_id, @task.id),
 		    remote: true,
 		    class: "btn btn-primary"
+
+		  = link_to "削除",
+				visit_record_task_path(task.visit_record.id, task.id),
+				method: :delete,
+				remote: true,
+				data: {confirm: "削除しますか？"},
+				class: "btn btn-danger"

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   get '/map' => 'homes#map'
   resources :visit_records do
-    resources :tasks, only: [:new, :create, :show, :edit, :update]
+    resources :tasks, only: [:new, :create, :show, :edit, :update, :destroy]
     resources :activity_details, only: [:create, :update, :destroy]
     collection do
       post 'counting'

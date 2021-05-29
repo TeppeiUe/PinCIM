@@ -13,6 +13,6 @@ class HomesController < ApplicationController
   private
 
   def save_previous_url
-    session[:privious_url] = request.fullpath
+    session[:privious_url] = URI(request.referer || '').path
   end
 end

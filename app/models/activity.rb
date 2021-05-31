@@ -10,5 +10,6 @@ class Activity < ApplicationRecord
     定期訪問: 1,
     打ち合せ: 2,
     PR: 3,
+    会議: 4,
   }
 end

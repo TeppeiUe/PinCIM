@@ -1,10 +1,11 @@
 - provide(:title, "タスク詳細")
+- breadcrumb :task, @task
+
 #task-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
 
-.container
-	h2 タスク詳細
-	.row
-		.col-lg-8
-			.set_show
-				= render "tasks/show", task: @task
-			= render "visit_records/show", visit_record: @task.visit_record
+h2 タスク詳細
+.row
+	.col-lg-8
+		.set_show
+			= render "tasks/show", task: @task
+		= render "visit_records/show", visit_record: @task.visit_record

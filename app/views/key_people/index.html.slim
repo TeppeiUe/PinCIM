@@ -1,33 +1,34 @@
 - provide(:title, "窓口担当者")
-.container
-	h2
-		- if action_name == "index"
-			| 窓口担当者一覧
-		- else
-			| 氏名に"#{@value}"が含まれる窓口担当者の検索結果
+- breadcrumb :key_people
 
-	.row
-		.col-lg-8
-			.form-inline
-				= form_with url: key_people_search_path, method: :post, local: true do |f|
-					= f.search_field :value, placeholder: "窓口担当者名", class: "form-control value"
-					= f.submit "検索", class: "btn btn-outline-success"
+h2
+	- if action_name == "index"
+		| 窓口担当者一覧
+	- else
+		| 氏名に"#{@value}"が含まれる窓口担当者の検索結果
 
-			table.table.table-hover
-				  thead.bg-light
-				    tr
-				      th 窓口担当者名
-				      th 顧客名
-				  tbody
-				    - @key_people.each do |key_person|
-				      tr
-				        td = link_to key_person.name, key_person_path(key_person.id)
-				        td
-				        	- unless key_person.customer.nil?
-				        		= link_to key_person.customer.name, customer_path(key_person.customer.id)
+.row
+	.col-lg-8
+		.form-inline
+			= form_with url: key_people_search_path, method: :post, local: true do |f|
+				= f.search_field :value, placeholder: "窓口担当者名", class: "form-control value"
+				= f.submit "検索", class: "btn btn-outline-success"
 
-			.d-flex.justify-content-center
-				= paginate @key_people
+		table.table.table-hover
+			  thead.bg-light
+			    tr
+			      th 窓口担当者名
+			      th 顧客名
+			  tbody
+			    - @key_people.each do |key_person|
+			      tr
+			        td = link_to key_person.name, key_person_path(key_person.id)
+			        td
+			        	- unless key_person.customer.nil?
+			        		= link_to key_person.customer.name, customer_path(key_person.customer.id)
 
-		.col-lg-4
-			= render "key_people/form", key_person: @key_person, btn_name: "新規登録"
+		.d-flex.justify-content-center
+			= paginate @key_people
+
+	.col-lg-4
+		= render "key_people/form", key_person: @key_person, btn_name: "新規登録"

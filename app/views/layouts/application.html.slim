@@ -11,4 +11,6 @@ html
     = favicon_link_tag 'favicon.ico'
   body
     = render "layouts/header"
-    = yield
+    .container
+      = breadcrumbs separator: " &rsaquo; " , class: "mb-4"
+      = yield

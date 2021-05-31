@@ -16,3 +16,8 @@
  */
 
 @import "bootstrap";
+
+a.nav-link.active{
+	color: #595959 !important;
+	font-weight: bold;
+}

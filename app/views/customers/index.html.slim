@@ -1,41 +1,42 @@
 - provide(:title, "顧客")
-.container
-	h2
-		- if action_name == "index"
-			| 顧客一覧
-		- else
-			| "#{@how == "customer_name" ? "名称" : "住所"}"に
-			| "#{@value}"が含まれる顧客の検索結果
+- breadcrumb :customers
 
-	.row
-		.col
-			.d-md-flex.justify-content-between
-				.form-inline
-					= form_with url: customers_search_path, method: :post, local: true do |f|
-						= f.select :how,
-							options_for_select("顧客名": "customer_name", "住所": "customer_address"),
-							{},
-							class: "custom-select"
-						= f.search_field :value, placeholder: "顧客名", class: "form-control value"
-						= f.submit "検索", class: "btn btn-outline-success"
-				= link_to "新規登録", new_customer_path, class: "btn btn-success"
+h2
+	- if action_name == "index"
+		| 顧客一覧
+	- else
+		| "#{@how == "customer_name" ? "名称" : "住所"}"に
+		| "#{@value}"が含まれる顧客の検索結果
 
-			table.table.table-hover
-				  thead.bg-light
-				    tr
-				      th 顧客名
-				      th 住所
-				      th 窓口担当者
-				      th 営業担当者所属
-				      th 営業担当者名
-				  tbody
-				    - @customers.each do |customer|
-				      tr
-				        td = link_to customer.name, customer_path(customer.id)
-				        td = customer.address
-				        td = link_to customer.key_person.name, key_person_path(customer.key_person.id)
-				        td = link_to customer.sales_end.belong.name, belong_path(customer.sales_end.belong.id)
-				        td = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)
+.row
+	.col
+		.d-md-flex.justify-content-between
+			.form-inline
+				= form_with url: customers_search_path, method: :post, local: true do |f|
+					= f.select :how,
+						options_for_select("顧客名": "customer_name", "住所": "customer_address"),
+						{},
+						class: "custom-select"
+					= f.search_field :value, placeholder: "顧客名", class: "form-control value"
+					= f.submit "検索", class: "btn btn-outline-success"
+			= link_to "新規登録", new_customer_path, class: "btn btn-success"
 
-			.d-flex.justify-content-center
-				= paginate @customers
+		table.table.table-hover
+			  thead.bg-light
+			    tr
+			      th 顧客名
+			      th 住所
+			      th 窓口担当者
+			      th 営業担当者所属
+			      th 営業担当者名
+			  tbody
+			    - @customers.each do |customer|
+			      tr
+			        td = link_to customer.name, customer_path(customer.id)
+			        td = customer.address
+			        td = link_to customer.key_person.name, key_person_path(customer.key_person.id)
+			        td = link_to customer.sales_end.belong.name, belong_path(customer.sales_end.belong.id)
+			        td = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)
+
+		.d-flex.justify-content-center
+			= paginate @customers

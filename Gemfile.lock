@@ -24,6 +24,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (5.2.5)
       activesupport (= 5.2.5)
       globalid (>= 0.3.6)
@@ -110,6 +113,9 @@ GEM
       i18n (>= 0.7)
       multi_json
       request_store (>= 1.0)
+    gretel (4.2.0)
+      actionview (>= 5.1, < 7.0)
+      railties (>= 5.1, < 7.0)
     hpricot (0.8.6)
     html2slim (0.2.0)
       hpricot
@@ -305,6 +311,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.5)
   bullet
@@ -317,6 +324,7 @@ DEPENDENCIES
   fullcalendar-rails
   geocoder
   gon
+  gretel
   html2slim
   jbuilder (~> 2.5)
   jquery-rails

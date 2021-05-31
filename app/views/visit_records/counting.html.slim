@@ -1,30 +1,31 @@
 - provide(:title, "訪問記録 集計")
-.container
-	h2.mb-4
-		| #{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
-		| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの訪問記録集計結果
+- breadcrumb :visit_records_counting
 
-	.row
-		.col
-			table.table.table-bordered.table-hover.text-center [style="table-layout:fixed;"]
-				thead.bg-light
+h2.mb-4
+	| #{Date.parse(@from).strftime("%Y年 %m月 %d日")}から
+	| #{Date.parse(@to).strftime("%Y年 %m月 %d日")}までの訪問記録集計結果
+
+.row
+	.col
+		table.table.table-bordered.table-hover.text-center [style="table-layout:fixed;"]
+			thead.bg-light
+				tr
+					th [scope="col"]
+					- @columns.each do |column|
+						th.align-middle [scope="col"] = column
+					th.align-middle [scope="col"] 合計
+			tbody
+				- @table.each_with_index do |tr, i|
 					tr
-						th [scope="col"]
-						- @columns.each do |column|
-							th.align-middle [scope="col"] = column
-						th.align-middle [scope="col"] 合計
-				tbody
-					- @table.each_with_index do |tr, i|
-						tr
-							th.bg-light.align-middle [scope="row"] = @rows[i]
-							- countsum = 0
-							- tr.each_with_index do |count, i|
-								td.align-middle = count
-								- @sums[i] += count.to_i
-								- countsum += count.to_i
-							td.align-middle = countsum
-					tr
-						th.bg-light.align-middle [scope="row"] 合計
-						- @sums.each do |sum|
-							td.align-middle = sum
-						th
+						th.bg-light.align-middle [scope="row"] = @rows[i]
+						- countsum = 0
+						- tr.each_with_index do |count, i|
+							td.align-middle = count
+							- @sums[i] += count.to_i
+							- countsum += count.to_i
+						td.align-middle = countsum
+				tr
+					th.bg-light.align-middle [scope="row"] 合計
+					- @sums.each do |sum|
+						td.align-middle = sum
+					th

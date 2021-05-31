@@ -3,7 +3,7 @@ class HomesController < ApplicationController
   # jsonのpath?が反映されるため、sessionをそれぞれ明記した。
 
   def top
-    @visit_records = current_user.visit_records
+    @visit_records = current_user.visit_records.includes([:customer])
     @tasks = Task.where(is_active: true, user_id: current_user)
     session[:privious_url] = "/"
   end

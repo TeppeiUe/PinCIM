@@ -1,87 +1,89 @@
-.container
-	h2 訪問記録新規登録
-	.row
-		.col-md-8
-			= render "shared/error", obj: @visit_record
+- provide(:title, "訪問記録新規登録")
+- breadcrumb :visit_records_new
 
-			= form_with model: @visit_record, local: true do |f|
-				.form-group
-					= f.label :visit_datetime, "訪問日時"
-					.form-inline
-						= f.date_field :visit_date,
-							value: @visit_date,
-							autofocus: true,
-							class: "form-control visit_datetime mr-1"
+h2 訪問記録新規登録
+.row
+	.col-md-8
+		= render "shared/error", obj: @visit_record
 
-						= f.time_select :visit_time,
-							{prompt: @visit_time_nodefault,
-							default: {hour: @visit_time_hour, min: @visit_time_minute},
-							start_hour: 8,
-							end_hour: 22,
-							minute_step: 15},
-							class: "form-control visit_datetime"
-
-				.form-row
-					.form-group.col
-						= f.label :customer_id, "顧客名"
-						= f.collection_select :customer_id,
-							@customers, :id, :name,
-							{prompt: "選択して下さい"},
-							autofocus: true,
-							class: "form-control customer_id"
-
-					.form-group.col
-						= f.label :key_person_id, "窓口担当者名"
-						= f.collection_select :key_person_id,
-							@key_people, :id, :name,
-							{prompt: "選択して下さい"},
-							autofocus: true,
-							class: "form-control key_person_id"
-
-				.form-row
-					.form-group.col
-						= f.label :belong_id, "営業担当者所属"
-						= f.collection_select :belong_id,
-							@belongs, :id, :name,
-							{prompt: "選択して下さい"},
-							autofocus: true,
-							class: "form-control belong_id"
-
-					.form-group.col
-						= f.label :sales_end_id, "営業担当者名"
-						= f.collection_select :sales_end_id,
-							@sales_ends, :id, :name,
-							{prompt: "選択して下さい"},
-							autofocus: true,
-							class: "form-control sales_end_id"
-
-				.form-group
-					= f.label :next_datetime, "次回訪問予定日"
-					.form-inline
-						= f.date_field :next_date,
-							value: @next_date,
-							autofocus: true,
-							class: "form-control next_datetime mr-1"
-
-						= f.time_select :next_time,
-							{prompt: @next_time_nodefault,
-							default: {hour: @next_time_hour, min: @next_time_minute},
-							start_hour: 8,
-							end_hour: 22,
-							minute_step: 15},
-							class: "form-control next_datetime"
-
-				.form-group
-					= f.label :note, "備考"
-					= f.text_area :note, autofocus: true, class: "form-control note"
-
-				.form-group
-					= f.label :rank, "ランク"
-					= f.select :rank,
-						options_for_select(VisitRecord.ranks.keys, @visit_record.rank),
-						{},
+		= form_with model: @visit_record, local: true do |f|
+			.form-group
+				= f.label :visit_datetime, "訪問日時"
+				.form-inline
+					= f.date_field :visit_date,
+						value: @visit_date,
 						autofocus: true,
-						class: "form-control rank"
+						class: "form-control visit_datetime mr-1"
 
-				.form-group
-					= f.submit "新規登録", class: "btn btn-primary"
+					= f.time_select :visit_time,
+						{prompt: @visit_time_nodefault,
+						default: {hour: @visit_time_hour, min: @visit_time_minute},
+						start_hour: 8,
+						end_hour: 22,
+						minute_step: 15},
+						class: "form-control visit_datetime"
+
+			.form-row
+				.form-group.col
+					= f.label :customer_id, "顧客名"
+					= f.collection_select :customer_id,
+						@customers, :id, :name,
+						{prompt: "選択して下さい"},
+						autofocus: true,
+						class: "form-control customer_id"
+
+				.form-group.col
+					= f.label :key_person_id, "窓口担当者名"
+					= f.collection_select :key_person_id,
+						@key_people, :id, :name,
+						{prompt: "選択して下さい"},
+						autofocus: true,
+						class: "form-control key_person_id"
+
+			.form-row
+				.form-group.col
+					= f.label :belong_id, "営業担当者所属"
+					= f.collection_select :belong_id,
+						@belongs, :id, :name,
+						{prompt: "選択して下さい"},
+						autofocus: true,
+						class: "form-control belong_id"
+
+				.form-group.col
+					= f.label :sales_end_id, "営業担当者名"
+					= f.collection_select :sales_end_id,
+						@sales_ends, :id, :name,
+						{prompt: "選択して下さい"},
+						autofocus: true,
+						class: "form-control sales_end_id"
+
+			.form-group
+				= f.label :next_datetime, "次回訪問予定日"
+				.form-inline
+					= f.date_field :next_date,
+						value: @next_date,
+						autofocus: true,
+						class: "form-control next_datetime mr-1"
+
+					= f.time_select :next_time,
+						{prompt: @next_time_nodefault,
+						default: {hour: @next_time_hour, min: @next_time_minute},
+						start_hour: 8,
+						end_hour: 22,
+						minute_step: 15},
+						class: "form-control next_datetime"
+
+			.form-group
+				= f.label :note, "備考"
+				= f.text_area :note, autofocus: true, class: "form-control note"
+
+			.form-group
+				= f.label :rank, "ランク"
+				= f.select :rank,
+					options_for_select(VisitRecord.ranks.keys, @visit_record.rank),
+					{},
+					autofocus: true,
+					class: "form-control rank"
+
+			.form-group
+				= f.submit "新規登録", class: "btn btn-primary"

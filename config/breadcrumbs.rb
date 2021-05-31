@@ -28,6 +28,16 @@ crumb :tasks do
 end
 
 crumb :task do |task|
-  link "【タスク】#{task.title}の詳細", visit_record_task_path(task.visit_record_id, task.id)
+  link "#{task.title}の詳細", visit_record_task_path(task.visit_record_id, task.id)
   parent :tasks
+end
+
+crumb :sales_ends do
+  link "営業担当者", sales_ends_path
+  parent :root
+end
+
+crumb :sales_end do |sales_end|
+  link "#{sales_end.name}氏の詳細", sales_end_path(sales_end.id)
+  parent :sales_ends
 end

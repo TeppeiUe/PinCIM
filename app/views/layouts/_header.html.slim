@@ -16,10 +16,10 @@ header
 
 				#navbarNavDropdown.collapse.navbar-collapse
 					ul.navbar-nav
-						li.nav-item = link_to "トップページ", "/", class: "nav-link"
-						li.nav-item = link_to "マップ", map_path, class: "nav-link"
-						li.nav-item = link_to "訪問記録", visit_records_path, class: "nav-link"
-						li.nav-item = link_to "タスク", tasks_path, class: "nav-link"
+						li.nav-item = active_link_to "トップページ", "/", class: "nav-link", active: [['homes'], ['top']]
+						li.nav-item = active_link_to "マップ", map_path, class: "nav-link"
+						li.nav-item = active_link_to "訪問記録", visit_records_path, class: "nav-link"
+						li.nav-item = active_link_to "タスク", tasks_path, class: "nav-link"
 						li.nav-item.dropdown
 						  a#navbarDropdownMenuLink.nav-link.dropdown-toggle[
 						  	href="#"

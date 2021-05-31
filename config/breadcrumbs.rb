@@ -76,3 +76,8 @@ crumb :belong do |belong|
   link "#{belong.name}の詳細", belong_path(belong.id)
   parent :belongs
 end
+
+crumb :activities do
+  link "活動種別", activities_path
+  parent :root
+end

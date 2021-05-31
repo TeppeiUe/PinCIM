@@ -13,12 +13,12 @@ crumb :visit_records_new do
 end
 
 crumb :visit_record do |visit_record|
-  link "訪問記録詳細", visit_record_path(visit_record.id)
+  link "詳細", visit_record_path(visit_record.id)
   parent :visit_records
 end
 
 crumb :visit_records_counting do
-	link "訪問記録集計", counting_visit_records_path
+	link "集計", counting_visit_records_path
 	parent :visit_records
 end
 
@@ -50,4 +50,19 @@ end
 crumb :key_person do |key_person|
   link "#{key_person.name}氏の詳細", key_person_path(key_person.id)
   parent :key_people
+end
+
+crumb :customers do
+  link "顧客", customers_path
+  parent :root
+end
+
+crumb :customer_new do
+	link "新規登録", new_customer_path
+	parent :customers
+end
+
+crumb :customer do |customer|
+  link "#{customer.name}の詳細", customer_path(customer.id)
+  parent :customers
 end

@@ -3,7 +3,7 @@ class KeyPeopleController < ApplicationController
   before_action :set_key_person, only: [:show, :edit, :update]
 
   def index
-    @key_people = current_user.key_people.page(params[:page]).per(10)
+    @key_people = current_user.key_people.includes([:customer]).page(params[:page]).per(10)
   end
 
   def create
@@ -32,7 +32,10 @@ class KeyPeopleController < ApplicationController
 
   def search
     @value = params[:value]
-    @key_people = current_user.key_people.search_name(@value).page(params[:page]).per(10)
+    @key_people = current_user.key_people.
+      search_name(@value).
+      includes([:customer]).
+      page(params[:page]).per(10)
     render "index"
   end
 

@@ -66,7 +66,9 @@ class CustomersController < ApplicationController
   end
 
   def index
-    @customers = current_user.customers.page(params[:page]).per(10).order(:address)
+    @customers = current_user.customers.
+      includes([:key_person, sales_end: :belong]).
+      page(params[:page]).per(10).order(:address)
   end
 
   def show
@@ -93,6 +95,7 @@ class CustomersController < ApplicationController
     @value = params[:value]
     @customers = current_user.customers.
       search_customer(@how, @value).
+      includes([:key_person, sales_end: :belong]).
       page(params[:page]).per(10)
     render "index"
   end

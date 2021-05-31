@@ -4,7 +4,7 @@ class SalesEndsController < ApplicationController
   before_action :set_belongs, only: [:index, :edit, :search]
 
   def index
-    @sales_ends = current_user.sales_ends.page(params[:page]).per(10)
+    @sales_ends = current_user.sales_ends.includes([:belong]).page(params[:page]).per(10)
   end
 
   def create
@@ -37,6 +37,7 @@ class SalesEndsController < ApplicationController
     @value = params[:value]
     @sales_ends = current_user.sales_ends.
       search_sales_end(@how, @value).
+      includes([:belong]).
       page(params[:page]).per(10)
     render "index"
   end

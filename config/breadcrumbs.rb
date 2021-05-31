@@ -41,3 +41,13 @@ crumb :sales_end do |sales_end|
   link "#{sales_end.name}氏の詳細", sales_end_path(sales_end.id)
   parent :sales_ends
 end
+
+crumb :key_people do
+  link "窓口担当者", key_people_path
+  parent :root
+end
+
+crumb :key_person do |key_person|
+  link "#{key_person.name}氏の詳細", key_person_path(key_person.id)
+  parent :key_people
+end

@@ -1,13 +1,13 @@
 - provide(:title, "窓口担当者詳細")
+- breadcrumb :key_person, @key_person
 #key_person_edit-modal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
 
-.container
-	h2.key_person_name_title #{@key_person.name}氏詳細
-	.row
-		.col-lg-8
-			.set_show
-				= render "key_people/show", key_person: @key_person
+h2.key_person_name_title #{@key_person.name}氏詳細
+.row
+	.col-lg-8
+		.set_show
+			= render "key_people/show", key_person: @key_person
 
-			- unless @key_person.customer.nil?
-				h5 所属
-				p = link_to @key_person.customer.name, customer_path(@key_person.customer.id)
+		- unless @key_person.customer.nil?
+			h5 所属
+			p = link_to @key_person.customer.name, customer_path(@key_person.customer.id)

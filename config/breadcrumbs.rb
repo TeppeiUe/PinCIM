@@ -66,3 +66,13 @@ crumb :customer do |customer|
   link "#{customer.name}の詳細", customer_path(customer.id)
   parent :customers
 end
+
+crumb :belongs do
+  link "所属", belongs_path
+  parent :root
+end
+
+crumb :belong do |belong|
+  link "#{belong.name}の詳細", belong_path(belong.id)
+  parent :belongs
+end

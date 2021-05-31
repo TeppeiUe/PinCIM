@@ -36,6 +36,7 @@ class VisitRecordsController < ApplicationController
 
   def index
     @visit_records = current_user.visit_records.
+      includes([:customer, activity_details: :activity]).
       page(params[:page]).per(10).
       order(visit_datetime: :desc)
     session[:privious_url] = request.fullpath
@@ -101,6 +102,7 @@ class VisitRecordsController < ApplicationController
     @to = params[:to_date]
     @visit_records = current_user.visit_records.
       search_period(@from, @to).
+      includes([:customer, activity_details: :activity]).
       page(params[:page]).per(10).
       order(visit_datetime: :desc)
     render "index"

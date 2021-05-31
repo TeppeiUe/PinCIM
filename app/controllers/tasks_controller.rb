@@ -27,7 +27,10 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = current_user.tasks.page(params[:page]).per(10).order(deadline: :desc)
+    @tasks = current_user.tasks.
+      includes([:visit_record]).
+      page(params[:page]).per(10).
+      order(deadline: :desc)
   end
 
   def show

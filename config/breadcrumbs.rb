@@ -81,3 +81,8 @@ crumb :activities do
   link "活動種別", activities_path
   parent :root
 end
+
+crumb :maps do
+  link "顧客一覧マップ", map_path
+  parent :root
+end

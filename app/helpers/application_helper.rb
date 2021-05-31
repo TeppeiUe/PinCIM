@@ -32,4 +32,8 @@ module ApplicationHelper
       "text-danger" if active && deadline < Time.now
     end
   end
+
+  def user_system
+    current_user.id == 2 ? "#{ENV['SELECT_SYSTEM']}" : "systemA"
+  end
 end

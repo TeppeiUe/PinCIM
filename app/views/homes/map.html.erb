@@ -14,7 +14,9 @@
 		  <thead class="bg-light">
 		    <tr>
 		      <th scope="col"></th>
-		      <th scope="col" class="align-middle">systemAを導入顧客</th>
+		      <th scope="col" class="align-middle">
+		      	<%= user_system %>を導入顧客
+		      </th>
 		      <th scope="col" class="align-middle">その他</th>
 		    </tr>
 		   </thead>
@@ -66,7 +68,7 @@
 		                  else
 		                    visit_record.find_active_tasks.blank? ? "blue" : "red"
 		                  end %>
-			<% icon_style = customer.system.include?("systemA") ? "-pushpin" : "-dot" %>
+			<% icon_style = customer.system.include?("#{user_system}") ? "-pushpin" : "-dot" %>
 			icon_url = "https://maps.google.com/mapfiles/ms/micons/" + "<%= icon_color %>" + "<%= icon_style %>" + ".png"
 
       marker[i] = new google.maps.Marker({

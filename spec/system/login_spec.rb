@@ -1,72 +1,78 @@
 require 'rails_helper'
 
-describe '[STEP1] ログイン画面' do
+describe 'ログイン画面' do
   before do
     visit '/sign_in'
   end
 
   let(:user) { create(:user) }
 
-  context '表示内容の確認' do
+  context 'URLの確認' do
     it 'URLが正しい' do
       expect(current_path).to eq '/sign_in'
     end
+  end
+
+  context '表示内容の確認' do
+    subject { page }
 
     it 'タイトルの「ログイン」が表示される' do
-      expect(page).to have_selector 'h2', text: 'ログイン'
+      is_expected.to have_selector 'h2', text: 'ログイン'
     end
 
     it 'メールアドレスフォームが表示される' do
-      expect(page).to have_field 'user[email]'
+      is_expected.to have_field 'user[email]'
     end
 
     it 'パスワードフォームが表示される' do
-      expect(page).to have_field 'user[password]'
+      is_expected.to have_field 'user[password]'
     end
 
     it 'ログインボタンが表示される' do
-      expect(page).to have_button 'ログイン'
+      is_expected.to have_button 'ログイン'
     end
   end
 
   context 'ヘッダー表示内容の確認' do
+    subject { page }
+
     it 'トップページが表示されない' do
-      expect(page).not_to have_selector 'header', text: 'トップページ'
+      is_expected.not_to have_selector 'header', text: 'トップページ'
     end
 
     it 'マップが表示されない' do
-      expect(page).not_to have_selector 'header', text: 'マップ'
+      is_expected.not_to have_selector 'header', text: 'マップ'
     end
 
     it '訪問記録が表示されない' do
-      expect(page).not_to have_selector 'header', text: '訪問記録'
+      is_expected.not_to have_selector 'header', text: '訪問記録'
     end
 
     it 'タスクが表示されない' do
-      expect(page).not_to have_selector 'header', text: 'タスク'
+      is_expected.not_to have_selector 'header', text: 'タスク'
     end
     it '顧客が表示されない' do
-      expect(page).not_to have_selector 'header', text: '顧客'
+      is_expected.not_to have_selector 'header', text: '顧客'
     end
 
     it '窓口担当者が表示されない' do
-      expect(page).not_to have_selector 'header', text: '窓口担当者'
+      is_expected.not_to have_selector 'header', text: '窓口担当者'
     end
 
     it '所属が表示されない' do
-      expect(page).not_to have_selector 'header', text: '所属'
+      is_expected.not_to have_selector 'header', text: '所属'
     end
 
     it '営業担当者が表示されない' do
-      expect(page).not_to have_selector 'header', text: '営業担当者'
+      is_expected.not_to have_selector 'header', text: '営業担当者'
     end
 
     it '活動種別が表示されない' do
-      expect(page).not_to have_selector 'header', text: '活動種別'
+      is_expected.not_to have_selector 'header', text: '活動種別'
     end
 
     it 'ログアウトが表示されない' do
-      expect(page).not_to have_selector 'header', text: 'ログアウト'
+      is_expected.not_to have_selector 'header', text: 'ログアウト'
     end
   end
 

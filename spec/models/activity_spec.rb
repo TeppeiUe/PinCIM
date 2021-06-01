@@ -33,7 +33,7 @@ RSpec.describe 'Activityモデルのテスト', type: :model do
       @activity_old_category = activity.category
 
       @activity_new_name = Faker::Lorem.characters(number: 10)
-      @activity_new_category = "定期訪問" #FactoryBotで生成するcategoryは"プレゼン"
+      @activity_new_category = "定期訪問" # FactoryBotで生成するcategoryは"プレゼン"
 
       activity.name = @activity_new_name
       activity.category = @activity_new_category

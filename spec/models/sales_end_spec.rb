@@ -38,9 +38,9 @@ RSpec.describe 'SalesEndモデルのテスト', type: :model do
       @sales_end_old_belong = sales_end.belong_id
 
       @sales_end_new_name = Faker::Name.name
-      @sales_end_new_post = Faker::Lorem.characters(number:10)
+      @sales_end_new_post = Faker::Lorem.characters(number: 10)
       @sales_end_new_telephone_number = Faker::PhoneNumber.cell_phone
-      @sales_end_new_note = Faker::Lorem.characters(number:50)
+      @sales_end_new_note = Faker::Lorem.characters(number: 50)
       @sales_end_new_belong = other_belong.id
 
       sales_end.name = @sales_end_new_name

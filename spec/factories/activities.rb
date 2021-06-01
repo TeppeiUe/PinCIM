@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :activity do
-    category { rand(0..3) }
+    category { "プレゼン" }
     name { Faker::Lorem.characters(number: 10) }
     user
   end

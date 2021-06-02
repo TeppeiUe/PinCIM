@@ -55,8 +55,6 @@ describe '活動種別画面' do
     end
 
     describe '登録内容の確認' do
-      subject { page }
-
       before do
         FactoryBot.create_list(:activity, 5, category: rand(0..3), user: user)
         visit '/activities'
@@ -65,22 +63,20 @@ describe '活動種別画面' do
       context '一覧表示内容の確認' do
         it "登録情報が一覧表示されているか" do
           Activity.all.each_with_index do |activity, i|
-            all('tbody tr')[i] do
-              is_expected.to have_content activity.category && activity.name
-            end
+            expect(all('tbody tr')[i]).to have_content activity.category && activity.name
           end
         end
 
         it "各編集ページへのリンクは存在するか" do
           Activity.all.each_with_index do |activity, i|
-            all('tbody tr')[i] do
-              is_expected.to have_link '編集', href: "/activities/#{i + 1}/edit"
-            end
+            expect(all('tbody tr')[i]).to have_link '編集', href: "/activities/#{i + 1}/edit"
           end
         end
       end
 
       context '検索機能の確認' do
+        subject { page }
+
         before do
           @sample = Activity.last
           fill_in 'value', with: @sample.name

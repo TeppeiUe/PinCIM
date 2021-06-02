@@ -50,8 +50,6 @@ describe '所属画面' do
     end
 
     describe '登録内容の確認' do
-      subject { page }
-
       before do
         FactoryBot.create_list(:belong, 5, user: user)
         visit '/belongs'
@@ -60,22 +58,20 @@ describe '所属画面' do
       context '一覧表示内容の確認' do
         it "登録情報が一覧表示されているか" do
           Belong.all.each_with_index do |belong, i|
-            all('tbody tr')[i] do
-              is_expected.to have_content belong.name && belong.address
-            end
+            expect(all('tbody tr')[i]).to have_content belong.name && belong.address
           end
         end
 
         it "各詳細ページへのリンクは存在するか" do
           Belong.all.each_with_index do |belong, i|
-            all('tbody tr')[i] do
-              is_expected.to have_link belong.name, href: "/belongs/#{i + 1}"
-            end
+            expect(all('tbody tr')[i]).to have_link belong.name, href: "/belongs/#{i + 1}"
           end
         end
       end
 
       context '検索機能の確認' do
+        subject { page }
+
         before do
           @sample = Belong.last
           fill_in 'value', with: @sample.name

@@ -78,10 +78,7 @@ describe '営業担当者画面' do
     end
 
     describe '登録内容の確認' do
-      subject { page }
-
       before do
-        # FactoryBot.create_list(:belong, 3, user: user)
         FactoryBot.create_list(:sales_end, 5, belong_id: rand(1..3), user: user)
         visit '/sales_ends'
       end
@@ -89,28 +86,28 @@ describe '営業担当者画面' do
       context '一覧表示内容の確認' do
         it "登録情報が一覧表示されているか" do
           SalesEnd.all.each_with_index do |sales_end, i|
-            all('tbody tr')[i] do
-              is_expected.to have_content(
-                sales_end.name &&
-                sales_end.post &&
-                sales_end.belong.name &&
-                sales_end.telephone_number
-              )
-            end
+            expect(all('tbody tr')[i]).to have_content(
+              sales_end.name &&
+              sales_end.post &&
+              sales_end.belong.name &&
+              sales_end.telephone_number
+            )
           end
         end
 
         it "各詳細ページへのリンクは正しいか" do
           SalesEnd.all.each_with_index do |sales_end, i|
-            all('tbody tr')[i] do
-              is_expected.to have_link sales_end.name, href: "/sales_ends/#{i + 1}"
-              is_expected.to habe_link sales_end.belong.name, "/belongs/#{sales_end.belong.id}"
-            end
+            expect(all('tbody tr')[i]).
+              to have_link sales_end.name, href: "/sales_ends/#{i + 1}"
+            expect(all('tbody tr')[i]).
+              to have_link sales_end.belong.name, href: "/belongs/#{sales_end.belong.id}"
           end
         end
       end
 
       describe '検索機能の確認' do
+        subject { page }
+
         before do
           @sample = SalesEnd.last
         end

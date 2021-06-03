@@ -166,11 +166,11 @@ describe '顧客画面' do
       end
 
       it '顧客名フォームが表示される' do
-        is_expected.to have_field 'customer[name]'
+        is_expected.to have_field '顧客名'
       end
 
       it '住所フォームが表示される' do
-        is_expected.to have_field 'customer[address]'
+        is_expected.to have_field '住所'
       end
 
       it '窓口担当者のラジオボタンは「登録済より選択」が選択される' do
@@ -233,11 +233,11 @@ describe '顧客画面' do
       end
 
       it '導入システムフォームが表示される' do
-        is_expected.to have_field 'customer[system]'
+        is_expected.to have_field '導入システム'
       end
 
       it '備考フォームが表示される' do
-        is_expected.to have_field 'customer[note]'
+        is_expected.to have_field '備考'
       end
 
       it '新規登録ボタンが表示される' do

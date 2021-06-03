@@ -121,7 +121,7 @@ describe '顧客画面' do
           end
         end
 
-        # Google api使用節約のため
+        # Google api使用節約のため&Fakerの住所が存在しない
         # context '[住所]を選択時の検索機能の確認' do
         #   before do
         #     select '住所', from: 'how'
@@ -143,6 +143,105 @@ describe '顧客画面' do
         #     end
         #   end
         # end
+      end
+    end
+  end
+
+  describe '顧客新規登録ページ' do
+    before do
+      visit '/customers/new'
+    end
+
+    context 'URLの確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/customers/new'
+      end
+    end
+
+    context '表示内容の確認' do
+      subject { page }
+
+      it '「顧客新規登録」と表示される' do
+        is_expected.to have_selector 'h2', text: '顧客新規登録'
+      end
+
+      it '顧客名フォームが表示される' do
+        is_expected.to have_field 'customer[name]'
+      end
+
+      it '住所フォームが表示される' do
+        is_expected.to have_field 'customer[address]'
+      end
+
+      it '窓口担当者のラジオボタンは「登録済より選択」が選択される' do
+        is_expected.to have_checked_field 'customer_radio_key_person_select'
+        is_expected.not_to have_checked_field 'customer_radio_key_person_new'
+      end
+
+      it '窓口担当者選択フォームが表示される' do
+        is_expected.to have_select 'customer[key_person_id]'
+      end
+
+      it '窓口担当者選択の項目内容が正しいか' do
+        options = KeyPerson.all.pluck(:name)
+        options.unshift('選択して下さい')
+        is_expected.to have_select('customer[key_person_id]', options: options)
+      end
+
+      it '窓口担当者新規登録フォームが表示される' do
+        is_expected.to have_field 'customer[key_person_name]'
+      end
+
+      it '営業担当者のラジオボタンは「登録済より選択」が選択される' do
+        is_expected.to have_checked_field 'customer_radio_sales_end_select'
+        is_expected.not_to have_checked_field 'customer_radio_sales_end_new'
+      end
+
+      it '営業担当者選択フォームが表示される' do
+        is_expected.to have_select 'customer[sales_end_id]'
+      end
+
+      it '営業担当者選択の項目内容が正しいか' do
+        options = SalesEnd.all.pluck(:name)
+        options.unshift('選択して下さい')
+        is_expected.to have_select('customer[sales_end_id]', options: options)
+      end
+
+      it '営業担当者新規登録フォームが表示される' do
+        is_expected.to have_field 'customer[sales_end_name]'
+      end
+
+      # 現環境ではjsの動作確認を入れることが出来ないため、
+      # 所属に関しては表示前提のテストを実施
+      it '所属のラジオボタンは「登録済より選択」が選択される' do
+        is_expected.to have_checked_field 'customer_radio_belong_select'
+        is_expected.not_to have_checked_field 'customer_radio_belong_new'
+      end
+
+      it '所属選択フォームが表示される' do
+        is_expected.to have_select 'customer[belong_id]'
+      end
+
+      it '所属選択の項目内容が正しいか' do
+        options = Belong.all.pluck(:name)
+        options.unshift('選択して下さい')
+        is_expected.to have_select('customer[belong_id]', options: options)
+      end
+
+      it '所属新規登録フォームが表示される' do
+        is_expected.to have_field 'customer[belong_name]'
+      end
+
+      it '導入システムフォームが表示される' do
+        is_expected.to have_field 'customer[system]'
+      end
+
+      it '備考フォームが表示される' do
+        is_expected.to have_field 'customer[note]'
+      end
+
+      it '新規登録ボタンが表示される' do
+        is_expected.to have_button '新規登録'
       end
     end
   end

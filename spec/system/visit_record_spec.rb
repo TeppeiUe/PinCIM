@@ -94,6 +94,45 @@ describe '訪問記録画面' do
           end
         end
       end
+
+      context '検索機能の確認' do
+        subject { page }
+
+        before do
+          @sample = VisitRecord.last
+          @from_date = @sample.visit_datetime
+          @to_date = @sample.visit_datetime.to_date + 1
+
+          fill_in 'from_date', with: @from_date
+          fill_in 'to_date', with: @to_date
+          click_button "検索"
+        end
+
+        it '検索時のタイトルが表示される' do
+          text = <<~TEXT
+            #{@from_date.strftime("%Y年 %m月 %d日")}から
+            #{@to_date.strftime("%Y年 %m月 %d日")}までの訪問記録検索結果
+          TEXT
+
+          is_expected.to have_selector 'h2', text: "#{text.split("\n").join}"
+        end
+
+        it "検索結果は正しいか" do
+          within(:css, "tbody tr") do
+            is_expected.to have_content(
+              @sample.visit_datetime.strftime("%Y-%m-%d %H:%M")
+            )
+
+            VisitRecord.all.each do |visit_record|
+              unless visit_record.id == @sample.id
+                is_expected.not_to have_content(
+                  visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M")
+                )
+              end
+            end
+          end
+        end
+      end
     end
   end
 end

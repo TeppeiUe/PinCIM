@@ -12,6 +12,7 @@ module PinCIM
     config.load_defaults 5.2
     config.generators.template_engine = :slim
     config.time_zone = "Tokyo"
+    # config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     config.generators do |g|
       g.factory_bot dir: 'spec/factories'

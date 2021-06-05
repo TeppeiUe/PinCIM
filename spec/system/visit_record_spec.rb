@@ -158,6 +158,10 @@ describe '訪問記録画面' do
         is_expected.to have_field 'visit_record[visit_date]'
       end
 
+      it '訪問日フォームの内容が正しいか' do
+        is_expected.to have_field 'visit_record[visit_date]', with: "#{Date.today}"
+      end
+
       it '訪問日時フォームが表示される' do
         is_expected.to have_select  'visit_record[visit_time(4i)]'
         is_expected.to have_select  'visit_record[visit_time(5i)]'
@@ -252,6 +256,48 @@ describe '訪問記録画面' do
 
       it '新規登録ボタンが表示される' do
         is_expected.to have_button '新規登録'
+      end
+    end
+
+    describe '新規登録のテスト' do
+      before do
+        select "#{Customer.last.name}", from: '顧客名'
+        select "#{KeyPerson.last.name}", from: '窓口担当者名'
+        select "#{Belong.last.name}", from: '営業担当者所属'
+        select "#{SalesEnd.last.name}", from: '営業担当者名'
+      end
+
+      context '新規登録成功' do
+        it '新規登録される' do
+          expect { click_button '新規登録' }.to change(VisitRecord, :count).by(1)
+        end
+
+        it '新規投稿後の遷移先は正しいか' do
+          click_button '新規登録'
+          expect(current_path).to eq '/visit_records/1'
+        end
+      end
+
+      context '新規登録失敗' do
+        it '顧客未選択で失敗する' do
+          select "選択して下さい", from: '顧客名'
+          expect { click_button '新規登録' }.not_to change(VisitRecord, :count)
+        end
+
+        it '窓口担当者未選択で失敗する' do
+          select "選択して下さい", from: '窓口担当者名'
+          expect { click_button '新規登録' }.not_to change(VisitRecord, :count)
+        end
+
+        it '営業担当者所属未選択で失敗する' do
+          select "選択して下さい", from: '営業担当者所属'
+          expect { click_button '新規登録' }.not_to change(VisitRecord, :count)
+        end
+
+        it '営業担当者未選択で失敗する' do
+          select "選択して下さい", from: '営業担当者名'
+          expect { click_button '新規登録' }.not_to change(VisitRecord, :count)
+        end
       end
     end
   end

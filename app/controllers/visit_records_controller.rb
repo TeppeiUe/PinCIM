@@ -4,6 +4,7 @@ class VisitRecordsController < ApplicationController
   def new
     @visit_record = VisitRecord.new
     set_form_select
+    @visit_date = Date.today
     @visit_time_nodefault = true
     @next_time_nodefault = true
   end

@@ -302,6 +302,117 @@ describe '訪問記録画面' do
     end
   end
 
+  describe '訪問記録詳細ページ' do
+    let(:visit_record) do
+      create(
+        :visit_record,
+        customer_id: 1,
+        key_person_id: 1,
+        belong_id: 1,
+        sales_end_id: 1,
+        user: user
+      )
+    end
+
+    before do
+      visit visit_record_path(visit_record.id)
+    end
+
+    context 'URLの確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/visit_records/1'
+      end
+    end
+
+    context '表示内容の確認' do
+      subject { page }
+
+      it '「訪問記録詳細」と表示される' do
+        is_expected.to have_selector 'h2', text: "訪問記録詳細"
+      end
+
+      it '訪問日時が表示される' do
+        is_expected.to have_content "#{visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M")}"
+      end
+
+      it '顧客名が表示される' do
+        is_expected.to have_content "#{visit_record.customer.name}"
+      end
+
+      it '窓口担当者が表示される' do
+        is_expected.to have_content "#{visit_record.key_person.name}"
+      end
+
+      it '所属が表示される' do
+        is_expected.to have_content "#{visit_record.belong.name}"
+      end
+
+      it '営業担当者が表示される' do
+        is_expected.to have_content "#{visit_record.sales_end.name}"
+      end
+
+      it '次回訪問日時が表示される' do
+        is_expected.to have_content "#{visit_record.next_datetime.strftime("%Y-%m-%d %H:%M")}"
+      end
+
+      it '備考が表示される' do
+        is_expected.to have_content "#{visit_record.note}"
+      end
+
+      it 'ランクが表示される' do
+        is_expected.to have_content "#{visit_record.rank}"
+      end
+
+      it '編集ボタンが表示される' do
+        within '.set_show' do
+          is_expected.to have_link '編集'
+        end
+      end
+
+      it '削除ボタンが表示される' do
+        within '.set_show' do
+          is_expected.to have_link '削除'
+        end
+      end
+    end
+
+    context '表示内容のリンク先は正しいか' do
+      it '顧客名が正しい' do
+        link = find('a', text: "#{visit_record.customer.name}")
+        expect(link[:href]).to eq customer_path(visit_record.customer.id)
+      end
+
+      it '窓口担当者が正しい' do
+        link = find('a', text: "#{visit_record.key_person.name}")
+        expect(link[:href]).to eq key_person_path(visit_record.key_person.id)
+      end
+
+      it '所属が正しい' do
+        link = find('a', text: "#{visit_record.belong.name}")
+        expect(link[:href]).to eq belong_path(visit_record.belong.id)
+      end
+
+      it '営業担当者が正しい' do
+        link = find('a', text: "#{visit_record.sales_end.name}")
+        expect(link[:href]).to eq sales_end_path(visit_record.sales_end.id)
+      end
+
+      it '編集ボタンが正しい' do
+        within '.set_show' do
+          expect(page).to have_link '編集', href: edit_visit_record_path(visit_record.id)
+        end
+      end
+
+      it '削除ボタンが正しい' do
+        within '.set_show' do
+          link = find_link '削除'
+          expect(link["data-method"]).to eq "delete"
+          expect(link[:href]).to eq visit_record_path(visit_record.id)
+        end
+      end
+    end
+  end
+
   describe '訪問記録 集計ページ' do
     before do
       visit "/visit_records"

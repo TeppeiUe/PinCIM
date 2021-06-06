@@ -10,7 +10,8 @@ h2 訪問記録詳細
 		.set_show
 			= render "visit_records/show", visit_record: @visit_record
 
-		= render "activity_details/show", visit_record: @visit_record, activities: @activities
+		.set_activity_detail_show
+			= render "activity_details/show", visit_record: @visit_record, activities: @activities
 
 		.card.mb-4.shadow-lg
 			h4.card-header タスク

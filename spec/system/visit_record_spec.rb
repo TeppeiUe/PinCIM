@@ -410,6 +410,13 @@ describe '訪問記録画面' do
           expect(link[:href]).to eq visit_record_path(visit_record.id)
         end
       end
+
+      it '削除確認alertが正しい' do
+        within '.set_show' do
+          link = find_link '削除'
+          expect(link["data-confirm"]).to eq "削除しますか？"
+        end
+      end
     end
   end
 

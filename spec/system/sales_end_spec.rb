@@ -7,8 +7,8 @@ describe '営業担当者画面' do
     FactoryBot.create_list(:belong, 3, user: user)
 
     visit 'sign_in'
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
@@ -47,29 +47,29 @@ describe '営業担当者画面' do
       end
 
       it '営業担当者名フォームが表示される' do
-        is_expected.to have_field 'sales_end[name]'
+        is_expected.to have_field '営業担当者名'
       end
 
       it '所属選択フォームが表示される' do
-        is_expected.to have_select 'sales_end[belong_id]'
+        is_expected.to have_select '所属'
       end
 
       it '所属選択の項目内容は正しいか' do
         options = Belong.all.pluck(:name)
         options.unshift("選択して下さい")
-        is_expected.to have_select('sales_end_belong_id', options: options)
+        is_expected.to have_select('所属', options: options)
       end
 
       it '役職フォームが表示される' do
-        is_expected.to have_field 'sales_end[post]'
+        is_expected.to have_field '役職'
       end
 
       it '電話番号フォームが表示される' do
-        is_expected.to have_field 'sales_end[telephone_number]'
+        is_expected.to have_field '電話番号'
       end
 
       it '備考フォームが表示される' do
-        is_expected.to have_field 'sales_end[note]'
+        is_expected.to have_field '備考'
       end
 
       it '新規登録ボタンが表示される' do
@@ -105,6 +105,7 @@ describe '営業担当者画面' do
         end
       end
 
+      # render先がindexであるため、営業担当者名の有無が確認できれば良い
       describe '検索機能の確認' do
         subject { page }
 
@@ -121,21 +122,11 @@ describe '営業担当者画面' do
 
           it "検索結果は正しいか" do
             within(:css, "tbody tr") do
-              is_expected.to have_content(
-                @sample.name &&
-                @sample.post &&
-                @sample.belong.name &&
-                @sample.telephone_number
-              )
+              is_expected.to have_content @sample.name
 
               SalesEnd.all.each do |sales_end|
                 unless sales_end.id == @sample.id
-                  is_expected.not_to have_content(
-                    sales_end.name &&
-                    sales_end.post &&
-                    sales_end.belong.name &&
-                    sales_end.telephone_number
-                  )
+                  is_expected.not_to have_content sales_end.name
                 end
               end
             end
@@ -150,25 +141,15 @@ describe '営業担当者画面' do
           end
 
           it "検索結果は正しいか" do
-            # tbody trの内での確認ではエラーが発生
+            # tbody trの内での確認ではエラーが発生する。原因は不明。
             within(:css, "table") do
               SalesEnd.where(belong_id: @sample.belong_id).each do |sales_end|
-                is_expected.to have_content(
-                  sales_end.name &&
-                  sales_end.post &&
-                  sales_end.belong.name &&
-                  sales_end.telephone_number
-                )
+                is_expected.to have_content sales_end.name
               end
 
               SalesEnd.all.each do |sales_end|
                 unless sales_end.belong_id == @sample.belong_id
-                  is_expected.not_to have_content(
-                    sales_end.name &&
-                    sales_end.post &&
-                    sales_end.belong.name &&
-                    sales_end.telephone_number
-                  )
+                  is_expected.not_to have_content sales_end.name
                 end
               end
             end

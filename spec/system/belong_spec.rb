@@ -5,8 +5,8 @@ describe '所属画面' do
 
   before do
     visit 'sign_in'
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
@@ -37,11 +37,11 @@ describe '所属画面' do
       end
 
       it '所属名フォームが表示される' do
-        is_expected.to have_field 'belong[name]'
+        is_expected.to have_field '所属名'
       end
 
       it '住所フォームが表示される' do
-        is_expected.to have_field 'belong[address]'
+        is_expected.to have_field '住所'
       end
 
       it '新規登録ボタンが表示される' do
@@ -69,6 +69,7 @@ describe '所属画面' do
         end
       end
 
+      # render先がindexであるため、所属名の有無が確認できれば良い
       context '検索機能の確認' do
         subject { page }
 
@@ -80,11 +81,11 @@ describe '所属画面' do
 
         it "検索結果は正しいか" do
           within(:css, "tbody tr") do
-            is_expected.to have_content @sample.name && @sample.address
+            is_expected.to have_content @sample.name
 
             Belong.all.each do |belong|
               unless belong.id == @sample.id
-                is_expected.not_to have_content belong.name && belong.address
+                is_expected.not_to have_content belong.name
               end
             end
           end

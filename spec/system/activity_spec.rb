@@ -5,8 +5,8 @@ describe '活動種別画面' do
 
   before do
     visit 'sign_in'
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
@@ -37,16 +37,16 @@ describe '活動種別画面' do
       end
 
       it 'カテゴリー選択フォームが表示される' do
-        is_expected.to have_select 'activity[category]'
+        is_expected.to have_select 'カテゴリー'
       end
 
       it 'カテゴリー選択の項目内容は正しいか' do
         options = Activity.categories.keys
-        is_expected.to have_select('activity_category', options: options)
+        is_expected.to have_select('カテゴリー', options: options)
       end
 
       it '活動種別名フォームが表示される' do
-        is_expected.to have_field 'activity[name]'
+        is_expected.to have_field '活動種別名'
       end
 
       it '新規登録ボタンが表示される' do
@@ -83,15 +83,14 @@ describe '活動種別画面' do
           click_button "検索"
         end
 
+        # render先がindexであるため、活動種別名の有無が確認できれば良い
         it "検索結果は正しいか" do
           within(:css, "tbody tr") do
-            # 検索結果として存在するべき内容
-            is_expected.to have_content @sample.category && @sample.name
+            is_expected.to have_content @sample.name
 
-            # 検索結果として存在しない内容
             Activity.all.each do |activity|
               unless activity.id == @sample.id
-                is_expected.not_to have_content activity.category && activity.name
+                is_expected.not_to have_content activity.name
               end
             end
           end

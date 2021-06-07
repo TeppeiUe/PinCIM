@@ -5,8 +5,8 @@ describe '窓口担当者画面' do
 
   before do
     visit 'sign_in'
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
@@ -37,15 +37,15 @@ describe '窓口担当者画面' do
       end
 
       it '窓口担当者名フォームが表示される' do
-        is_expected.to have_field 'key_person[name]'
+        is_expected.to have_field '窓口担当者名'
       end
 
       it '経歴フォームが表示される' do
-        is_expected.to have_field 'key_person[career]'
+        is_expected.to have_field '経歴'
       end
 
       it '備考フォームが表示される' do
-        is_expected.to have_field 'key_person[note]'
+        is_expected.to have_field '備考'
       end
 
       it '新規登録ボタンが表示される' do
@@ -84,6 +84,7 @@ describe '窓口担当者画面' do
         end
       end
 
+      # render先がindexであるため、窓口担当者名の有無が確認できれば良い
       context '検索機能の確認' do
         subject { page }
 
@@ -95,17 +96,11 @@ describe '窓口担当者画面' do
 
         it "検索結果は正しいか" do
           within(:css, "tbody tr") do
-            is_expected.to have_content(
-              @sample.name &&
-              @sample.customer.name
-            )
+            is_expected.to have_content @sample.name
 
             KeyPerson.all.each do |key_person|
               unless key_person.id == @sample.id
-                is_expected.not_to have_content(
-                  key_person.name &&
-                  key_person.customer.name
-                )
+                is_expected.not_to have_content key_person.name
               end
             end
           end

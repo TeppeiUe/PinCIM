@@ -328,6 +328,7 @@ describe '訪問記録画面' do
 
     before do
       FactoryBot.create(:activity_detail, visit_record: visit_record, activity_id: 1, user: user)
+      FactoryBot.create_list(:task, 2, visit_record: visit_record, user: user)
       visit visit_record_path(visit_record.id)
     end
 
@@ -466,6 +467,31 @@ describe '訪問記録画面' do
           link = find_link '削除'
           expect(link["data-method"]).to eq "delete"
           expect(link[:href]).to eq visit_record_activity_detail_path(visit_record.id, 1)
+        end
+      end
+    end
+
+    context 'タスクの確認' do
+      subject { page }
+
+      it '新規登録ボタンが表示される' do
+        is_expected.to have_link 'タスク追加'
+      end
+
+      it "登録情報が一覧表示されているか" do
+        visit_record.tasks.each_with_index do |task, i|
+          expect(all('tbody tr')[i]).to have_content(
+            task.title &&
+            task.deadline.strftime("%Y-%m-%d %H:%M") &&
+            task.status
+          )
+        end
+      end
+
+      it "各詳細ページへのリンクは正しいか" do
+        visit_record.tasks.each_with_index do |task, i|
+          expect(all('tbody tr')[i]).
+            to have_link task.title, href: visit_record_task_path(1, task.id)
         end
       end
     end

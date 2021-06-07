@@ -9,8 +9,8 @@ describe '顧客画面' do
     FactoryBot.create_list(:sales_end, 3, belong_id: rand(1..3), user: user)
 
     visit 'sign_in'
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
@@ -83,11 +83,20 @@ describe '顧客画面' do
             expect(all('tbody tr')[i]).
               to have_link customer.name, href: "/customers/#{i + 1}"
             expect(all('tbody tr')[i]).
-              to have_link customer.key_person.name, href: "/key_people/#{customer.key_person.id}"
+              to have_link(
+                customer.key_person.name,
+                href: "/key_people/#{customer.key_person.id}"
+              )
             expect(all('tbody tr')[i]).
-              to have_link customer.sales_end.belong.name, href: "/belongs/#{customer.sales_end.belong.id}"
+              to have_link(
+                customer.sales_end.belong.name,
+                href: "/belongs/#{customer.sales_end.belong.id}"
+              )
             expect(all('tbody tr')[i]).
-              to have_link customer.sales_end.name, href: "/sales_ends/#{customer.sales_end.id}"
+              to have_link(
+                customer.sales_end.name,
+                href: "/sales_ends/#{customer.sales_end.id}"
+              )
           end
         end
       end

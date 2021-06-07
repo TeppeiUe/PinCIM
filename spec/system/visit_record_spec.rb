@@ -8,11 +8,17 @@ describe '訪問記録画面' do
     FactoryBot.create_list(:key_person, 3, user: user)
     FactoryBot.create_list(:belong, 3, user: user)
     FactoryBot.create_list(:sales_end, 3, belong_id: rand(1..3), user: user)
-    FactoryBot.create_list(:customer, 3, key_person_id: rand(1..3), sales_end_id: rand(1..3), user: user)
+    FactoryBot.create_list(
+      :customer,
+      3,
+      key_person_id: rand(1..3),
+      sales_end_id: rand(1..3),
+      user: user
+    )
 
     visit 'sign_in'
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
@@ -100,9 +106,15 @@ describe '訪問記録画面' do
         it "各詳細ページへのリンクは正しいか" do
           VisitRecord.order(visit_datetime: :desc).each_with_index do |visit_record, i|
             expect(all('tbody tr')[i]).
-              to have_link visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), href: "/visit_records/#{visit_record.id}"
+              to have_link(
+                visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"),
+                href: "/visit_records/#{visit_record.id}"
+              )
             expect(all('tbody tr')[i]).
-              to have_link visit_record.customer.name, href: "/customers/#{visit_record.customer.id}"
+              to have_link(
+                visit_record.customer.name,
+                href: "/customers/#{visit_record.customer.id}"
+              )
           end
         end
       end
@@ -328,6 +340,7 @@ describe '訪問記録画面' do
 
     before do
       FactoryBot.create(:activity_detail, visit_record: visit_record, activity_id: 1, user: user)
+      FactoryBot.create_list(:task, 2, visit_record: visit_record, user: user)
       visit visit_record_path(visit_record.id)
     end
 
@@ -466,6 +479,31 @@ describe '訪問記録画面' do
           link = find_link '削除'
           expect(link["data-method"]).to eq "delete"
           expect(link[:href]).to eq visit_record_activity_detail_path(visit_record.id, 1)
+        end
+      end
+    end
+
+    context 'タスクの確認' do
+      subject { page }
+
+      it '新規登録ボタンが表示される' do
+        is_expected.to have_link 'タスク追加'
+      end
+
+      it "登録情報が一覧表示されているか" do
+        visit_record.tasks.each_with_index do |task, i|
+          expect(all('tbody tr')[i]).to have_content(
+            task.title &&
+            task.deadline.strftime("%Y-%m-%d %H:%M") &&
+            task.status
+          )
+        end
+      end
+
+      it "各詳細ページへのリンクは正しいか" do
+        visit_record.tasks.each_with_index do |task, i|
+          expect(all('tbody tr')[i]).
+            to have_link task.title, href: visit_record_task_path(1, task.id)
         end
       end
     end

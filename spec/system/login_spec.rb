@@ -21,11 +21,11 @@ describe 'ログイン画面' do
     end
 
     it 'メールアドレスフォームが表示される' do
-      is_expected.to have_field 'user[email]'
+      is_expected.to have_field 'メールアドレス'
     end
 
     it 'パスワードフォームが表示される' do
-      is_expected.to have_field 'user[password]'
+      is_expected.to have_field 'パスワード'
     end
 
     it 'ログインボタンが表示される' do
@@ -78,8 +78,8 @@ describe 'ログイン画面' do
 
   context 'ログイン成功のテスト' do
     before do
-      fill_in 'user[email]', with: user.email
-      fill_in 'user[password]', with: user.password
+      fill_in 'メールアドレス', with: user.email
+      fill_in 'パスワード', with: user.password
       click_button 'ログイン'
     end
 

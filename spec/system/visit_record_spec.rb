@@ -8,7 +8,13 @@ describe '訪問記録画面' do
     FactoryBot.create_list(:key_person, 3, user: user)
     FactoryBot.create_list(:belong, 3, user: user)
     FactoryBot.create_list(:sales_end, 3, belong_id: rand(1..3), user: user)
-    FactoryBot.create_list(:customer, 3, key_person_id: rand(1..3), sales_end_id: rand(1..3), user: user)
+    FactoryBot.create_list(
+      :customer,
+      3,
+      key_person_id: rand(1..3),
+      sales_end_id: rand(1..3),
+      user: user
+    )
 
     visit 'sign_in'
     fill_in 'user[email]', with: user.email
@@ -100,9 +106,15 @@ describe '訪問記録画面' do
         it "各詳細ページへのリンクは正しいか" do
           VisitRecord.order(visit_datetime: :desc).each_with_index do |visit_record, i|
             expect(all('tbody tr')[i]).
-              to have_link visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"), href: "/visit_records/#{visit_record.id}"
+              to have_link(
+                visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"),
+                href: "/visit_records/#{visit_record.id}"
+              )
             expect(all('tbody tr')[i]).
-              to have_link visit_record.customer.name, href: "/customers/#{visit_record.customer.id}"
+              to have_link(
+                visit_record.customer.name,
+                href: "/customers/#{visit_record.customer.id}"
+              )
           end
         end
       end

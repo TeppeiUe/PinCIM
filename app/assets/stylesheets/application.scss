@@ -19,6 +19,24 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+// 文字のレスポンシブ対応
+html{
+  @media (min-width: 300px){
+    font-size: calc(74% + 4 * (100vw - 300px) / 700)
+  }
+  @media (min-width: 1000px){
+    font-size: 100%;
+  }
+}
+
+// logoのレスポンシブ対応
+img{
+	@media (min-width: 600px){
+	  width: auto;
+	  height: 34.5px;
+	}
+}
+
 a.nav-link.active{
 	color: #595959 !important;
 	font-weight: bold;

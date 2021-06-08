@@ -16,10 +16,26 @@ header
 
 				#navbarNavDropdown.collapse.navbar-collapse
 					ul.navbar-nav
-						li.nav-item = active_link_to "トップページ", "/", class: "nav-link", active: [['homes'], ['top']]
-						li.nav-item = active_link_to "マップ", map_path, class: "nav-link"
-						li.nav-item = active_link_to "訪問記録", visit_records_path, class: "nav-link"
-						li.nav-item = active_link_to "タスク", tasks_path, class: "nav-link"
+						li.nav-item
+							= active_link_to "/", class: "nav-link", active: [['homes'], ['top']] do
+								i class="fas fa-calendar-alt"
+								| トップページ
+
+						li.nav-item
+							= active_link_to map_path, class: "nav-link" do
+								i class="fas fa-map-marked-alt"
+								| マップ
+
+						li.nav-item
+							= active_link_to visit_records_path, class: "nav-link" do
+								i class="fas fa-clipboard"
+								| 訪問記録
+
+						li.nav-item
+							= active_link_to tasks_path, class: "nav-link" do
+								i class="fas fa-tasks"
+								| タスク
+
 						li.nav-item.dropdown
 						  a#navbarDropdownMenuLink.nav-link.dropdown-toggle[
 						  	href="#"
@@ -27,7 +43,9 @@ header
 						  	data-toggle="dropdown"
 						  	aria-haspopup="true"
 						  	aria-expanded="false"]
-						    |  各種設定
+						    	i class="fas fa-cog"
+						    	| 各種設定
+
 						  ul.dropdown-menu[aria-labelledby="navbarDropdownMenuLink"]
 						    li.dropdown-item = link_to "顧客", customers_path
 						    li.dropdown-item = link_to "窓口担当者", key_people_path

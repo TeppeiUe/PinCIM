@@ -1,0 +1,21 @@
+.modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content
+      .modal-header
+        h5.modal-title
+          | 顧客絞り込み検索
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+
+      .modal-body
+        = form_with url: customers_search_path, method: :post, remote: true do |f|
+					= f.select :how,
+						options_for_select("顧客名": "customer_name", "住所": "customer_address"),
+						{},
+						class: "custom-select"
+					= f.search_field :value, placeholder: "顧客名", class: "form-control value"
+
+					.modal-footer
+						button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
+							| 閉じる
+						= f.submit "検索", class: "btn btn-outline-success"

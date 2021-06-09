@@ -8,8 +8,8 @@ crumb :visit_records do
 end
 
 crumb :visit_records_new do
-	link "新規登録", new_visit_record_path
-	parent :visit_records
+  link "新規登録", new_visit_record_path
+  parent :visit_records
 end
 
 crumb :visit_record do |visit_record|
@@ -18,8 +18,8 @@ crumb :visit_record do |visit_record|
 end
 
 crumb :visit_records_counting do
-	link "集計", counting_visit_records_path
-	parent :visit_records
+  link "集計", counting_visit_records_path
+  parent :visit_records
 end
 
 crumb :tasks do
@@ -58,8 +58,8 @@ crumb :customers do
 end
 
 crumb :customer_new do
-	link "新規登録", new_customer_path
-	parent :customers
+  link "新規登録", new_customer_path
+  parent :customers
 end
 
 crumb :customer do |customer|

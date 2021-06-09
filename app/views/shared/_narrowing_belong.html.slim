@@ -1,0 +1,18 @@
+.modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content
+      .modal-header
+        h5.modal-title
+          | 所属絞り込み検索
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+
+      .modal-body
+        = form_with url: belongs_search_path, method: :post, remote: true do |f|
+          = f.search_field :value, placeholder: "所属名", class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
+          .modal-footer
+            button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
+              | 閉じる
+            = f.submit "検索", class: "btn btn-outline-success"

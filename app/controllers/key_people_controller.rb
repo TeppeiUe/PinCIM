@@ -32,11 +32,19 @@ class KeyPeopleController < ApplicationController
 
   def search
     @value = params[:value]
-    @key_people = current_user.key_people.
-      search_name(@value).
-      includes([:customer]).
-      page(params[:page]).per(10)
-    render "index"
+
+    @key_people = current_user.key_people.search_name(@value)
+
+    respond_to do |format|
+      format.html do
+        @key_people = @key_people.includes([:customer]).page(params[:page]).per(10)
+        render "index"
+      end
+      format.js do
+        @controller = params[:controller_name]
+        render "search"
+      end
+    end
   end
 
   private

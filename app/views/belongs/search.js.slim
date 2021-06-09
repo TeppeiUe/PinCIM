@@ -1,0 +1,7 @@
+- if @controller == "customers"
+	| var select = $('#customer_belong_id');
+- elsif @controller == "visit_records"
+	| var select = $('#visit_record_belong_id');
+
+| select.html('#{j(options_for_select(@belongs.pluck(:name, :id)))}');
+| $('#BelongModal').modal('hide');

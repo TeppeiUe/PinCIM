@@ -35,17 +35,16 @@ class SalesEndsController < ApplicationController
   def search
     @how = params[:how]
     @value = params[:value]
+
+    @sales_ends = current_user.sales_ends.search_sales_end(@how, @value)
+
     respond_to do |format|
       format.html do
-        @sales_ends = current_user.sales_ends.
-          search_sales_end(@how, @value).
-          includes([:belong]).
-          page(params[:page]).per(10)
+        @sales_ends = @sales_ends.includes([:belong]).page(params[:page]).per(10)
         render "index"
       end
       format.js do
-        @sales_ends = current_user.sales_ends.
-          search_sales_end(@how, @value)
+        @controller = params[:controller_name]
         render "search"
       end
     end

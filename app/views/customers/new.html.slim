@@ -100,9 +100,12 @@ h2 顧客新規登録
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
             | ×
+
       .modal-body
         = form_with url: key_people_search_path, method: :post, remote: true do |f|
           = f.search_field :value, placeholder: "窓口担当者名", class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
           .modal-footer
             button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
               | 閉じる
@@ -117,6 +120,7 @@ h2 顧客新規登録
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
             | ×
+
       .modal-body
         = form_with url: sales_ends_search_path, method: :post, remote: true do |f|
           = f.select :how,
@@ -124,6 +128,8 @@ h2 顧客新規登録
             {},
             class: "custom-select"
           = f.search_field :value, class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
           .modal-footer
             button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
               | 閉じる
@@ -138,9 +144,12 @@ h2 顧客新規登録
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
             | ×
+
       .modal-body
         = form_with url: belongs_search_path, method: :post, remote: true do |f|
           = f.search_field :value, placeholder: "所属名", class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
           .modal-footer
             button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
               | 閉じる

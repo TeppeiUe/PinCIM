@@ -32,6 +32,9 @@ h2 訪問記録新規登録
 						autofocus: true,
 						class: "form-control customer_id"
 
+					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#CustomerModal"]
+						| 絞り込み検索
+
 				.form-group.col
 					= f.label :key_person_id, "窓口担当者名"
 					= f.collection_select :key_person_id,
@@ -39,6 +42,9 @@ h2 訪問記録新規登録
 						{prompt: "選択して下さい"},
 						autofocus: true,
 						class: "form-control key_person_id"
+
+					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#KeyPeopleModal"]
+						| 絞り込み検索
 
 			.form-row
 				.form-group.col
@@ -49,6 +55,9 @@ h2 訪問記録新規登録
 						autofocus: true,
 						class: "form-control belong_id"
 
+					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#BelongModal"]
+						| 絞り込み検索
+
 				.form-group.col
 					= f.label :sales_end_id, "営業担当者名"
 					= f.collection_select :sales_end_id,
@@ -56,6 +65,9 @@ h2 訪問記録新規登録
 						{prompt: "選択して下さい"},
 						autofocus: true,
 						class: "form-control sales_end_id"
+
+					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#SalesEndModal"]
+						| 絞り込み検索
 
 			.form-group
 				= f.label :next_datetime, "次回訪問予定日"
@@ -87,3 +99,90 @@ h2 訪問記録新規登録
 
 			.form-group
 				= f.submit "新規登録", class: "btn btn-primary"
+
+#CustomerModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content
+      .modal-header
+        h5.modal-title
+          | 顧客絞り込み検索
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+
+      .modal-body
+        = form_with url: customers_search_path, method: :post, remote: true do |f|
+					= f.select :how,
+						options_for_select("顧客名": "customer_name", "住所": "customer_address"),
+						{},
+						class: "custom-select"
+					= f.search_field :value, placeholder: "顧客名", class: "form-control value"
+
+					.modal-footer
+						button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
+							| 閉じる
+						= f.submit "検索", class: "btn btn-outline-success"
+
+#KeyPeopleModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content
+      .modal-header
+        h5.modal-title
+          | 窓口担当者絞り込み検索
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+
+      .modal-body
+        = form_with url: key_people_search_path, method: :post, remote: true do |f|
+          = f.search_field :value, placeholder: "窓口担当者名", class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
+          .modal-footer
+            button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
+              | 閉じる
+            = f.submit "検索", class: "btn btn-outline-success"
+
+#SalesEndModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content
+      .modal-header
+        h5.modal-title
+          | 営業担当者絞り込み検索
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+
+      .modal-body
+        = form_with url: sales_ends_search_path, method: :post, remote: true do |f|
+          = f.select :how,
+            options_for_select("担当者名": "sales_end_name", "所属名": "sales_end_belong_name"),
+            {},
+            class: "custom-select"
+          = f.search_field :value, class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
+          .modal-footer
+            button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
+              | 閉じる
+            = f.submit "検索", class: "btn btn-outline-success"
+
+#BelongModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content
+      .modal-header
+        h5.modal-title
+          | 所属絞り込み検索
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+
+      .modal-body
+        = form_with url: belongs_search_path, method: :post, remote: true do |f|
+          = f.search_field :value, placeholder: "所属名", class: "form-control value"
+          = f.hidden_field :controller_name, value: "#{controller_name}"
+
+          .modal-footer
+            button.btn.btn-outline-secondary[type="button" data-dismiss="modal"]
+              | 閉じる
+            = f.submit "検索", class: "btn btn-outline-success"

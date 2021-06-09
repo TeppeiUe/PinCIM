@@ -1,2 +1,7 @@
-| $('#customer_sales_end_id').html('#{j(options_for_select(@sales_ends.pluck(:name, :id)))}');
+- if @controller == "customers"
+	| var select = $('#customer_sales_end_id');
+- elsif @controller == "visit_records"
+	| var select = $('#visit_record_sales_end_id');
+
+| select.html('#{j(options_for_select(@sales_ends.pluck(:name, :id)))}');
 | $('#SalesEndModal').modal('hide');

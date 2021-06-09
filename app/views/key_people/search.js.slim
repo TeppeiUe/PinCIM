@@ -1,2 +1,7 @@
-| $('#customer_key_person_id').html('#{j(options_for_select(@key_people.pluck(:name, :id)))}');
+- if @controller == "customers"
+| var select = $('#customer_key_person_id');
+- elsif @controller == "visit_records"
+	| var select = $('#visit_record_key_person_id');
+
+| select.html('#{j(options_for_select(@key_people.pluck(:name, :id)))}');
 | $('#KeyPeopleModal').modal('hide');

@@ -34,18 +34,11 @@ class BelongsController < ApplicationController
   def search
     @value = params[:value]
 
-    @belongs = current_user.belongs.search_name(@value)
+    @belongs = current_user.belongs.
+      search_name(@value).
+      page(params[:page]).per(10)
 
-    respond_to do |format|
-      format.html do
-        @belongs = @belongs.page(params[:page]).per(10)
-        render "index"
-      end
-      format.js do
-        @controller = params[:controller_name]
-        render "search"
-      end
-    end
+    render "index"
   end
 
   private

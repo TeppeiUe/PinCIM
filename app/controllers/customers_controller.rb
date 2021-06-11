@@ -94,19 +94,12 @@ class CustomersController < ApplicationController
     @how = params[:how]
     @value = params[:value]
 
-    @customers = current_user.customers.search_customer(@how, @value)
+    @customers = current_user.customers.
+      search_customer(@how, @value).
+      includes([:key_person, sales_end: :belong]).
+      page(params[:page]).per(10)
 
-    respond_to do |format|
-      format.html do
-        @customers = @customers.
-          includes([:key_person, sales_end: :belong]).
-          page(params[:page]).per(10)
-        render "index"
-      end
-      format.js do
-        render "search"
-      end
-    end
+    render "index"
   end
 
   private

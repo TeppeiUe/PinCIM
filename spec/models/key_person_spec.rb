@@ -30,15 +30,19 @@ RSpec.describe 'KeyPersonモデルのテスト', type: :model do
     before do
       key_person.save
       @key_person_old_name = key_person.name
-      @key_person_old_career = key_person.career
+      @key_person_old_post = key_person.post
+      @key_person_old_email = key_person.email
       @key_person_old_note = key_person.note
 
       @key_person_new_name = Faker::Name.name
-      @key_person_new_career = Faker::Lorem.characters(number: 10)
+      @key_person_new_post = Faker::Lorem.characters(number: 10)
+      @key_person_new_email = Faker::Internet.email
       @key_person_new_note = Faker::Lorem.characters(number: 50)
 
       key_person.name = @key_person_new_name
-      key_person.career = @key_person_new_career
+      key_person.post = @key_person_new_post
+      key_person.email = @key_person_new_email
+      key_person.sex = "男性" # factorybotでは"女性"を選択中
       key_person.note = @key_person_new_note
       key_person.save
     end
@@ -48,9 +52,19 @@ RSpec.describe 'KeyPersonモデルのテスト', type: :model do
       expect(key_person.name).to eq @key_person_new_name
     end
 
-    it 'careerカラムが更新できる' do
-      expect(key_person.career).not_to eq @key_person_old_career
-      expect(key_person.career).to eq @key_person_new_career
+    it 'postカラムが更新できる' do
+      expect(key_person.post).not_to eq @key_person_old_post
+      expect(key_person.post).to eq @key_person_new_post
+    end
+
+    it 'emailカラムが更新できる' do
+      expect(key_person.email).not_to eq @key_person_old_email
+      expect(key_person.email).to eq @key_person_new_email
+    end
+
+    it 'sexカラムが更新できる' do
+      expect(key_person.sex).not_to eq "女性"
+      expect(key_person.sex).to eq "男性"
     end
 
     it 'noteカラムが更新できる' do

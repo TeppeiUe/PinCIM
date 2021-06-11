@@ -24,7 +24,7 @@ h2 顧客新規登録
 	          @key_people, :id, :name,
 	          {include_blank: "選択して下さい"},
 	          autofocus: true,
-	          class: "form-control key_person_id"
+	          class: "form-control key_person_id js-select2"
 
 	      .form-group.col
 	      	.form-check
@@ -42,7 +42,7 @@ h2 顧客新規登録
 	          @sales_ends, :id, :name,
 	          {include_blank: "選択して下さい"},
 	          autofocus: true,
-	          class: "form-control sales_end_id"
+	          class: "form-control sales_end_id js-select2"
 
 	      .form-group.col
 	      	.form-check
@@ -66,7 +66,7 @@ h2 顧客新規登録
 	        	  {selected: @selected_belong,
 	        	  prompt: "選択して下さい"},
 	        	  autofocus: true,
-	        	  class: "form-control belong_id"
+	        	  class: "form-control belong_id js-select2"
 
 	        .form-group.col
 	        	.form-check

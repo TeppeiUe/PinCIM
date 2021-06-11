@@ -30,7 +30,7 @@ h2 訪問記録新規登録
 						@customers, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control customer_id"
+						class: "form-control customer_id js-select2"
 
 				.form-group.col
 					= f.label :key_person_id, "窓口担当者名"
@@ -38,7 +38,7 @@ h2 訪問記録新規登録
 						@key_people, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control key_person_id"
+						class: "form-control key_person_id js-select2"
 
 			.form-row
 				.form-group.col
@@ -47,7 +47,7 @@ h2 訪問記録新規登録
 						@belongs, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control belong_id"
+						class: "form-control belong_id js-select2"
 
 				.form-group.col
 					= f.label :sales_end_id, "営業担当者名"
@@ -55,7 +55,7 @@ h2 訪問記録新規登録
 						@sales_ends, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control sales_end_id"
+						class: "form-control sales_end_id js-select2"
 
 			.form-group
 				= f.label :next_datetime, "次回訪問予定日"

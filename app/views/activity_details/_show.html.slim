@@ -14,7 +14,7 @@
 							= f.collection_select :activity_id,
 								activities, :id, :name,
 								{prompt: "選択して下さい"},
-								class: "form-control activity_id"
+								class: "form-control activity_id li-#{activity_detail.id}"
 
 							= f.submit "変更", class: "btn btn-primary"
 

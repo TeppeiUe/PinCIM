@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :tasks, only: [:new, :create, :show, :edit, :update, :destroy]
     resources :activity_details, only: [:create, :update, :destroy]
     collection do
+      get 'get_customer', default: { format: :json }
       post 'counting'
       post 'search'
     end

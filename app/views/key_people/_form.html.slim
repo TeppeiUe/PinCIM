@@ -16,8 +16,22 @@
 		      = f.text_field :name, autofocus: true, class: "form-control name"
 
 		    .form-group
-		      = f.label :career, "経歴"
-		      = f.text_area :career, autofocus: true, class: "form-control career"
+		      = f.label :post, "役職"
+		      = f.text_field :post, autofocus: true, class: "form-control post"
+
+		    .form-group
+		    	= f.label :email, "メールアドレス"
+		    	= f.email_field :email, autofocus: true, class: "form-control email"
+
+		    p 性別
+		    .form-group
+		    	.form-check.form-check-inline
+		    		= f.radio_button :sex, "男性", checked: true, class: "form-check-input"
+		    		label.form-check-label 男性
+
+		    	.form-check.form-check-inline
+		    		= f.radio_button :sex, "女性", class: "form-check-input"
+		    		label.form-check-label 女性
 
 		    .form-group
 		      = f.label :note, "備考"

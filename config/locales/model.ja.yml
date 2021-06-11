@@ -30,6 +30,7 @@ ja:
 
         key_person:
           name: 窓口担当者名
+          email: メールアドレス
 
         sales_end:
           name: 営業担当者名

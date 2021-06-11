@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require fullcalendar
+//= require select2
 //= require rails-ujs
 //= require activestorage
 // require turbolinks

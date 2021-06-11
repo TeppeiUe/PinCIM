@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get '/tasks' => 'tasks#index'
   resources :activities, only: [:create, :index, :edit, :update]
   post 'activities/search'
-  resources :customers, only: [:new, :create, :index, :show, :edit, :update]
+  resources :customers, only: [:new, :create, :index, :show, :edit, :update] do
+    resources :customer_key_people, only: [:create, :update, :destroy]
+  end
   post 'customers/search'
   resources :key_people, only: [:create, :index, :show, :edit, :update]
   post 'key_people/search'

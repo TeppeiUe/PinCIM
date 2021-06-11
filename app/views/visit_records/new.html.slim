@@ -1,18 +1,6 @@
 - provide(:title, "訪問記録新規登録")
 - breadcrumb :visit_records_new
 
-#CustomerModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_customer"
-
-#KeyPersonModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_key_person"
-
-#SalesEndModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_sales_end"
-
-#BelongModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_belong"
-
 h2 訪問記録新規登録
 .row
 	.col-md-8
@@ -42,10 +30,7 @@ h2 訪問記録新規登録
 						@customers, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control customer_id"
-
-					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#CustomerModal"]
-						| 絞り込み検索
+						class: "form-control customer_id js-select2"
 
 				.form-group.col
 					= f.label :key_person_id, "窓口担当者名"
@@ -53,10 +38,7 @@ h2 訪問記録新規登録
 						@key_people, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control key_person_id"
-
-					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#KeyPersonModal"]
-						| 絞り込み検索
+						class: "form-control key_person_id js-select2"
 
 			.form-row
 				.form-group.col
@@ -65,10 +47,7 @@ h2 訪問記録新規登録
 						@belongs, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control belong_id"
-
-					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#BelongModal"]
-						| 絞り込み検索
+						class: "form-control belong_id js-select2"
 
 				.form-group.col
 					= f.label :sales_end_id, "営業担当者名"
@@ -76,10 +55,7 @@ h2 訪問記録新規登録
 						@sales_ends, :id, :name,
 						{prompt: "選択して下さい"},
 						autofocus: true,
-						class: "form-control sales_end_id"
-
-					button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#SalesEndModal"]
-						| 絞り込み検索
+						class: "form-control sales_end_id js-select2"
 
 			.form-group
 				= f.label :next_datetime, "次回訪問予定日"

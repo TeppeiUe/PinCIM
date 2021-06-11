@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  *= require fullcalendar
+ *= require select2
+ *= require select2-bootstrap
  */
 
 @import "bootstrap";
@@ -40,4 +42,13 @@ img{
 a.nav-link.active{
 	color: #595959 !important;
 	font-weight: bold;
+}
+
+.select2-selection.select2-selection--single {
+    height: calc(2.25rem + 2px) !important;
+    padding: 6px 12px !important;
+}
+
+.select2-selection__rendered {
+    font-size: 1rem !important;
 }

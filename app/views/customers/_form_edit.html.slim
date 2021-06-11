@@ -23,7 +23,7 @@
 		      	key_people, :id, :name,
 		      	{prompt: "選択して下さい"},
 		      	autofocus: true,
-		      	class: "form-control key_person_id"
+		      	class: "form-control key_person_id js-select2"
 
 		    .form-group
 		      = f.label :sales_end_id, "営業担当者"
@@ -31,7 +31,7 @@
 		      	sales_ends, :id, :name,
 		      	{prompt: "選択して下さい"},
 		      	autofocus: true,
-		      	class: "form-control sales_end_id"
+		      	class: "form-control sales_end_id js-select2"
 
 		    .form-group
 		    	= f.label :system, "導入システム"

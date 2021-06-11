@@ -1,15 +1,6 @@
 - provide(:title, "顧客新規登録")
 - breadcrumb :customer_new
 
-#KeyPersonModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_key_person"
-
-#SalesEndModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_sales_end"
-
-#BelongModal.modal.fade[tabindex="-1" role="dialog" aria-hidden="true"]
-  = render "shared/narrowing_belong"
-
 h2 顧客新規登録
 .row
 	.col-md-8
@@ -33,9 +24,7 @@ h2 顧客新規登録
 	          @key_people, :id, :name,
 	          {include_blank: "選択して下さい"},
 	          autofocus: true,
-	          class: "form-control key_person_id"
-	        button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#KeyPersonModal"]
-	          | 絞り込み検索
+	          class: "form-control key_person_id js-select2"
 
 	      .form-group.col
 	      	.form-check
@@ -53,9 +42,7 @@ h2 顧客新規登録
 	          @sales_ends, :id, :name,
 	          {include_blank: "選択して下さい"},
 	          autofocus: true,
-	          class: "form-control sales_end_id"
-	        button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#SalesEndModal"]
-	          | 絞り込み検索
+	          class: "form-control sales_end_id js-select2"
 
 	      .form-group.col
 	      	.form-check
@@ -79,9 +66,7 @@ h2 顧客新規登録
 	        	  {selected: @selected_belong,
 	        	  prompt: "選択して下さい"},
 	        	  autofocus: true,
-	        	  class: "form-control belong_id"
-	        	button.btn.btn-outline-primary[type="button" data-toggle="modal" data-target="#BelongModal"]
-	        	  | 絞り込み検索
+	        	  class: "form-control belong_id js-select2"
 
 	        .form-group.col
 	        	.form-check

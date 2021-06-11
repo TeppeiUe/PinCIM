@@ -5,6 +5,7 @@ class KeyPerson < ApplicationRecord
 
   has_one :customer
   has_many :visit_records
+  has_many :customer_key_people
   belongs_to :user
 
   enum sex: {

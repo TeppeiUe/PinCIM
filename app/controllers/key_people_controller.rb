@@ -53,6 +53,6 @@ class KeyPeopleController < ApplicationController
   end
 
   def params_key_person
-    params.require(:key_person).permit(:name, :career, :note)
+    params.require(:key_person).permit(:name, :post, :email, :sex, :note)
   end
 end

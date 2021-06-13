@@ -1,7 +1,7 @@
 class KeyPerson < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id }
-  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, allow_blank: true }
 
   has_one :customer
   has_many :visit_records

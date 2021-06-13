@@ -2,7 +2,9 @@ class CreateKeyPeople < ActiveRecord::Migration[5.2]
   def change
     create_table :key_people do |t|
       t.string :name
-      t.text :career
+      t.string :post
+      t.string :email
+      t.integer :sex, default: 0
       t.text :note
       t.integer :user_id
 

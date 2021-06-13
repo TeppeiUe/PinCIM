@@ -5,6 +5,7 @@ ja:
       activity_detail: 活動内容
       belong: 所属
       customer: 顧客
+      customer_key_person: 窓口担当者管理
       key_person: 窓口担当者
       sales_end: 営業担当者
       task: タスク
@@ -27,6 +28,10 @@ ja:
           name: 顧客名
           key_person: 窓口担当者
           sales_end: 営業担当者
+
+        customer_key_person:
+          key_person: 窓口担当者
+          end_period: 担当期間(終了)
 
         key_person:
           name: 窓口担当者名

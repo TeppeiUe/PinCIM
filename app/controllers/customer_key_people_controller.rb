@@ -42,7 +42,7 @@ class CustomerKeyPeopleController < ApplicationController
 	                        @customer_key_person.errors.full_messages_for(:end_period)
 	                      else
 	                        @customer_key_person.errors.full_messages
-	    end
+	                      end
 
 	    flash.now[:alert] = errors_message.join('<br/>').html_safe
 	    @men_checked = true if @key_person_select == "key_person_selection"
@@ -69,7 +69,6 @@ class CustomerKeyPeopleController < ApplicationController
         if @customer_key_person.update(params_customer_key_person)
           render "update"
         else
-          binding.pry
           flash.now[:alert] = @customer_key_person.errors.full_messages.join
           render "edit"
         end

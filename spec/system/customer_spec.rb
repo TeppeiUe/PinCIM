@@ -175,7 +175,7 @@ describe '顧客画面' do
       end
 
       it '顧客名フォームが表示される' do
-        is_expected.to have_field '顧客名'
+        is_expected.to have_field 'customer[name]'
       end
 
       it '住所フォームが表示される' do

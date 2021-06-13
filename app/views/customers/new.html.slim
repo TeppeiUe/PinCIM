@@ -4,17 +4,26 @@
 h2 顧客新規登録
 .row
 	.col-md-8
-	  = render "shared/error", obj: @customer
 	  = form_with model: @customer, local: true do |f|
 	    .form-group
-	      = f.label :name, "顧客名"
+	      p
+	        | 顧客名
+	        span.badge.badge-danger.ml-1 必須
+	      - if flash[:alert_name].present?
+	        p.text-danger = flash[:alert_name]
+
 	      = f.text_field :name, autofocus: true, class: "form-control name"
 
 	    .form-group
 	      = f.label :address, "住所"
 	      = f.text_field :address, autofocus: true, class: "form-control address"
 
-	    p 窓口担当者
+	    p
+	      | 窓口担当者
+	      span.badge.badge-danger.ml-1 必須
+	    - if flash[:alert_key_person].present?
+	       p.text-danger = flash[:alert_key_person]
+
 	    .form-group.row
 	      .form-group.col
 	      	.form-check
@@ -31,8 +40,15 @@ h2 顧客新規登録
 	        	= f.radio_button :radio_key_person, :new, checked: @radio_key_person_new, class: "form-check-input"
 	        	label.form-check-label 新規登録
 	        = f.text_field :key_person_name, value: @key_person_new_value, class: "form-control key_person_name"
+	        p.small
+	          | ※詳細は顧客の新規登録後に個別で編集下さい
 
-	    p 営業担当者
+	    p
+	      | 営業担当者
+	      span.badge.badge-danger.ml-1 必須
+	    - if flash[:alert_sales_end].present?
+	      p.text-danger = flash[:alert_sales_end]
+
 	    .form-group.row
 	      .form-group.col
 	      	.form-check
@@ -49,11 +65,15 @@ h2 顧客新規登録
 	        	= f.radio_button :radio_sales_end, :new, checked: @radio_sales_end_new, class: "form-check-input"
 	        	label.form-check-label 新規登録
 	        = f.text_field :sales_end_name, value: @sales_end_new_value, class: "form-control sales_end_name"
+	        p.small
+	          | ※詳細は顧客の新規登録後に個別で編集下さい
 
 	    /営業担当者で"新規登録"を選択した場合表示
 	    #selected_sales_end_new
-	      p 所属 (営業担当者で"新規登録"を選択した場合入力下さい)
-	      - unless flash[:alert_belong].nil?
+	      p
+	        | 所属 (営業担当者で"新規登録"を選択した場合入力下さい)
+	        span.badge.badge-danger.ml-1 必須
+	      - if flash[:alert_belong].present?
 	        p.text-danger = flash[:alert_belong]
 
 	      .form-group.row
@@ -73,6 +93,8 @@ h2 顧客新規登録
 	        		= f.radio_button :radio_belong, :new, checked: @radio_belong_new, class: "form-check-input"
 	        		label.form-check-label 新規登録
 	        	= f.text_field :belong_name, value: @belong_new_value,class: "form-control belong_name"
+	        	p.small
+	        	  | ※詳細は顧客の新規登録後に個別で編集下さい
 
 	    .form-group
 	      = f.label :system, "導入システム"

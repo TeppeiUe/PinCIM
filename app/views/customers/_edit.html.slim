@@ -24,6 +24,8 @@
 		      	{prompt: "選択して下さい"},
 		      	autofocus: true,
 		      	class: "form-control key_person_id js-select2"
+		      p.small
+		      	| ※担当期間管理で管理されている窓口担当者のリストです
 
 		    .form-group
 		      = f.label :sales_end_id, "営業担当者"
@@ -43,3 +45,6 @@
 
 		    .modal-footer
 		      = f.submit "変更保存", class: "btn btn-primary"
+
+javascript:
+	setJsSelect2();

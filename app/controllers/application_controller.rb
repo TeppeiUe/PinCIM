@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if hour.nil? || minute.nil?
       true
     else
-      hour == "00" && minute == "00" ? true : false
+      hour == "00" && minute == "00"
     end
   end
 

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :activities, only: [:create, :index, :edit, :update]
   post 'activities/search'
   resources :customers, only: [:new, :create, :index, :show, :edit, :update] do
-    resources :customer_key_people, only: [:create, :update, :destroy]
+    resources :customer_key_people, only: [:new, :create, :edit, :update, :destroy]
   end
   post 'customers/search'
   resources :key_people, only: [:create, :index, :show, :edit, :update]

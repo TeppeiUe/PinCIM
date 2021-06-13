@@ -1,0 +1,34 @@
+.card.mb-4.shadow-lg
+	h4.card-header 窓口担当者の担当期間管理
+	.card-body
+		table.table.table-hover
+			thead.bg-light
+				tr
+					th 窓口担当者名
+					th 担当期間
+					th
+			tbody
+				- customer.customer_key_people.order('end_period NOT NULL, end_period DESC').each do |customer_key_person|
+					tr class="tr-#{customer_key_person.id}"
+						td = link_to customer_key_person.key_person.name, key_person_path(customer_key_person.key_person_id)
+						td
+							| #{def_date(customer_key_person.start_period)}
+							| ~
+							| #{def_date(customer_key_person.end_period)}
+						td
+							= link_to "編集",
+								edit_customer_customer_key_person_path(customer, customer_key_person),
+								remote: true,
+								class: "btn btn-primary mr-1"
+
+							= link_to "削除",
+								customer_customer_key_person_path(customer, customer_key_person),
+								method: :delete,
+								remote: true,
+								data: {confirm: "削除しますか？"},
+								class: "btn btn-danger"
+
+		= link_to "担当期間を新規登録",
+			new_customer_customer_key_person_path(customer.id, KeyPerson.new),
+			remote: true,
+			class: "btn btn-success"

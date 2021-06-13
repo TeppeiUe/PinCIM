@@ -1,0 +1,36 @@
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title 担当期間の編集
+			button.close [type="button" data-dismiss="modal" aria-label="Close"]
+				span [aria-hidden="true"] &times;
+
+		.modal-body
+			= flash.now[:alert]
+
+			= form_with model: [@customer_key_person.customer, @customer_key_person], remote: true do |f|
+				= f.hidden_field :customer_id, value: @customer_key_person.customer_id
+				= f.hidden_field :key_person_id, value: @customer_key_person.key_person_id
+
+				.form-group
+					.form-inline
+						= f.date_select :start_period,
+							{prompt: true,
+							discard_day: true,
+							start_year: Time.now.year - 20,
+							end_year: Time.now.year},
+							class: "form-control start_period"
+
+						span ~
+
+						= f.date_select :end_period,
+							{prompt: true,
+							discard_day: true,
+							start_year: Time.now.year - 20,
+							end_year: Time.now.year},
+							class: "form-control start_period"
+
+				.modal-footer
+					button.btn.btn-secondary [type="button" data-dismiss="modal"]
+						| 閉じる
+					= f.submit "更新", class: "btn btn-success"

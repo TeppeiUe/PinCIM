@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :visit_records
   has_many :activity_details
   has_many :tasks
+  has_many :customer_key_people
 end

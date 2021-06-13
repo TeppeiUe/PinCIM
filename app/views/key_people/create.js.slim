@@ -1,6 +1,9 @@
 | $('tbody').prepend("#{j(render 'key_people/tr', key_person: @key_person)}");
 | $('#key_person_name').val("");
-| $('#key_person_career').val("");
+| $('#key_person_post').val("");
+| $('#key_person_email').val("");
+| document.getElementById('key_person_sex_男性').checked = true;
 | $('#key_person_note').val("");
+| $('#key_person_name').focus();
 | $('.error_explanation').empty();
 | $('.js-message-errors').empty();

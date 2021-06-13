@@ -40,8 +40,17 @@ describe '窓口担当者画面' do
         is_expected.to have_field '窓口担当者名'
       end
 
-      it '経歴フォームが表示される' do
-        is_expected.to have_field '経歴'
+      it '役職フォームが表示される' do
+        is_expected.to have_field '役職'
+      end
+
+      it 'メールアドレスフォームが表示される' do
+        is_expected.to have_field 'メールアドレス'
+      end
+
+      it '性別フォームが表示される' do
+        is_expected.to have_checked_field 'key_person_sex_男性'
+        is_expected.not_to have_checked_field 'key_person_sex_女性'
       end
 
       it '備考フォームが表示される' do

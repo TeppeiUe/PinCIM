@@ -1,0 +1,94 @@
+.modal-dialog.modal-dialog-centered
+	.modal-content
+		.modal-header
+			h4.modal-title 担当期間新規登録
+			button.close [type="button" data-dismiss="modal" aria-label="Close"]
+				span [aria-hidden="true"] &times;
+
+		.modal-body
+			= flash.now[:alert]
+			= form_with model: [@customer, @customer_key_person], remote: true do |f|
+				= f.hidden_field :customer_id, value: @customer.id
+				= f.hidden_field :key_person_select, value: "key_person_selection"
+
+				ul.nav.nav-tabs
+					li.nav-item
+						a.nav-link.active [href="#tab-selection" data-toggle="tab"]
+							| 登録済窓口担当者に紐付け
+					li.nav-item
+						a.nav-link [href="#tab-new" data-toggle="tab"]
+							| 新規窓口担当者に紐付け
+
+				.tab-content.mt-4
+					.tab-pane.active [id="tab-selection"]
+						.form-group
+							= f.label :key_person_id, "窓口担当者"
+							= f.collection_select :key_person_id,
+								@key_people, :id, :name,
+								{prompt: "選択してください"},
+								autofocus: true,
+								class: "form-control key_person_id, js-select2"
+
+					.tab-pane [id="tab-new"]
+						.form-group
+							= f.label :name, "窓口担当者名"
+							= f.text_field :name, value: @key_person_name, autofocus: true, class: "form-control name"
+
+						.form-group
+							= f.label :post, "役職"
+							= f.text_field :post, value: @key_person_post, autofocus: true, class: "form-control post"
+
+						.form-group
+							= f.label :email, "メールアドレス"
+							= f.email_field :email, value: @key_person_email, autofocus: true, class: "form-control email"
+
+						p 性別
+						.form-group
+							.form-check.form-check-inline
+								= f.radio_button :sex, "男性", checked: @men_checked, class: "form-check-input"
+								label.form-check-label 男性
+
+							.form-check.form-check-inline
+								= f.radio_button :sex, "女性", checked: @female_checked, class: "form-check-input"
+								label.form-check-label 女性
+
+						.form-group
+							= f.label :note, "備考"
+							= f.text_area :note, value: @key_person_note, autofocus: true, class: "form-control note"
+
+				.form-group
+					p 担当期間
+					.form-inline
+						= f.date_select :start_period,
+							{prompt: true,
+							discard_day: true,
+							start_year: Time.now.year - 20,
+							end_year: Time.now.year},
+							class: "form-control start_period"
+
+						span ~
+
+						= f.date_select :end_period,
+							{prompt: true,
+							discard_day: true,
+							start_year: Time.now.year - 20,
+							end_year: Time.now.year},
+							class: "form-control start_period"
+
+				.modal-footer
+				  = f.submit "新規登録", class: "btn btn-primary"
+
+/連続render後に発火させる方法がわからなかったため
+javascript:
+	$('.nav-link').on('click', function() {
+  	let target = $(this).attr('href');
+  	let $key_person_select = $('#customer_key_person_key_person_select');
+
+  	if (target == "#tab-new") {
+    	$key_person_select.val("key_person_new");
+  	} else {
+    	$key_person_select.val("key_person_selection");
+  	}
+	});
+
+	setJsSelect2();

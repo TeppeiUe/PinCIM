@@ -12,6 +12,10 @@ module ApplicationHelper
     datetime.nil? ? "なし" : datetime.strftime("%Y-%m-%d %H:%M")
   end
 
+  def def_date(date)
+    date.nil? ? "" : date.strftime("%Y年%m月")
+  end
+
   # simple_formatメソッドではpタグが入って来て扱いにくいため定義した
   def def_format(text)
     text.nil? ? "なし" : safe_join(text.split(/\R/), tag(:br))

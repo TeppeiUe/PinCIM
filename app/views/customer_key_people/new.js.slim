@@ -2,9 +2,12 @@
 |    "#{j(render 'customer_key_people/new', customer: @customer, customer_key_person: @customer_key_person, key_people: @key_people)}"
 | );
 | $("#customer_edit-modal").modal('show');
+/select2はselectではなくinputから開始するようであるが、focusの設定がわからなかった
+
 - if flash.now[:alert].present? && @key_person_select == "key_person_new"
 	| $(".nav-link").removeClass('active');
 	| $(".nav-link").last().addClass('active');
 	| $("#tab-selection").removeClass('active');
 	| $("#tab-new").addClass('active');
 	| $('#customer_key_person_key_person_select').val("key_person_new");
+	| $('#customer_key_person_name').focus();

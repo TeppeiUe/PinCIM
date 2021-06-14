@@ -10,7 +10,4 @@
 |   	"#{j(render 'sales_ends/form', sales_end: @sales_end, belongs: @belongs, btn_name: '変更保存')}"
 | 	);
 | 	$("#sales_end_edit-modal").modal('show');
-| 	$(document).on('shown.bs.modal',function(){
-| 	 	$('#sales_end_name').focus();
-|		});
 | }, setTime);

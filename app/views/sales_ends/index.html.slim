@@ -37,5 +37,5 @@ h2
 		.d-flex.justify-content-center
 			= paginate @sales_ends
 
-	.col-lg-4
+	.col-lg-4.set_form
 		= render "sales_ends/form", sales_end: @sales_end, belongs: @belongs, btn_name: "新規登録"

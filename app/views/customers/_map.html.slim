@@ -1,26 +1,28 @@
-#map.mx-auto.my-4 style='height: 350px;'
+#map.mx-auto.my-4.small [style='height: 350px;']
+ | Mapが表示されない場合、まずは登録している住所を確認下さい。
 
-script [
-  async='async'
-  src="https://maps.googleapis.com/maps/api/js?key=#{ ENV['GOOGLE_MAP_API'] }&callback=initMap"
-]
+- unless customer.latitude.nil?
+  script [
+    async='async'
+    src="https://maps.googleapis.com/maps/api/js?key=#{ ENV['GOOGLE_MAP_API'] }&callback=initMap"
+  ]
 
-javascript:
-  function initMap() {};
-  function initMap() {
+  javascript:
+    function initMap() {};
+    function initMap() {
 
-		pos = new google.maps.LatLng(
-			#{customer.latitude},
-			#{customer.longitude}
-		);
+  		pos = new google.maps.LatLng(
+  			#{customer.latitude},
+  			#{customer.longitude}
+  		);
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: pos,
-      zoom: 15,
-    });
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: pos,
+        zoom: 15,
+      });
 
-    marker = new google.maps.Marker({
-      position: pos,
-      map: map
-    });
-  }
+      marker = new google.maps.Marker({
+        position: pos,
+        map: map
+      });
+    }

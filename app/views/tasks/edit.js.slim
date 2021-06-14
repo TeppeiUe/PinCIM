@@ -1,4 +1,13 @@
-| $("#task-modal").html(
-|    "#{j(render 'tasks/form', task: @task, visit_record: @visit_record, btn_name: '変更保存')}"
-| );
-| $("#task-modal").modal('show');
+| var setTime = 0;
+
+- if action_name == "update"
+	| var setTime = 500;
+	| $("#task-modal").modal('hide');
+
+/modal('hide')のタイミングが遅いため、modal('hide')の実行時は0.5s後に実行(Chromeで確認、通信状態に依存するかは不明)
+| setTimeout(function() {
+| 	$("#task-modal").html(
+|   	"#{j(render 'tasks/form', task: @task, visit_record: @visit_record, btn_name: '変更保存')}"
+| 	);
+| 	$("#task-modal").modal('show');
+| }, setTime);

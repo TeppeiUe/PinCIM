@@ -12,32 +12,19 @@ class VisitRecordsController < ApplicationController
   def create
     @visit_date, @visit_time_hour, @visit_time_minute = params_visit_datetime
     @next_date, @next_time_hour, @next_time_minute = params_next_datetime
-
-    # @visit_date = params_visit_datetime[:visit_date]
-    # @visit_time_hour = params_visit_datetime["visit_time(4i)"]
-    # @visit_time_minute = params_visit_datetime["visit_time(5i)"]
-
-    # @next_date = params_next_datetime[:next_date]
-    # @next_time_hour = params_next_datetime["next_time(4i)"]
-    # @next_time_minute = params_next_datetime["next_time(5i)"]
-
     @visit_record = current_user.visit_records.new(params_visit_record)
 
-    # datetime型のデータに加工
-    # @visit_record.visit_datetime = datetime_join(@visit_date, @visit_time_hour, @visit_time_minute)
-    # @visit_record.next_datetime = datetime_join(@next_date, @next_time_hour, @next_time_minute)
-    @visit_record.visit_datetime = datetime_join(params_visit_datetime)
-    @visit_record.next_datetime = datetime_join(params_next_datetime)
+    # datetime型のデータに加工し、それぞれのカラムに追加
+    @visit_record.visit_datetime = array2datetime(params_visit_datetime)
+    @visit_record.next_datetime = array2datetime(params_next_datetime)
 
     if @visit_record.save
       redirect_to visit_record_path(@visit_record.id)
     else
       set_form_select
-      # time_selectフォームににデータ反映するか判定
-      # @visit_time_nodefault = time_select_nodefault(@visit_time_hour, @visit_time_minute)
-      # @next_time_nodefault = time_select_nodefault(@next_time_hour, @next_time_minute)
-      @visit_time_nodefault = time_select_nodefault(params_visit_datetime)
-      @next_time_nodefault = time_select_nodefault(params_next_datetime)
+      # time_selectフォームにデータ反映するか判定
+      @visit_time_nodefault = unset_default_time?(params_visit_datetime)
+      @next_time_nodefault = unset_default_time?(params_next_datetime)
       render "new"
     end
   end
@@ -57,57 +44,32 @@ class VisitRecordsController < ApplicationController
 
   def edit
     set_form_select
-    # visit_datetime = @visit_record.visit_datetime
-    # next_datetime = @visit_record.next_datetime
-    visit_datetime_array = datetime_division(@visit_record.visit_datetime)
-    next_datetime_array = datetime_division(@visit_record.next_datetime)
+    visit_datetime_array = datetime2array(@visit_record.visit_datetime)
+    next_datetime_array = datetime2array(@visit_record.next_datetime)
 
-    # datetime型のデータをtime型やdate型に変換
-    # @visit_date = datetime_division(visit_datetime, "datetime")
-    # @visit_time_hour = datetime_division(visit_datetime, "time_hour")
-    # @visit_time_minute = datetime_division(visit_datetime, "time_minute")
+    # datetime型のデータをdate_fieldとtime_selectで扱える形式に変換
     @visit_date, @visit_time_hour, @visit_time_minute = visit_datetime_array
-
-    # @next_date = datetime_division(next_datetime, "datetime")
-    # @next_time_hour = datetime_division(next_datetime, "time_hour")
-    # @next_time_minute = datetime_division(next_datetime, "time_minute")
     @next_date, @next_time_hour, @next_time_minute = next_datetime_array
 
-    # time_selectフォームににデータ反映するか判定
-    # @visit_time_nodefault = time_select_nodefault(@visit_time_hour, @visit_time_minute)
-    # nilクラスのデータを引数で渡しても、nil?メソッドでnil判定出来なかったため、以下のように記述
-    # @next_time_nodefault = next_datetime.nil? ?
-    # true : time_select_nodefault(@next_time_hour, @next_time_minute)
-    @visit_time_nodefault = time_select_nodefault(visit_datetime_array)
-    @next_time_nodefault = time_select_nodefault(next_datetime_array)
+    # time_selectフォームにデータ反映するか判定
+    @visit_time_nodefault = unset_default_time?(visit_datetime_array)
+    @next_time_nodefault = unset_default_time?(next_datetime_array)
   end
 
   def update
     @visit_date, @visit_time_hour, @visit_time_minute = params_visit_datetime
     @next_date, @next_time_hour, @next_time_minute = params_next_datetime
-    # @visit_date = params_visit_datetime[:visit_date]
-    # @visit_time_hour = params_visit_datetime["visit_time(4i)"]
-    # @visit_time_minute = params_visit_datetime["visit_time(5i)"]
-
-    # @next_date = params_next_datetime[:next_date]
-    # @next_time_hour = params_next_datetime["next_time(4i)"]
-    # @next_time_minute = params_next_datetime["next_time(5i)"]
-
-    # datetime型のデータに加工
-    # @visit_record.visit_datetime = datetime_join(@visit_date, @visit_time_hour, @visit_time_minute)
-    # @visit_record.next_datetime = datetime_join(@next_date, @next_time_hour, @next_time_minute)
-    @visit_record.visit_datetime = datetime_join(params_visit_datetime)
-    @visit_record.next_datetime = datetime_join(params_next_datetime)
+    # datetime型のデータに加工し、それぞれのカラムに追加
+    @visit_record.visit_datetime = array2datetime(params_visit_datetime)
+    @visit_record.next_datetime = array2datetime(params_next_datetime)
 
     if @visit_record.update(params_visit_record)
       render "update"
     else
       set_form_select
       # time_selectフォームににデータ反映するか判定
-      # @visit_time_nodefault = time_select_nodefault(@visit_time_hour, @visit_time_minute)
-      # @next_time_nodefault = time_select_nodefault(@next_time_hour, @next_time_minute)
-      @visit_time_nodefault = time_select_nodefault(params_visit_datetime)
-      @next_time_nodefault = time_select_nodefault(params_next_datetime)
+      @visit_time_nodefault = unset_default_time?(params_visit_datetime)
+      @next_time_nodefault = unset_default_time?(params_next_datetime)
       render "edit"
     end
   end
@@ -188,10 +150,6 @@ class VisitRecordsController < ApplicationController
       )
   end
 
-  # def params_visit_datetime
-  #   params.require(:visit_record).permit(:visit_date, "visit_time(4i)", "visit_time(5i)")
-  # end
-
   def params_visit_datetime
     [
       params[:visit_record][:visit_date],
@@ -207,8 +165,4 @@ class VisitRecordsController < ApplicationController
       params[:visit_record]["next_time(5i)"],
     ]
   end
-
-  # def params_next_datetime
-  #   params.require(:visit_record).permit(:next_date, "next_time(4i)", "next_time(5i)")
-  # end
 end

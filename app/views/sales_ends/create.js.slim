@@ -1,8 +1,9 @@
 | $('tbody').prepend("#{j(render 'sales_ends/tr', sales_end: @sales_end)}");
-| $('#sales_end_name').val("");
-| $('#sales_end_belong_id').val("");
-| $('#sales_end_post').val("");
-| $('#sales_end_telephone_number').val("");
-| $('#sales_end_note').val("");
+| $('.set_form #sales_end_name').val("");
+| $('.set_form #sales_end_belong_id').val("");
+| $('.set_form #sales_end_post').val("");
+| $('.set_form #sales_end_telephone_number').val("");
+| $('.set_form #sales_end_note').val("");
+| $('.set_form #sales_end_name').focus();
 | $('.error_explanation').empty();
 | $('.js-message-errors').empty();

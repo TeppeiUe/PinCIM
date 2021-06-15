@@ -27,5 +27,5 @@ h2
 						td = activity.name
 						td = link_to "編集", edit_activity_path(activity.id), remote: true, class: "btn btn-primary"
 
-	.col-lg-4
+	.col-lg-4.set_form
 		= render "activities/form", activity: @activity, btn_name: "新規登録"

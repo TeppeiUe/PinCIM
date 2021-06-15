@@ -1,4 +1,13 @@
-| $("#sales_end_edit-modal").html(
-|    "#{j(render 'sales_ends/form', sales_end: @sales_end, belongs: @belongs, btn_name: '変更保存')}"
-| );
-| $("#sales_end_edit-modal").modal('show');
+| var setTime = 0;
+
+- if action_name == "update"
+	| var setTime = 500;
+	| $("#sales_end_edit-modal").modal('hide');
+
+/modal('hide')のタイミングが遅いため、modal('hide')の実行時は0.5s後に実行(Chromeで確認、通信状態に依存するかは不明)
+| setTimeout(function() {
+| 	$("#sales_end_edit-modal").html(
+|   	"#{j(render 'sales_ends/form', sales_end: @sales_end, belongs: @belongs, btn_name: '変更保存')}"
+| 	);
+| 	$("#sales_end_edit-modal").modal('show');
+| }, setTime);

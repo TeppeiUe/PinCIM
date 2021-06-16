@@ -1,6 +1,7 @@
 | $('.activity_detail_list').append(
 |   "#{j(render 'activity_details/li', visit_record: @activity_detail.visit_record, activity_detail: @activity_detail, activities: @activities)}"
 | );
+| setActivityDetailStatus();
 | $('.add_activity').val('');
 | $('.error_explanation').empty();
 | $('.js-message-errors').empty();

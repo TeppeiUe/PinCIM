@@ -33,7 +33,7 @@ h2
 			    - @customers.each do |customer|
 			      tr
 			        td = link_to customer.name, customer_path(customer.id)
-			        td = customer.address
+			        td = item_format(customer.address)
 			        td = link_to customer.key_person.name, key_person_path(customer.key_person.id)
 			        td = link_to customer.sales_end.belong.name, belong_path(customer.sales_end.belong.id)
 			        td = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)

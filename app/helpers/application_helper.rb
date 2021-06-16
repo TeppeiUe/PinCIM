@@ -13,9 +13,9 @@ module ApplicationHelper
       "なし"
     else
       if datetime.hour == 0 && datetime.min == 0
-        datetime.strftime("%Y/%m/%d(#{t('date.abbr_day_names')[datetime.wday]})")
+        datetime.strftime("%Y/%m/%d(#{I18n.t('date.abbr_day_names')[datetime.wday]})")
       else
-        datetime.strftime("%Y/%m/%d(#{t('date.abbr_day_names')[datetime.wday]}) %H:%M")
+        datetime.strftime("%Y/%m/%d(#{I18n.t('date.abbr_day_names')[datetime.wday]}) %H:%M")
       end
     end
   end

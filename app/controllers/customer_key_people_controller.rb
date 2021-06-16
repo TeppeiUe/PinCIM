@@ -56,26 +56,11 @@ class CustomerKeyPeopleController < ApplicationController
   end
 
   def update
-    # date_selectオブジェクトの返す値が細切れであり、扱いやすい形式に変換するため定義
-    dammy = CustomerKeyPerson.new(params_customer_key_person)
-
-    if dammy.end_period.nil?
-      @customer_key_person.update(params_customer_key_person)
+    if @customer_key_person.update(params_customer_key_person)
       render "update"
     else
-      # 担当期間が終了していない担当者が2人以上存在する場合に変更可能
-      # →現役担当者が1人以上いる状態を保持
-      if @customer_key_person.check_action_ok?
-        if @customer_key_person.update(params_customer_key_person)
-          render "update"
-        else
-          flash.now[:alert] = @customer_key_person.errors.full_messages.join
-          render "edit"
-        end
-      else
-        flash.now[:alert] = "他の現役担当者がいる場合、担当期間(終了)の更新が出来ます"
-        render "edit"
-      end
+      flash.now[:alert] = @customer_key_person.errors.full_messages.join('<br/>').html_safe
+      render "edit"
     end
   end
 

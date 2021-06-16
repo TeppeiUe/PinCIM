@@ -4,8 +4,8 @@ $(function(){
 });
 
 function setActivityDetailStatus() {
-  let count = $('ul.activity_detail_list').children().length;
-  if(!count) {
+  let listCount = $('ul.activity_detail_list').children().length;
+  if(!listCount) {
     $('p.activity_detail_status').removeClass('d-none');
   } else {
     $('p.activity_detail_status').addClass('d-none');

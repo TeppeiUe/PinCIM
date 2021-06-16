@@ -94,10 +94,16 @@ class CustomersController < ApplicationController
   end
 
   def show
+    # dbの種類やバージョンに依存しない記述？
     @customer_key_people = @customer.
       customer_key_people.
-      includes([:key_person]).
-      order('end_period NOT NULL, end_period DESC')
+      where(end_period: nil).
+      includes([:key_person])
+    @customer_key_people += @customer.
+      customer_key_people.
+      where.not(end_period: nil).
+      order(end_period: :desc).
+      includes([:key_person])
   end
 
   def edit

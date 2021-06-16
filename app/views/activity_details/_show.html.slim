@@ -4,6 +4,9 @@
 		.js-message-errors
 		= render "shared/error", obj: @activity_detail
 
+		p.activity_detail_status
+			| 活動種別は登録されていません
+
 		ul.activity_detail_list
 			- visit_record.activity_details.each do |activity_detail|
 				li class="li-#{activity_detail.id}"

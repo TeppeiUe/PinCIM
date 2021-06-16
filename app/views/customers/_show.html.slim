@@ -2,7 +2,7 @@ h5.card-title 顧客名
 p.card-text = customer.name
 
 h5.catd-title 住所
-p.card-text = customer.address
+p.card-text = item_format(customer.address)
 
 h5.card-title 窓口担当者
 p.card-text = link_to customer.key_person.name, key_person_path(customer.key_person.id)
@@ -14,9 +14,9 @@ h5.card-title 営業担当者
 p.card-text = link_to customer.sales_end.name, sales_end_path(customer.sales_end.id)
 
 h5.card-title 導入システム
-p.card-text = customer.system
+p.card-text = item_format(customer.system)
 
 h5.card-title 備考
-p.card-text = def_format(customer.note)
+p.card-text = text_format(customer.note)
 
 = link_to "編集", edit_customer_path(customer.id), remote: true, class: "btn btn-primary"

@@ -23,7 +23,7 @@ h2
 		    - @belongs.each do |belong|
 		      tr
 		        td = link_to belong.name, belong_path(belong.id)
-		        td = belong.address
+		        td = item_format(belong.address)
 
 		.d-flex.justify-content-center
 			= paginate @belongs

@@ -33,7 +33,7 @@
 				p.card-text = def_datetime(visit_record.next_datetime)
 
 				h5.card-title 備考
-				p.card-text = visit_record.note
+				p.card-text = text_format(visit_record.note)
 
 				h5.card-title ランク
 				p.card-text = visit_record.rank

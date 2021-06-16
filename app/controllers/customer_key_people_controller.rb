@@ -34,22 +34,22 @@ class CustomerKeyPeopleController < ApplicationController
     end
     render "create"
 
-	  rescue => e
-	    # トランザクション処理で評価されない場合があるため(エラーメッセージ用)
-	    @customer_key_person.save
+    rescue => e
+      # トランザクション処理で評価されない場合があるため(エラーメッセージ用)
+      @customer_key_person.save
 
-	    errors_message << if @key_person_select == "key_person_new"
-	                        @customer_key_person.errors.full_messages_for(:end_period)
-	                      else
-	                        @customer_key_person.errors.full_messages
-	                      end
+      errors_message << if @key_person_select == "key_person_new"
+                          @customer_key_person.errors.full_messages_for(:end_period)
+                        else
+                          @customer_key_person.errors.full_messages
+                        end
 
-	    flash.now[:alert] = errors_message.join('<br/>').html_safe
-	    @men_checked = true if @key_person_select == "key_person_selection"
+      flash.now[:alert] = errors_message.join('<br/>').html_safe
+      @men_checked = true if @key_person_select == "key_person_selection"
 
-	    @customer = @customer_key_person.customer
-	    @key_people = current_user.key_people
-	    render "new"
+      @customer = @customer_key_person.customer
+      @key_people = current_user.key_people
+      render "new"
   end
 
   def edit

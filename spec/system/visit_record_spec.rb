@@ -107,7 +107,7 @@ describe '訪問記録画面' do
           VisitRecord.order(visit_datetime: :desc).each_with_index do |visit_record, i|
             expect(all('tbody tr')[i]).
               to have_link(
-                visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"),
+                def_datetime(visit_record.visit_datetime),
                 href: "/visit_records/#{visit_record.id}"
               )
             expect(all('tbody tr')[i]).
@@ -144,13 +144,13 @@ describe '訪問記録画面' do
         it "検索結果は正しいか" do
           within(:css, "tbody tr") do
             is_expected.to have_content(
-              @sample.visit_datetime.strftime("%Y-%m-%d %H:%M")
+              def_datetime(@sample.visit_datetime)
             )
 
             VisitRecord.all.each do |visit_record|
               unless visit_record.id == @sample.id
                 is_expected.not_to have_content(
-                  visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M")
+                  def_datetime(visit_record.visit_datetime)
                 )
               end
             end
@@ -358,7 +358,7 @@ describe '訪問記録画面' do
       end
 
       it '訪問日時が表示される' do
-        is_expected.to have_content "#{visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M")}"
+        is_expected.to have_content "#{def_datetime(visit_record.visit_datetime)}"
       end
 
       it '顧客名が表示される' do
@@ -378,7 +378,7 @@ describe '訪問記録画面' do
       end
 
       it '次回訪問日時が表示される' do
-        is_expected.to have_content "#{visit_record.next_datetime.strftime("%Y-%m-%d %H:%M")}"
+        is_expected.to have_content "#{def_datetime(visit_record.next_datetime)}"
       end
 
       it '備考が表示される' do

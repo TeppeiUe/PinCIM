@@ -9,7 +9,15 @@ module ApplicationHelper
   end
 
   def def_datetime(datetime)
-    datetime.nil? ? "なし" : datetime.strftime("%Y-%m-%d %H:%M")
+    if datetime.nil?
+      "なし"
+    else
+      if datetime.hour == 0 && datetime.min == 0
+        datetime.strftime("%Y/%m/%d(#{I18n.t('date.abbr_day_names')[datetime.wday]})")
+      else
+        datetime.strftime("%Y/%m/%d(#{I18n.t('date.abbr_day_names')[datetime.wday]}) %H:%M")
+      end
+    end
   end
 
   def def_date(date)
@@ -17,8 +25,16 @@ module ApplicationHelper
   end
 
   # simple_formatメソッドではpタグが入って来て扱いにくいため定義した
-  def def_format(text)
-    text.nil? ? "なし" : safe_join(text.split(/\R/), tag(:br))
+  def text_format(text)
+    if text.nil?
+      "なし"
+    else
+      text.blank? ? "なし" : safe_join(text.split(/\R/), tag(:br))
+    end
+  end
+
+  def item_format(text)
+    text.blank? || text.nil? ? "未登録" : text
   end
 
   def btn_type(btn_name)

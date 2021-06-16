@@ -8,6 +8,12 @@ h2.key_person_name_title #{@key_person.name}氏詳細
 		.set_show
 			= render "key_people/show", key_person: @key_person
 
-		- unless @key_person.customer.nil?
-			h5 所属
-			p = link_to @key_person.customer.name, customer_path(@key_person.customer.id)
+		- if @key_person.customer_key_people.exists?
+			.card.mb-4.shadow-lg
+					h5.card-header 在籍記録
+					.card-body
+						ul
+							- @customer_key_people.each do |customer_key_person|
+								li
+									= link_to customer_key_person.customer.name,
+										customer_path(customer_key_person.customer.id)

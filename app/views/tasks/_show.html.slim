@@ -5,7 +5,7 @@
 		p.card-text = task.title
 
 		h5.card-title 内容
-		p.card-text = simple_format(task.content)
+		p.card-text = text_format(task.content)
 
 		h5.card-title 期限
 		p class="card-text #{deadline_color(@task.is_active, @task.deadline)}"

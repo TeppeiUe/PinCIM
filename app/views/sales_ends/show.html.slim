@@ -9,7 +9,9 @@ h2.sales_end_name_title #{@sales_end.name}氏詳細
 			= render "sales_ends/show", sales_end: @sales_end
 
 		- if @customers.exists?
-			h5 担当顧客一覧
-			ul
-				- @customers.each do |customer|
-					li = link_to customer.name, customer_path(customer.id)
+			.card.mb-4.shadow-lg
+				h5.card-header 担当顧客一覧
+				.card-body
+					ul
+						- @customers.each do |customer|
+							li = link_to customer.name, customer_path(customer.id)

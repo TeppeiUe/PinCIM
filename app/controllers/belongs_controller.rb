@@ -17,7 +17,7 @@ class BelongsController < ApplicationController
   end
 
   def show
-    @sales_ends = @belong.sales_ends
+    @sales_ends = @belong.sales_ends.page(params[:page]).per(5)
   end
 
   def edit

@@ -8,20 +8,17 @@ class TasksController < ApplicationController
   end
 
   def create
-    @deadline_date = params_deadline[:deadline_date]
-    @deadline_time_hour = params_deadline["deadline_time(4i)"]
-    @deadline_time_minute = params_deadline["deadline_time(5i)"]
-
+    @deadline_date, @deadline_time_hour, @deadline_time_minute = params_deadline
     @task = current_user.tasks.new(params_task)
-    # datetime型のデータに加工しレコードのdeadlimeカラムに追加
-    @task.deadline = datetime_join(@deadline_date, @deadline_time_hour, @deadline_time_minute)
+    # datetime型のデータに加工しdeadlimeカラムに追加
+    @task.deadline = array2datetime(params_deadline)
 
     if @task.save
       render "create"
     else
       set_visit_record
-      # time_selectフォームににデータ反映するか判定
-      @deadline_time_nodefault = time_select_nodefault(@deadline_time_hour, @deadline_time_minute)
+      # time_selectフォームにデータ反映するか判定
+      @deadline_time_nodefault = unset_default_time?(params_deadline)
       render "new"
     end
   end
@@ -39,24 +36,17 @@ class TasksController < ApplicationController
 
   def edit
     set_visit_record
-    deadline = @task.deadline
+    deadline_datetime_array = datetime2array(@task.deadline)
 
-    # datetime型のデータをtime型やdate型に変換
-    @deadline_date = datetime_division(deadline, "datetime")
-    @deadline_time_hour = datetime_division(deadline, "time_hour")
-    @deadline_time_minute = datetime_division(deadline, "time_minute")
-
-    # time_selectフォームににデータ反映するか判定
-    @deadline_time_nodefault = time_select_nodefault(@deadline_time_hour, @deadline_time_minute)
+    @deadline_date, @deadline_time_hour, @deadline_time_minute = deadline_datetime_array
+    # time_selectフォームにデータ反映するか判定
+    @deadline_time_nodefault = unset_default_time?(deadline_datetime_array)
   end
 
   def update
-    @deadline_date = params_deadline[:deadline_date]
-    @deadline_time_hour = params_deadline["deadline_time(4i)"]
-    @deadline_time_minute = params_deadline["deadline_time(5i)"]
-
-    # datetime型のデータに加工しレコードのdeadlimeカラムに追加
-    @task.deadline = datetime_join(@deadline_date, @deadline_time_hour, @deadline_time_minute)
+    @deadline_date, @deadline_time_hour, @deadline_time_minute = params_deadline
+    # datetime型のデータに加工しdeadlimeカラムに追加
+    @task.deadline = array2datetime(params_deadline)
 
     if @task.update(params_task)
       @render_page = session[:task_show_view]
@@ -64,7 +54,7 @@ class TasksController < ApplicationController
     else
       set_visit_record
       # time_selectフォームににデータ反映するか判定
-      @deadline_time_nodefault = time_select_nodefault(@deadline_time_hour, @deadline_time_minute)
+      @deadline_time_nodefault = unset_default_time?(params_deadline)
       render "edit"
     end
   end
@@ -100,6 +90,10 @@ class TasksController < ApplicationController
   end
 
   def params_deadline
-    params.require(:task).permit(:deadline_date, "deadline_time(4i)", "deadline_time(5i)")
+    [
+      params[:task][:deadline_date],
+      params[:task]["deadline_time(4i)"],
+      params[:task]["deadline_time(5i)"],
+    ]
   end
 end

@@ -59,7 +59,7 @@ describe 'タスク画面' do
               task.content &&
               task.deadline &&
               task.status &&
-              task.visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M")
+              def_datetime(task.visit_record.visit_datetime)
             )
           end
         end
@@ -69,7 +69,7 @@ describe 'タスク画面' do
             expect(all('tbody tr')[i]).
               to have_link task.title, href: visit_record_task_path(1, task.id)
             expect(all('tbody tr')[i]).
-              to have_link task.visit_record.visit_datetime.strftime("%Y-%m-%d %H:%M"),
+              to have_link def_datetime(task.visit_record.visit_datetime),
                            href: "/visit_records/1"
           end
         end

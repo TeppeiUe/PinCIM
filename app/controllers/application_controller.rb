@@ -3,69 +3,35 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  # def datetime_join(date, hour, minute)
-  #   unless date.nil?
-  #     if hour.blank? || minute.blank?
-  #       date
-  #     else
-  #       "#{date} #{hour}:#{minute}"
-  #     end
-  #   end
-  # end
-
-  def datetime_join(datetime)
-    if datetime[0].present?
-      if datetime[1].blank? || datetime[2].blank?
-        datetime[0]
+  def array2datetime(array)
+    if array[0].present?
+      if array[1].blank? || array[2].blank?
+        array[0]
       else
-        "#{datetime[0]} #{datetime[1]}:#{datetime[2]}"
+        "#{array[0]} #{array[1]}:#{array[2]}"
       end
     end
   end
 
-  # time_selectフォームのdefaultを操作するためのメソッド
-  # 時間範囲が8-22であるため、defaultを指定しなければ予期せぬ結果が生じる
-  # def time_select_nodefault(hour, minute)
-  #   # blank?メソッドはnilクラスオブジェクトの場合エラーとなるため
-  #   if hour.nil? || minute.nil?
-  #     true
-  #   else
-  #     if hour.blank? || minute.blank?
-  #       true
-  #     else
-  #       hour == "00" && minute == "00"
-  #     end
-  #   end
-  # end
-
-  def time_select_nodefault(datetime)
-    if datetime[1].blank? || datetime[2].blank?
+  # time_selectフォームのdefault時間選択を操作するためのメソッド
+  # falseの場合、指定した時間を選択することが出来る
+  def unset_default_time?(array)
+    if array[1].blank? || array[2].blank?
       true
     else
-      datetime[1] == "00" && datetime[2] == "00"
+      # 00:00で保存されているデータは時間指定なし
+      array[1] == "00" && array[2] == "00"
     end
   end
 
-  # def datetime_division(datetime, which)
-  #   unless datetime.nil?
-  #     if which == "datetime"
-  #       datetime.to_time.to_s.slice(0, 10)
-  #     elsif which == "time_hour"
-  #       datetime.to_time.to_s.slice(11, 2)
-  #     elsif which == "time_minute"
-  #       datetime.to_time.to_s.slice(14, 2)
-  #     end
-  #   end
-  # end
-
-  def datetime_division(datetime)
+  def datetime2array(datetime)
     if datetime.nil?
       Array.new(3, nil)
     else
       [
-        datetime.to_time.to_s.slice(0, 10),
-        datetime.to_time.to_s.slice(11, 2),
-        datetime.to_time.to_s.slice(14, 2),
+        datetime.to_date,
+        sprintf("%02d", datetime.hour),
+        sprintf("%02d", datetime.min),
       ]
     end
   end

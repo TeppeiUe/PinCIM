@@ -8,7 +8,7 @@
 					th 担当期間
 					th
 			tbody
-				- customer.customer_key_people.order(end_period: :desc).each do |customer_key_person|
+				- customer_key_people.order(end_period: :desc).each do |customer_key_person|
 					tr class="tr-#{customer_key_person.id}"
 						td = link_to customer_key_person.key_person.name, key_person_path(customer_key_person.key_person_id)
 						td

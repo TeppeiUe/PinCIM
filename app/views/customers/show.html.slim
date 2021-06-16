@@ -15,4 +15,6 @@ h2.customer_name_title #{@customer.name}詳細
 
 .row
 	.col
-		= render "customer_key_people/show", customer: @customer
+		= render "customer_key_people/show",
+			customer: @customer,
+			customer_key_people: @customer_key_people

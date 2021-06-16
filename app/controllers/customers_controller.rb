@@ -94,6 +94,10 @@ class CustomersController < ApplicationController
   end
 
   def show
+    @customer_key_people = @customer.
+      customer_key_people.
+      includes([:key_person]) # .
+    # order('end_period NOT NULL, end_period DESC')
   end
 
   def edit

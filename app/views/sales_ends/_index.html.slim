@@ -1,0 +1,20 @@
+table.table.table-hover
+  thead.bg-light
+    tr
+      th 氏名
+      th
+        - unless controller_name == "belongs"
+          | 所属
+      th 役職
+      th 電話番号
+  tbody
+    - sales_ends.each do |sales_end|
+      tr
+        td = link_to sales_end.name, sales_end_path(sales_end.id)
+        td
+          = link_to sales_end.belong.name, belong_path(sales_end.belong_id) unless controller_name == "belongs"
+        td = item_format(sales_end.post)
+        td = item_format(sales_end.telephone_number)
+
+  .d-flex.justify-content-center
+    = paginate sales_ends

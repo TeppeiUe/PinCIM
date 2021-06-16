@@ -29,9 +29,9 @@ class ApplicationController < ActionController::Base
       Array.new(3, nil)
     else
       [
-        datetime.to_time.to_s.slice(0, 10),
-        datetime.to_time.to_s.slice(11, 2),
-        datetime.to_time.to_s.slice(14, 2),
+        datetime.to_date,
+        sprintf("%02d", datetime.hour),
+        sprintf("%02d", datetime.min),
       ]
     end
   end

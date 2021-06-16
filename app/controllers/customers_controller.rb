@@ -12,9 +12,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = current_user.customers.new(params_customer)
-    radio_key_person = params[:customer][:radio_key_person]
-    radio_sales_end = params[:customer][:radio_sales_end]
-    radio_belong = params[:customer][:radio_belong]
+    radio_key_person, radio_sales_end, radio_belong = params_radio
 
     @customer.transaction do
       # 窓口担当者で新規登録を選択
@@ -70,23 +68,23 @@ class CustomersController < ApplicationController
     )
     redirect_to customer_path(@customer.id)
 
-  rescue => e
-    flash.now[:alert_name] = @customer.errors.full_messages_for(:name).join
-    if radio_key_person == "select"
-      flash.now[:alert_key_person] =
-        @customer.errors.full_messages_for(:key_person).join
-    end
-    if radio_sales_end == "select"
-      flash.now[:alert_sales_end] =
-        @customer.errors.full_messages_for(:sales_end).join
-    end
+    rescue => e
+      flash.now[:alert_name] = @customer.errors.full_messages_for(:name).join
+      if radio_key_person == "select"
+        flash.now[:alert_key_person] =
+          @customer.errors.full_messages_for(:key_person).join
+      end
+      if radio_sales_end == "select"
+        flash.now[:alert_sales_end] =
+          @customer.errors.full_messages_for(:sales_end).join
+      end
 
-    @key_people = current_user.key_people
-    @sales_ends = current_user.sales_ends
-    @belongs = current_user.belongs
-    gon.radio_sales_end_select = @radio_sales_end_select
+      @key_people = current_user.key_people
+      @sales_ends = current_user.sales_ends
+      @belongs = current_user.belongs
+      gon.radio_sales_end_select = @radio_sales_end_select
 
-    render "new"
+      render "new"
   end
 
   def index
@@ -157,5 +155,13 @@ class CustomersController < ApplicationController
       :system,
       :note,
     )
+  end
+
+  def params_radio
+    [
+      params[:customer][:radio_key_person],
+      params[:customer][:radio_sales_end],
+      params[:customer][:radio_belong],
+    ]
   end
 end

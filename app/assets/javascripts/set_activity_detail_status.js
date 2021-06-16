@@ -10,4 +10,4 @@ function setActivityDetailStatus() {
   } else {
     $('p.activity_detail_status').addClass('d-none');
   }
-};
+}

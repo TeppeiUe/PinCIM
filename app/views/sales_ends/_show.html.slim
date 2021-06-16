@@ -7,12 +7,12 @@
 		p.card-text = link_to sales_end.belong.name, belong_path(sales_end.belong_id)
 
 		h5.card-title 役職
-		p.card-text = sales_end.post
+		p.card-text = item_format(sales_end.post)
 
 		h5.card-title 電話番号
-		p.card-text = sales_end.telephone_number
+		p.card-text = item_format(sales_end.telephone_number)
 
 		h5.card-title 備考
-		p.card-text = def_format(sales_end.note)
+		p.card-text = text_format(sales_end.note)
 
 		= link_to "編集", edit_sales_end_path(sales_end.id), remote: true, class: "btn btn-primary"

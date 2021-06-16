@@ -10,7 +10,7 @@
 		  p = @task.title
 
 		  h5 内容
-		  p = def_format(@task.content)
+		  p = text_format(@task.content)
 
 		  h5 期限
 		  p class="#{deadline_color(@task.is_active, @task.deadline)}"

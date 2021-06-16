@@ -19,7 +19,7 @@ h2 タスク一覧
 					tr class="tr-#{task.id}"
 						td = link_to task.title, visit_record_task_path(task.visit_record_id, task.id), remote: true
 						td.text-truncate
-							= task.content
+							= item_format(task.content)
 						td class="#{deadline_color(task.is_active, task.deadline)}"
 							= def_datetime(task.deadline)
 						td class="#{status_color(task.is_active)}"

@@ -19,8 +19,8 @@ class KeyPeopleController < ApplicationController
   def show
     @customer_key_people = @key_person.
       customer_key_people.
-      includes([:customer]) # .
-    # order('end_period NOT NULL, end_period DESC')
+      includes([:customer]).
+      order('end_period NOT NULL, end_period DESC')
   end
 
   def edit

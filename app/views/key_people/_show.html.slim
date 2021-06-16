@@ -4,15 +4,15 @@
 		p.card-text = key_person.name
 
 		h5.card-title 役職
-		p.card-text = key_person.post
+		p.card-text = item_format(key_person.post)
 
 		h5.card-title メールアドレス
-		p.card-text = key_person.email
+		p.card-text = item_format(key_person.email)
 
 		h5.card-title 性別
 		p.card-text = key_person.sex
 
 		h5.card-title 備考
-		p.card-text = def_format(key_person.note)
+		p.card-text = text_format(key_person.note)
 
 		= link_to "編集", edit_key_person_path(key_person.id), remote: true, class: "btn btn-primary"

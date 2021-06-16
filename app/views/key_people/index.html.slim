@@ -24,7 +24,9 @@ h2
 			      tr
 			        td = link_to key_person.name, key_person_path(key_person.id)
 			        td
-			        	- unless key_person.customer.nil?
+			        	- if key_person.customer.nil?
+			        		| 未登録
+			        	- else
 			        		= link_to key_person.customer.name, customer_path(key_person.customer.id)
 
 		.d-flex.justify-content-center

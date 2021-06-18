@@ -1,0 +1,33 @@
+h2 顧客一覧マップ
+.row
+  .col
+    #map_index[
+      style='height: 500px;'
+      data-user_system='#{user_system}']
+.row
+  .col-lg-7
+    h4.mt-4 マーカー対応表
+    table.table.table-bordered.text-center[style="table-layout:fixed;"]
+      thead.bg-light
+        tr
+          th[scope="col"]
+          th.align-middle[scope="col"]
+            = user_system
+            | を導入顧客
+          th.align-middle[scope="col"]
+            | その他
+      tbody
+        tr
+          th.bg-light.align-middle[scope="row"]
+            | 実行中タスクあり
+          td.align-middle
+            = image_tag 'red-pushpin.png'
+          td.align-middle
+            = image_tag 'red-dot.png'
+        tr
+          th.bg-light.align-middle[scope="row"]
+            | 実行中タスクなし
+          td.align-middle
+            = image_tag 'blue-pushpin.png'
+          td.align-middle
+            = image_tag 'blue-dot.png'

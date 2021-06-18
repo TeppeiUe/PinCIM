@@ -28,7 +28,7 @@ $(function() {
 });
 
 // リダイレクト対策、urlの書き換え
-$(function(){
+$(function() {
   var path = location.pathname;
 
   var check_pattern_search = "/search";
@@ -37,11 +37,13 @@ $(function(){
   var check_path_search = path.lastIndexOf(check_pattern_search);
   var check_path_counting = path.lastIndexOf(check_pattern_counting);
 
-  if(check_path_search !== -1){
-    var set_path = path.slice(0, -check_pattern_search.length);
-    history.replaceState(null, null, set_path);
-  } else if(check_path_counting !== -1){
-    var set_path = path.slice(0, -check_pattern_counting.length);
-    history.replaceState(null, null, set_path);
+  history.replaceState(null, null, setPath());
+
+  function setPath() {
+    if(check_path_search !== -1){
+      return path.slice(0, -check_pattern_search.length);
+    } else if(check_path_counting !== -1){
+      return path.slice(0, -check_pattern_counting.length);
+    }
   }
 });

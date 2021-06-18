@@ -4,7 +4,7 @@
 |    "#{j(render 'customers/show', customer: @customer)}"
 | );
 - if @map_status == "change"
-  | $(".set_map").html(
-  |    "#{j(render 'customers/map', customer: @customer)}"
-  | );
+  | $('#map_show').attr('data-latitude', '#{@customer.latitude}');
+  | $('#map_show').attr('data-longitude', '#{@customer.longitude}');
+  | setMapShow();
 | $("#customer_edit-modal").modal('hide');

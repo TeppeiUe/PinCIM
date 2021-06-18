@@ -11,8 +11,11 @@ h2.customer_name_title #{@customer.name}詳細
 		  		.col-md.set_show
 		  			= render "customers/show", customer: @customer
 		  		.col-md.set_map
-		  			= render "customers/map", customer: @customer
-
+		  			#map_show.mx-auto.my-4.small [
+		  				style='height: 350px;'
+		  				data-latitude='#{@customer.latitude}'
+		  				data-longitude='#{@customer.longitude}']
+		  				| Mapが表示されない場合、まずは登録している住所を確認下さい。
 .row
 	.col
 		= render "customer_key_people/show",

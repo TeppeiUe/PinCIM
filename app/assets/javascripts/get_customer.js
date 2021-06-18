@@ -4,7 +4,7 @@ $(function(){
 			type: 'GET',
 			url: '/visit_records/get_customer',
 			data: { customer_id: $('#visit_record_customer_id').has('option:selected').val() },
-			dateType: 'json'
+			dataType: 'json'
 		})
 		.done(function(data) {
 			$('#visit_record_key_person_id').select2("val", data['key_person_id'].toString());

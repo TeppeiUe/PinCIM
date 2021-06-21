@@ -1,9 +1,9 @@
-$(function(){
-  setBlankTime()
+$(function() {
+  setBlankTime();
 });
 
-$(document).on('shown.bs.modal',function(){
-	setBlankTime()
+$(document).on('shown.bs.modal',function() {
+	setBlankTime();
 });
 
 
@@ -20,11 +20,11 @@ function setBlankTime() {
   ];
 
   $.each(id_select_array, function(index, id) {
-     $.each(time_select_table, function(val, text){
+     $.each(time_select_table, function(val, text) {
       let $setForm = $(`#${id}_${val}i`);
       let $setOption = $(`<option value>${text}</option>`);
 
-      if($setForm.children().first().text() != text){
+      if($setForm.children().first().text() != text) {
         $setForm.prepend($setOption);
       }
     });

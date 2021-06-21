@@ -46,13 +46,13 @@ header
 						    	i class="fas fa-cog"
 						    	| 各種設定
 
-						  ul.dropdown-menu[aria-labelledby="navbarDropdownMenuLink"]
-						    li.dropdown-item = link_to "顧客", customers_path
-						    li.dropdown-item = link_to "窓口担当者", key_people_path
+						  .dropdown-menu[aria-labelledby="navbarDropdownMenuLink"]
+						    = active_link_to "顧客", customers_path, class: 'dropdown-item'
+						    = active_link_to "窓口担当者", key_people_path, class: 'dropdown-item'
 						    .dropdown-divider
-						    li.dropdown-item = link_to "所属", belongs_path
-						    li.dropdown-item = link_to "営業担当者", sales_ends_path
+						    = active_link_to "所属", belongs_path, class: 'dropdown-item'
+						    = active_link_to "営業担当者", sales_ends_path, class: 'dropdown-item'
 						    .dropdown-divider
-						    li.dropdown-item = link_to "活動種別", activities_path
+						    = active_link_to "活動種別", activities_path, class: 'dropdown-item'
 						    .dropdown-divider
-						    li.dropdown-item = link_to "ログアウト", sign_out_path, method: :delete
+						    = active_link_to "ログアウト", sign_out_path, method: :delete, class: 'dropdown-item'

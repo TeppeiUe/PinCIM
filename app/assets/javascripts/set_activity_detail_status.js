@@ -1,6 +1,6 @@
 // 活動種別の登録の有無で表示を変更
 $(function(){
-  setActivityDetailStatus()
+  setActivityDetailStatus();
 });
 
 function setActivityDetailStatus() {

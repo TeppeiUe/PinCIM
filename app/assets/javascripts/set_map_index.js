@@ -61,7 +61,7 @@ $(function () {
           `;
 
             if (data[i].visit_datetime) {
-              infoText = infoText + `
+              infoText += `
                 </td>
               </tr>
               <tr>
@@ -99,20 +99,20 @@ $(function () {
 
               if (taskCount) {
                 for (var j = 0; j < taskCount; j++) {
-                  infoText = infoText + `
+                  infoText += `
                   <a href="${data[i].task[j].task_url}">
                     ${data[i].task[j].title}
                   </a><br>
                 `;
                 }
               } else {
-                infoText = infoText + `
+                infoText += `
                   なし
               `;
               }
             }
 
-            infoText = infoText + `
+            infoText += `
                 </td>
               </tr>
             </table>

@@ -79,14 +79,6 @@ class VisitRecordsController < ApplicationController
     redirect_to session[:privious_url]
   end
 
-  def get_customer
-    @customer = Customer.find(params[:customer_id])
-
-    respond_to do |format|
-      format.json { render "get_customer" }
-    end
-  end
-
   def search
     @from = params[:from_date]
     @to = params[:to_date]

@@ -13,6 +13,7 @@ h2 顧客新規登録
 	        p.text-danger = flash[:alert_name]
 
 	      = f.text_field :name, autofocus: true, class: "form-control name"
+	      p.small.text-danger#customer_name_error
 
 	    .form-group
 	      = f.label :address, "住所"
@@ -40,8 +41,9 @@ h2 顧客新規登録
 	        	= f.radio_button :radio_key_person, :new, checked: @radio_key_person_new, class: "form-check-input"
 	        	label.form-check-label 新規登録
 	        = f.text_field :key_person_name, value: @key_person_new_value, class: "form-control key_person_name"
-	        p.small
+	        p.small.mb-0
 	          | ※詳細は顧客の新規登録後に個別で編集下さい
+	        p.small.text-danger#key_person_name_error
 
 	    p
 	      | 営業担当者
@@ -65,8 +67,9 @@ h2 顧客新規登録
 	        	= f.radio_button :radio_sales_end, :new, checked: @radio_sales_end_new, class: "form-check-input"
 	        	label.form-check-label 新規登録
 	        = f.text_field :sales_end_name, value: @sales_end_new_value, class: "form-control sales_end_name"
-	        p.small
+	        p.small.mb-0
 	          | ※詳細は顧客の新規登録後に個別で編集下さい
+	        p.small.text-danger#sales_end_name_error
 
 	    /営業担当者で"新規登録"を選択した場合表示
 	    #selected_sales_end_new
@@ -93,8 +96,9 @@ h2 顧客新規登録
 	        		= f.radio_button :radio_belong, :new, checked: @radio_belong_new, class: "form-check-input"
 	        		label.form-check-label 新規登録
 	        	= f.text_field :belong_name, value: @belong_new_value,class: "form-control belong_name"
-	        	p.small
+	        	p.small.mb-0
 	        	  | ※詳細は顧客の新規登録後に個別で編集下さい
+	        	p.small.text-danger#belong_name_error
 
 	    .form-group
 	      = f.label :system, "導入システム"

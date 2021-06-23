@@ -7,7 +7,12 @@ json.array!(@customers) do |customer|
 
   visit_record = customer.latest_visit_record
 
-  unless visit_record.nil?
+  if visit_record.nil?
+    json.visit_datetime ''
+    json.task do
+      json.array!
+    end
+  else
     json.visit_datetime def_datetime(visit_record.visit_datetime)
     json.visit_datetime_url visit_record_path(visit_record.id)
 
@@ -26,11 +31,6 @@ json.array!(@customers) do |customer|
         json.title active_task.title
         json.task_url visit_record_task_path(visit_record.id, active_task.id, format: :html)
       end
-    end
-  else
-    json.visit_datetime ''
-    json.task do
-      json.array!
     end
   end
 end

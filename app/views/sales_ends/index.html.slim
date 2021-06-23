@@ -11,7 +11,7 @@ h2
 .row
 	.col-lg-8
 		.form-inline
-			= form_with url: sales_ends_search_path, method: :post, local: true do |f|
+			= form_with url: search_sales_ends_path, method: :post, local: true do |f|
 				= f.select :how,
 					options_for_select("担当者名": "sales_end_name", "所属名": "sales_end_belong_name"),
 					{},

@@ -10,11 +10,16 @@ Rails.application.routes.draw do
   get '/map' => 'homes#map'
   get '/tasks' => 'tasks#index'
 
+  namespace :visit_records do
+    namespace :registrations do
+      get 'get_customer', default: { format: :json }
+    end
+  end
+
   resources :visit_records do
     resources :tasks, only: [:new, :create, :show, :edit, :update, :destroy]
     resources :activity_details, only: [:create, :update, :destroy]
     collection do
-      get 'get_customer', default: { format: :json }
       post 'counting'
       post 'search'
     end

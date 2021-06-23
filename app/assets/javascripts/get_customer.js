@@ -3,7 +3,7 @@ $(function(){
 		$.ajax({
 			type: 'GET',
 			url: '/visit_records/registrations/get_customer',
-			data: { customer_id: $('#visit_record_customer_id').has('option:selected').val() },
+			data: { customer_id: $(this).has('option:selected').val() },
 			dataType: 'json'
 		})
 		.done(function(data) {

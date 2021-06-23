@@ -19,6 +19,15 @@ Rails.application.routes.draw do
   get '/tasks' => 'tasks#index'
   resources :activities, only: [:create, :index, :edit, :update]
   post 'activities/search'
+
+  namespace :customers do
+    namespace :registrations do
+      get 'get_customer_name', default: { format: :json }
+      get 'get_key_person_name', default: { format: :json }
+      get 'get_sales_end_name', default: { format: :json }
+      get 'get_belong_name', default: { format: :json }
+    end
+  end
   resources :customers, only: [:new, :create, :index, :show, :edit, :update] do
     resources :customer_key_people, only: [:new, :create, :edit, :update, :destroy]
   end

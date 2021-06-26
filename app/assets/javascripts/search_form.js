@@ -1,7 +1,7 @@
 // 検索フォームのプレースホルダーを書き換え
 $(function(){
-  $(document).on('change', '#how', function() {
-    var form_text = $("#how option:selected").text();
+  $('#how').on('change', function() {
+    let form_text = $('option:selected', this).text();
     $('#value').attr('placeholder', form_text);
   });
 });

@@ -29,21 +29,18 @@ $(function() {
 
 // リダイレクト対策、urlの書き換え
 $(function() {
-  var path = location.pathname;
+  let path = location.pathname;
 
-  var check_pattern_search = "/search";
-  var check_pattern_counting = "/counting";
+  let check_pattern = [
+    '/search',
+    '/counting'
+  ];
 
-  var check_path_search = path.lastIndexOf(check_pattern_search);
-  var check_path_counting = path.lastIndexOf(check_pattern_counting);
-
-  history.replaceState(null, null, setPath());
-
-  function setPath() {
-    if(check_path_search !== -1){
-      return path.slice(0, -check_pattern_search.length);
-    } else if(check_path_counting !== -1){
-      return path.slice(0, -check_pattern_counting.length);
+  $.each(check_pattern, function(index, pattern){
+    let check_path = path.lastIndexOf(pattern);
+    if (check_path !== -1) {
+      let replace_path = path.slice(0, -pattern.length);
+      history.replaceState(null, null, replace_path);
     }
-  }
+  });
 });

@@ -6,7 +6,8 @@ $(function() {
       type: 'GET',
       url: '/customers/registrations/get_customer_name',
       data: { name: inputValue },
-      dataType: 'json'
+      dataType: 'json',
+      timeout: 5000
     })
     .done(function (data) {
       let errorOutput = $('#customer_name_error');

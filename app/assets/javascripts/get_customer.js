@@ -4,7 +4,8 @@ $(function(){
 			type: 'GET',
 			url: '/visit_records/registrations/get_customer',
 			data: { customer_id: $(this).has('option:selected').val() },
-			dataType: 'json'
+			dataType: 'json',
+			timeout: 5000
 		})
 		.done(function(data) {
 			$('#visit_record_key_person_id').select2("val", data['key_person_id'].toString());

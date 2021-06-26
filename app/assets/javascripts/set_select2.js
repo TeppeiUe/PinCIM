@@ -10,7 +10,7 @@ $(function() {
 });
 
 // 読み込んだ後の画面サイズ変更で体裁が崩れるため
-window.addEventListener("resize", function() {
+$(window).resize(function() {
 	setJsSelect2();
 });
 

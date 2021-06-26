@@ -5,9 +5,7 @@ $(function() {
       belongNameAjax(inputValue);
     }
   });
-});
 
-$(function() {
   $('input[name="customer[radio_belong]"]').on('change', function() {
     let inputName = $('#customer_belong_name');
     let inputValue = inputName.val();
@@ -23,30 +21,31 @@ $(function() {
       }
     }
   });
+
+  function belongNameAjax(name) {
+    return $.ajax({
+      type: 'GET',
+      url: '/customers/registrations/get_belong_name',
+      data: { name: name },
+      dataType: 'json',
+      timeout: 5000
+    })
+    .done(function(data) {
+      let inputName = $('#customer_belong_name');
+      let errorOutput = $('#belong_name_error');
+
+      if (data.length) {
+        errorOutput.text(data[0]);
+        inputName.addClass('is-invalid');
+        inputName.removeClass('is-valid');
+      } else {
+        errorOutput.text('');
+        inputName.removeClass('is-invalid');
+        inputName.addClass(('is-valid'));
+      }
+    })
+    .fail(function () {
+      console.log("通信に失敗しました");
+    });
+  }
 });
-
-function belongNameAjax(name) {
-  return $.ajax({
-    type: 'GET',
-    url: '/customers/registrations/get_belong_name',
-    data: { name: name },
-    dataType: 'json'
-  })
-  .done(function(data) {
-    let inputName = $('#customer_belong_name');
-    let errorOutput = $('#belong_name_error');
-
-    if (data.length) {
-      errorOutput.text(data[0]);
-      inputName.addClass('is-invalid');
-      inputName.removeClass('is-valid');
-    } else {
-      errorOutput.text('');
-      inputName.removeClass('is-invalid');
-      inputName.addClass(('is-valid'));
-    }
-  })
-  .fail(function () {
-    console.log("通信に失敗しました");
-  });
-}

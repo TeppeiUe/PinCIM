@@ -1,16 +1,15 @@
 // 営業担当者で"新規登録"を選択した場合表示
 $(function() {
 	let $belongField = $('#selected_sales_end_new');
+	let $radioCheck = $('input[name="customer[radio_sales_end]"]:checked');
 
-	if(gon.radio_sales_end_select == "checked") {
-		$belongField.hide();
-	}
+	belongFieldToggle($radioCheck.val());
 
-	$('[name="customer[radio_sales_end]"]:radio').change(function() {
-		if($('#customer_radio_sales_end_new').prop('checked')) {
-			$belongField.show();
-		} else if($('#customer_radio_sales_end_select').prop('checked')) {
-			$belongField.hide();
-		}
+	$('input[name="customer[radio_sales_end]"]').change(function() {
+		belongFieldToggle($(this).val());
 	});
+
+	function belongFieldToggle(value) {
+		return (value == 'new') ? $belongField.show() : $belongField.hide();
+	}
 });

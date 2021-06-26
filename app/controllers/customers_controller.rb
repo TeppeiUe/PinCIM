@@ -7,7 +7,6 @@ class CustomersController < ApplicationController
     @key_people = current_user.key_people
     @sales_ends = current_user.sales_ends
     @belongs = current_user.belongs
-    gon.radio_sales_end_select = @radio_sales_end_select
   end
 
   def create
@@ -82,8 +81,6 @@ class CustomersController < ApplicationController
       @key_people = current_user.key_people
       @sales_ends = current_user.sales_ends
       @belongs = current_user.belongs
-      gon.radio_sales_end_select = @radio_sales_end_select
-
       render "new"
   end
 

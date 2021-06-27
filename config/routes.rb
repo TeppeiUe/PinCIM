@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :visit_records do
     resources :tasks, only: [:new, :create, :show, :edit, :update, :destroy]
-    resources :activity_details, only: [:create, :update, :destroy]
+    resources :activity_details, only: :index, default: { format: :json }
     collection do
       post 'counting'
       post 'search'

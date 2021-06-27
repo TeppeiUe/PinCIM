@@ -450,36 +450,16 @@ describe '訪問記録画面' do
       subject { page }
 
       it '活動種別選択フォームが表示される' do
-        is_expected.to have_select 'activity_detail[activity_id]'
+        is_expected.to have_select 'activity_detail[activity_id][]'
       end
 
       it '活動種別選択の項目内容が正しいか' do
         options = Activity.all.pluck(:name)
-        options.unshift('選択して下さい')
-        is_expected.to have_select('activity_detail[activity_id]', options: options)
-      end
-
-      it '新規登録ボタンが表示される' do
-        is_expected.to have_button '活動内容 追加'
+        is_expected.to have_select('activity_detail[activity_id][]', options: options)
       end
 
       it '登録内容が選択・表示される' do
-        is_expected.to have_select(
-          'activity_detail[activity_id]',
-          selected: "#{Activity.first.name}"
-        )
-      end
-
-      it '登録内容の変更ボタンが表示される' do
-        is_expected.to have_button '変更'
-      end
-
-      it '登録内容の削除ボタンが表示される' do
-        within '.set_activity_detail_show' do
-          link = find_link '削除'
-          expect(link["data-method"]).to eq "delete"
-          expect(link[:href]).to eq visit_record_activity_detail_path(visit_record.id, 1)
-        end
+        is_expected.to have_content "#{Activity.first.name}"
       end
     end
 

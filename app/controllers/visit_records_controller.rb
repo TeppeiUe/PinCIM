@@ -38,7 +38,7 @@ class VisitRecordsController < ApplicationController
   end
 
   def show
-    @activity_detail = ActivityDetail.new
+    @activity_details = @visit_record.activity_details.includes([:activity])
     @activities = current_user.activities.order(:category)
   end
 

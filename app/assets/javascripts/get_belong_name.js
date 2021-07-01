@@ -1,5 +1,5 @@
 $(function() {
-  $('#customer_belong_name').on('blur', function(){
+  $('#customer_belong_name').on('blur', function() {
     if ($('input[name="customer[radio_belong]"]:checked').val() == 'new') {
       let inputValue = $.trim($(this).val());
       belongNameAjax(inputValue);
@@ -9,13 +9,15 @@ $(function() {
   $('input[name="customer[radio_belong]"]').on('change', function() {
     let inputName = $('#customer_belong_name');
     let inputValue = inputName.val();
-    let errorOutput = $('#belong_name_error');
+    let errorOutputName = $('#belong_name_error');
+    let errorOutputSelect = $('#belong_select_error');
 
     if ($(this).val() == 'select') {
-      errorOutput.text('');
+      errorOutputName.text('');
       inputName.removeClass('is-invalid');
       inputName.removeClass('is-valid');
     } else {
+      errorOutputSelect.text('');
       if (inputValue) {
         belongNameAjax(inputValue);
       }
@@ -32,14 +34,14 @@ $(function() {
     })
     .done(function(data) {
       let inputName = $('#customer_belong_name');
-      let errorOutput = $('#belong_name_error');
+      let errorOutputName = $('#belong_name_error');
 
       if (data.length) {
-        errorOutput.text(data[0]);
+        errorOutputName.text(data[0]);
         inputName.addClass('is-invalid');
         inputName.removeClass('is-valid');
       } else {
-        errorOutput.text('');
+        errorOutputName.text('');
         inputName.removeClass('is-invalid');
         inputName.addClass(('is-valid'));
       }

@@ -9,11 +9,10 @@ h2 顧客新規登録
 	      p
 	        | 顧客名
 	        span.badge.badge-danger.ml-1 必須
-	      - if flash[:alert_name].present?
-	        p.text-danger = flash[:alert_name]
 
 	      = f.text_field :name, autofocus: true, class: "form-control name"
 	      p.small.text-danger#customer_name_error
+	      	= flash[:alert_name]
 
 	    .form-group
 	      = f.label :address, "住所"
@@ -22,68 +21,77 @@ h2 顧客新規登録
 	    p
 	      | 窓口担当者
 	      span.badge.badge-danger.ml-1 必須
-	    - if flash[:alert_key_person].present?
-	       p.text-danger = flash[:alert_key_person]
 
 	    .form-group.row
 	      .form-group.col
 	      	.form-check
 	        	= f.radio_button :radio_key_person, :select, checked: @radio_key_person_select, class: "form-check-input"
 	        	label.form-check-label 登録済より選択
+
 	        = f.collection_select :key_person_id,
 	          @key_people, :id, :name,
 	          {include_blank: "選択して下さい"},
 	          autofocus: true,
 	          class: "form-control key_person_id js-select2"
 
+	        p.small.text-danger#key_person_select_error
+	        	= flash[:alert_key_person_select]
+
 	      .form-group.col
 	      	.form-check
 	        	= f.radio_button :radio_key_person, :new, checked: @radio_key_person_new, class: "form-check-input"
 	        	label.form-check-label 新規登録
+
 	        = f.text_field :key_person_name, value: @key_person_new_value, class: "form-control key_person_name"
+
 	        p.small.mb-0
 	          | ※詳細は顧客の新規登録後に個別で編集下さい
 	        p.small.text-danger#key_person_name_error
+	        	= flash[:alert_key_person_new]
 
 	    p
 	      | 営業担当者
 	      span.badge.badge-danger.ml-1 必須
-	    - if flash[:alert_sales_end].present?
-	      p.text-danger = flash[:alert_sales_end]
 
 	    .form-group.row
 	      .form-group.col
 	      	.form-check
 	        	= f.radio_button :radio_sales_end, :select, checked: @radio_sales_end_select, class: "form-check-input"
 	        	label.form-check-label 登録済より選択
+
 	        = f.collection_select :sales_end_id,
 	          @sales_ends, :id, :name,
 	          {include_blank: "選択して下さい"},
 	          autofocus: true,
 	          class: "form-control sales_end_id js-select2"
 
+	        p.small.text-danger#sales_end_select_error
+	        	= flash[:alert_sales_end_select]
+
 	      .form-group.col
 	      	.form-check
 	        	= f.radio_button :radio_sales_end, :new, checked: @radio_sales_end_new, class: "form-check-input"
 	        	label.form-check-label 新規登録
+
 	        = f.text_field :sales_end_name, value: @sales_end_new_value, class: "form-control sales_end_name"
+
 	        p.small.mb-0
 	          | ※詳細は顧客の新規登録後に個別で編集下さい
 	        p.small.text-danger#sales_end_name_error
+	        	= flash[:alert_sales_end_new]
 
 	    /営業担当者で"新規登録"を選択した場合表示
 	    #selected_sales_end_new
 	      p
 	        | 所属 (営業担当者で"新規登録"を選択した場合入力下さい)
 	        span.badge.badge-danger.ml-1 必須
-	      - if flash[:alert_belong].present?
-	        p.text-danger = flash[:alert_belong]
 
 	      .form-group.row
 	        .form-group.col
 	        	.form-check
 	        		= f.radio_button :radio_belong, :select, checked: @radio_belong_select, class: "form-check-input"
 	        		label.form-check-label 登録済より選択
+
 	        	= f.collection_select :belong_id,
 	        	  @belongs, :id, :name,
 	        	  {selected: @selected_belong,
@@ -91,14 +99,20 @@ h2 顧客新規登録
 	        	  autofocus: true,
 	        	  class: "form-control belong_id js-select2"
 
+	        	p.small.text-danger#belong_select_error
+	        		= flash[:alert_belong_select]
+
 	        .form-group.col
 	        	.form-check
 	        		= f.radio_button :radio_belong, :new, checked: @radio_belong_new, class: "form-check-input"
 	        		label.form-check-label 新規登録
+
 	        	= f.text_field :belong_name, value: @belong_new_value,class: "form-control belong_name"
+
 	        	p.small.mb-0
 	        	  | ※詳細は顧客の新規登録後に個別で編集下さい
 	        	p.small.text-danger#belong_name_error
+	        		= flash[:alert_belong_new]
 
 	    .form-group
 	      = f.label :system, "導入システム"

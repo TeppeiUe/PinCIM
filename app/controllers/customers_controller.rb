@@ -21,7 +21,7 @@ class CustomersController < ApplicationController
         @key_person_new_value = params[:customer][:key_person_name]
 
         key_person = current_user.key_people.create(name: @key_person_new_value)
-        flash.now[:alert_key_person] = key_person.errors.full_messages_for(:name).join
+        flash.now[:alert_key_person_new] = key_person.errors.full_messages_for(:name).join
         @customer.key_person_id = key_person.id
       end
 
@@ -46,13 +46,13 @@ class CustomersController < ApplicationController
           @belong_new_value = params[:customer][:belong_name]
 
           belong = current_user.belongs.create(name: @belong_new_value)
-          flash.now[:alert_belong] = belong.errors.full_messages_for(:name).join
+          flash.now[:alert_belong_new] = belong.errors.full_messages_for(:name).join
           sales_end.belong_id = belong.id
         end
         sales_end.save
-        flash.now[:alert_sales_end] = sales_end.errors.full_messages_for(:name).join
+        flash.now[:alert_sales_end_new] = sales_end.errors.full_messages_for(:name).join
         if radio_belong == "select"
-          flash.now[:alert_belong] =
+          flash.now[:alert_belong_select] =
             sales_end.errors.full_messages_for(:belong).join
         end
         @customer.sales_end_id = sales_end.id
@@ -70,11 +70,11 @@ class CustomersController < ApplicationController
     rescue => e
       flash.now[:alert_name] = @customer.errors.full_messages_for(:name).join
       if radio_key_person == "select"
-        flash.now[:alert_key_person] =
+        flash.now[:alert_key_person_select] =
           @customer.errors.full_messages_for(:key_person).join
       end
       if radio_sales_end == "select"
-        flash.now[:alert_sales_end] =
+        flash.now[:alert_sales_end_select] =
           @customer.errors.full_messages_for(:sales_end).join
       end
 
@@ -165,10 +165,10 @@ class CustomersController < ApplicationController
   end
 
   def params_radio
-    [
-      params[:customer][:radio_key_person],
-      params[:customer][:radio_sales_end],
-      params[:customer][:radio_belong],
-    ]
+    params.require(:customer).permit(
+      :radio_key_person,
+      :radio_sales_end,
+      :radio_belong,
+    ).values
   end
 end

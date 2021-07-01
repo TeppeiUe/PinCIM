@@ -97,8 +97,8 @@ class VisitRecordsController < ApplicationController
 
     visit_records = current_user.visit_records.counting_period(@from, @to)
 
-    @rows = []
-    @columns = []
+    @rows = Array.new
+    @columns = Array.new
     # テーブルの行と列名を取得
     visit_records.each do |k, v|
       @rows << k[0] unless @rows.include?(k[0])
@@ -128,33 +128,31 @@ class VisitRecordsController < ApplicationController
   end
 
   def params_visit_record
-    params.
-      require(:visit_record).
-      permit(
-        :customer_id,
-        :key_person_id,
-        :belong_id,
-        :sales_end_id,
-        :visit_datetime,
-        :next_datetime,
-        :note,
-        :rank,
-      )
+    params.require(:visit_record).permit(
+      :customer_id,
+      :key_person_id,
+      :belong_id,
+      :sales_end_id,
+      :visit_datetime,
+      :next_datetime,
+      :note,
+      :rank,
+    )
   end
 
   def params_visit_datetime
-    [
-      params[:visit_record][:visit_date],
-      params[:visit_record]["visit_time(4i)"],
-      params[:visit_record]["visit_time(5i)"],
-    ]
+    params.require(:visit_record).permit(
+      :visit_date,
+      "visit_time(4i)",
+      "visit_time(5i)",
+    ).values
   end
 
   def params_next_datetime
-    [
-      params[:visit_record][:next_date],
-      params[:visit_record]["next_time(4i)"],
-      params[:visit_record]["next_time(5i)"],
-    ]
+    params.require(:visit_record).permit(
+      :next_date,
+      "next_time(4i)",
+      "next_time(5i)",
+    ).values
   end
 end

@@ -79,21 +79,19 @@ class TasksController < ApplicationController
   end
 
   def params_task
-    params.
-      require(:task).
-      permit(
-        :visit_record_id,
-        :title,
-        :content,
-        :is_active,
-      )
+    params.require(:task).permit(
+      :visit_record_id,
+      :title,
+      :content,
+      :is_active,
+    )
   end
 
   def params_deadline
-    [
-      params[:task][:deadline_date],
-      params[:task]["deadline_time(4i)"],
-      params[:task]["deadline_time(5i)"],
-    ]
+    params.require(:task).permit(
+      :deadline_date,
+      "deadline_time(4i)",
+      "deadline_time(5i)",
+    ).values
   end
 end

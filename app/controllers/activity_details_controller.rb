@@ -4,7 +4,7 @@ class ActivityDetailsController < ApplicationController
     visit_record = VisitRecord.find(params[:visit_record_id])
     data_base = {
       visit_record_id: visit_record.id,
-      user_id: current_user.id
+      user_id: current_user.id,
     }
     activity_details = ActivityDetail.where(data_base)
     activity_ids = activity_details.pluck(:activity_id) # DBに登録済の活動種別配列
@@ -15,7 +15,7 @@ class ActivityDetailsController < ApplicationController
         activity_ids.delete(activity_id.to_i)
       else
         # 取得した活動種別がDBに存在しない場合、新規登録
-        data_detail = {activity_id: activity_id.to_i}.merge(data_base)
+        data_detail = { activity_id: activity_id.to_i }.merge(data_base)
         @activity_detail = ActivityDetail.create(data_detail)
       end
     end

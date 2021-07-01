@@ -1,5 +1,5 @@
 $(function() {
-  $('#customer_key_person_name').on('blur', function(){
+  $('#customer_key_person_name').on('blur', function() {
     if ($('input[name="customer[radio_key_person]"]:checked').val() == 'new') {
       let inputValue = $.trim($(this).val());
       keyPersonNameAjax(inputValue);
@@ -9,13 +9,15 @@ $(function() {
   $('input[name="customer[radio_key_person]"]').on('change', function() {
     let inputName = $('#customer_key_person_name');
     let inputValue = inputName.val();
-    let errorOutput = $('#key_person_name_error');
+    let errorOutputName = $('#key_person_name_error');
+    let errorOutputSelect = $('#key_person_select_error');
 
     if ($(this).val() == 'select') {
-      errorOutput.text('');
+      errorOutputName.text('');
       inputName.removeClass('is-invalid');
       inputName.removeClass('is-valid');
     } else {
+      errorOutputSelect.text('');
       if (inputValue) {
         keyPersonNameAjax(inputValue);
       }
@@ -32,14 +34,14 @@ $(function() {
     })
     .done(function(data) {
       let inputName = $('#customer_key_person_name');
-      let errorOutput = $('#key_person_name_error');
+      let errorOutputName = $('#key_person_name_error');
 
       if (data.length) {
-        errorOutput.text(data[0]);
+        errorOutputName.text(data[0]);
         inputName.addClass('is-invalid');
         inputName.removeClass('is-valid');
       } else {
-        errorOutput.text('');
+        errorOutputName.text('');
         inputName.removeClass('is-invalid');
         inputName.addClass(('is-valid'));
       }

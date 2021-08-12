@@ -8,9 +8,9 @@ $(function(){
 			timeout: 5000
 		})
 		.done(function(data) {
-			$('#visit_record_key_person_id').select2("val", data['key_person_id'].toString());
-			$('#visit_record_sales_end_id').select2("val", data['sales_end_id'].toString());
-			$('#visit_record_belong_id').select2("val", data['belong_id'].toString());
+			$('#visit_record_key_person_id').select2('val', [data['key_person_id'].toString()]);
+			$('#visit_record_sales_end_id').select2('val', [data['sales_end_id'].toString()]);
+			$('#visit_record_belong_id').select2('val', [data['belong_id'].toString()]);
 		})
 		.fail(function () {
     	console.log("通信に失敗しました");

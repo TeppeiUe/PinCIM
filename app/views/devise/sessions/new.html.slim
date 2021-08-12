@@ -19,9 +19,3 @@
 
 		    .form-group
 		      = f.submit "ログイン", class: "btn btn-primary"
-
-		  = form_with model: resource, as: resource_name, url: "/sign_in", local: true do |guest|
-		  	= guest.hidden_field :email, value: "hoge@hoge.com", id: "guest_email"
-		  	= guest.hidden_field :password, value: "hogehoge", id: "guest_password"
-		  	.form-group
-		  		= guest.submit "ゲストログイン", class: "btn btn-warning"
